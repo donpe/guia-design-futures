@@ -1,0 +1,1386 @@
+<title>Guía de Campo Design Futures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#FBF9FB; --surface:#FFFFFF; --surface-2:#F3EEF3; --ink:#1D1320; --muted:#6A5A6D; --line:#E6DCE7;
+  --accent:#602866; --accent-ink:#FFFFFF; --accent-soft:#EFE6F0;
+  --red:#F72411; --red-ink:#C8190A; --red-soft:#FDE9E6; --purple:#602866;
+  --f1:#602866; --f1s:#EFE6F0;
+  --f2:#85285A; --f2s:#F5E6EE;
+  --f3:#AB2746; --f3s:#FAE6EA;
+  --f4:#C9232C; --f4s:#FDE7E6;
+  --f5:#D6200E; --f5s:#FEEAE6;
+  --f0:#6A5A6D; --f0s:#F3EEF3;
+  --warn:#C8190A; --warn-soft:#FDE9E6;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ill-filter:none; --ill-blend:multiply;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#151016; --surface:#1D171F; --surface-2:#2A222C; --ink:#F2EAF3; --muted:#B3A3B6; --line:#3A2F3D;
+    --accent:#D3A6DA; --accent-ink:#1D1320; --accent-soft:#3A2140;
+    --red:#FF5A43; --red-ink:#FF8F85; --red-soft:#4E1F1D; --purple:#B77BC0;
+    --f1:#D3A6DA; --f1s:#3A2140; --f2:#E7A0C3; --f2s:#45203A; --f3:#F59BAC; --f3s:#4A1F2C;
+    --f4:#FF8F85; --f4s:#4E1F1D; --f5:#FF7A66; --f5s:#52201A; --f0:#B3A3B6; --f0s:#2A222C;
+    --warn:#FF8F85; --warn-soft:#4E1F1D;
+    --ill-filter:invert(1); --ill-blend:screen;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+    --ground:#151016; --surface:#1D171F; --surface-2:#2A222C; --ink:#F2EAF3; --muted:#B3A3B6; --line:#3A2F3D;
+    --accent:#D3A6DA; --accent-ink:#1D1320; --accent-soft:#3A2140;
+    --red:#FF5A43; --red-ink:#FF8F85; --red-soft:#4E1F1D; --purple:#B77BC0;
+    --f1:#D3A6DA; --f1s:#3A2140; --f2:#E7A0C3; --f2s:#45203A; --f3:#F59BAC; --f3s:#4A1F2C;
+    --f4:#FF8F85; --f4s:#4E1F1D; --f5:#FF7A66; --f5s:#52201A; --f0:#B3A3B6; --f0s:#2A222C;
+    --warn:#FF8F85; --warn-soft:#4E1F1D;
+  --ill-filter:invert(1); --ill-blend:screen;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.55}
+a{color:var(--accent)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;font-weight:500;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pg{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.pg b{font-weight:500;color:var(--ink)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--ground) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top::before{content:"";display:block;height:5px;background:linear-gradient(90deg,var(--f1) 0 20%,var(--f2) 20% 40%,var(--f3) 40% 60%,var(--f4) 60% 80%,var(--red) 80% 100%)}
+.top-in{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding-block:14px 10px}
+.brand{display:flex;flex-direction:column;line-height:1.1;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand{gap:3px}
+.brand b{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,30px);letter-spacing:-.03em;line-height:1}
+.brand i{font-style:normal;font-size:13px;color:var(--muted)}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;text-decoration:none;border-radius:8px;padding:10px 16px;font-weight:600;font-size:14.5px;white-space:nowrap;border:1px solid var(--red)}
+.cta:hover{background:var(--red-ink);border-color:var(--red-ink)}
+.cta small{font-family:var(--mono);font-weight:400;font-size:11px;opacity:.85}
+.cta.big{padding:14px 20px;font-size:16px;flex-direction:column;align-items:flex-start;gap:2px}
+.cta.ghost{background:transparent;color:var(--accent);border-color:var(--accent)}
+.cta.ghost:hover{background:var(--accent-soft)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:stretch}
+@media (max-width:700px){
+  .top{position:relative;top:0}
+  .top-in{gap:10px 10px;padding-block:12px 8px}
+  .brand{width:100%}
+  .brand b{font-size:24px}
+  .top .search{flex:1 1 0;min-width:0}
+  .top .cta{padding:9px 12px;font-size:14px}
+  .top .cta small{display:none}
+  .nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}
+  main{padding-block:20px 56px}
+  .hero{gap:18px}
+  .hero figure{max-width:260px}
+  .hero .lead{font-size:16px}
+  .cta.big{width:100%}
+  .view-h{margin-bottom:16px}
+  .sec{margin-top:32px}
+  .ph-head figure{max-width:220px}
+  .fichas{columns:1}
+  .igs{grid-template-columns:1fr}
+  .ig.wide{grid-column:auto}
+  .keys li{grid-template-columns:14px 1fr}
+  .keys li .pg{grid-column:2}
+  .checks li{padding:9px 12px;gap:8px}
+  .checks li .pg{grid-column:2}
+  .checks li{grid-template-columns:22px 1fr}
+  .phnav a{font-size:16px}
+  .gracias{columns:1}
+  .stats{gap:6px 16px}
+  .stat b{font-size:22px}
+}
+.brand span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.search{position:relative;flex:0 1 300px;min-width:180px}
+.search input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px 8px 32px;font-size:14.5px}
+.search input:focus{border-color:var(--accent);outline:none}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.nav{display:flex;gap:2px;overflow-x:auto;width:100%;scrollbar-width:none;margin-bottom:-11px}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:8px 12px 10px;font-size:14px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:500}
+
+main{padding-block:28px 72px}
+.view-h{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;max-width:72ch}
+.view-h h1{font-size:clamp(28px,4.4vw,42px);font-weight:700;letter-spacing:-.025em;line-height:1.05}
+.view-h p{color:var(--muted)}
+.sec{margin-top:40px}
+.sec > h2{font-size:22px;margin-bottom:12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+
+/* home */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
+.hero h1{font-size:clamp(34px,6vw,62px);font-weight:700;letter-spacing:-.035em;line-height:.98}
+.hero h1 em{font-style:normal;color:var(--red-ink)}
+.hero figure{position:relative}
+.px{position:absolute;pointer-events:none;z-index:1}
+.px.a{top:0;right:0;width:36%}
+.px.b{bottom:40px;left:0;width:28%}
+.view-h h1::after,.ph-head h1::after{content:"";display:block;width:56px;height:8px;margin-top:12px;background:linear-gradient(90deg,var(--red) 0 50%,var(--purple) 50% 100%)}
+.hero .lead{font-size:17px;max-width:56ch;margin-top:14px}
+.hero .meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.hero figure{margin:0}
+.ill{display:block;width:100%;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 45%;filter:var(--ill-filter);mix-blend-mode:var(--ill-blend)}
+.ill-box{background:var(--cs,var(--f1s));border:1px solid var(--line);border-radius:12px;overflow:hidden;isolation:isolate}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));padding:8px 12px;border-top:1px solid var(--line);background:var(--surface)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.rule h3{font-size:17px}
+.rule p{font-size:14px;color:var(--muted)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.t-a{background:var(--purple);color:#fff}
+.t-c{background:var(--surface-2);color:var(--ink)}
+.t-q{border:1px solid var(--red-ink);color:var(--red-ink)}
+.t-found{background:var(--warn-soft);color:var(--warn)}
+.t-book{background:var(--f2s);color:var(--f2)}
+.t-oa{background:var(--accent-soft);color:var(--accent)}
+.t-none{background:var(--surface-2);color:var(--muted)}
+
+/* process */
+.proc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.step{display:flex;flex-direction:column;gap:8px;padding:16px 14px 14px;border-left:1px solid var(--line);position:relative;text-align:left;background:transparent;border-top:none;border-right:none;border-bottom:none;color:inherit}
+.step:first-child{border-left:none}
+.step::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--c)}
+.step .n{font-family:var(--mono);font-size:11px;color:var(--c);letter-spacing:.06em}
+.step h3{font-size:19px;line-height:1.15}
+.step p{font-size:13.5px;color:var(--muted)}
+.step .subs{display:flex;flex-direction:column;gap:4px;margin-top:auto;padding-top:6px}
+.sub{display:flex;justify-content:space-between;gap:8px;font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--surface)}
+.sub:hover{border-color:var(--c)}
+.proc-foot{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:13px;color:var(--muted)}
+
+/* phase page */
+.ph-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:28px;align-items:start}
+.ph-kick{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ph-dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.ph-head h1{font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1}
+.ph-def{font-size:17px;line-height:1.6;margin-top:14px;max-width:62ch}
+.ph-def-src{margin-top:8px}
+.keys{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;max-width:64ch}
+.keys li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:baseline;font-size:15px}
+.keys li::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c);transform:translateY(-1px)}
+.phnav{display:flex;justify-content:space-between;gap:10px;margin-top:40px;border-top:1px solid var(--line);padding-top:16px;flex-wrap:wrap}
+.phnav a{text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:2px;font-family:var(--display);font-size:18px}
+.phnav a span{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.phnav a:last-child{text-align:right;margin-left:auto}
+.substeps{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.substeps a{font-size:13px;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink);background:var(--surface)}
+.substeps a[aria-current="page"]{background:var(--c);border-color:var(--c);color:var(--surface)}
+
+/* fichas */
+.filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px;font-size:13.5px;display:inline-flex;gap:6px;align-items:center}
+.chip .n{font-family:var(--mono);font-size:11.5px;opacity:.7}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.sel{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 10px;font-size:13.5px}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
+.fichas{columns:3 300px;column-gap:14px}
+.ficha{break-inside:avoid;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:14px;display:flex;flex-direction:column;gap:7px}
+.ficha.q{background:transparent;border-style:dashed}
+.ficha-h{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ficha h4{font-size:17px;line-height:1.25}
+.ficha p{font-size:14.5px}
+.ficha-h .pg b{color:var(--c)}
+.ficha .who{font-size:13px;color:var(--muted)}
+.ficha .src{font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px;border-top:1px dashed var(--line);padding-top:7px}
+.ficha .src button{background:none;border:none;padding:0;color:var(--accent);text-align:left;font-size:12.5px;text-decoration:underline;text-underline-offset:2px}
+.fdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-right:5px}
+.empty{color:var(--muted);padding:20px 0}
+
+/* concepts */
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.term{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--c)}
+.term h3{font-size:18px}
+.term .en{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.term p{font-size:14.5px}
+.letters{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.letters a{font-family:var(--mono);font-size:12px;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:2px 7px;color:var(--ink)}
+
+/* infographics */
+.igs{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 16px 14px;display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden;container-type:inline-size}
+.ig.wide{grid-column:1/-1}
+.ig-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;margin-inline:-16px;padding:12px 16px 11px;background:var(--cs);border-bottom:1px solid var(--line)}
+.ig-h h3{color:var(--c)}
+.ig-h .pg,.ig-h .pg b{color:var(--c)}
+.ig-h h3{font-size:19px}
+.ig .note{font-size:13px;color:var(--muted)}
+.ig svg{width:100%;height:auto;display:block}
+.ig svg text{font-family:var(--body);fill:var(--ink)}
+.ig svg .m{font-family:var(--mono);fill:var(--muted);font-size:11px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.box{border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.box h4{font-size:16px}
+.box p,.box li{font-size:13.5px}
+.box ul{margin:0;padding-left:16px}
+.box.hl{border-color:var(--c);background:var(--cs)}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.card-ig{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;display:flex;flex-direction:column;gap:4px;background:var(--surface);min-width:0}
+.card-ig b{color:var(--c,var(--ink))}
+@container (max-width:600px){.trio{grid-template-columns:1fr}.trio .card-ig{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);column-gap:14px;align-items:baseline}.trio .card-ig > *{grid-column:2}.trio .card-ig > .tag,.trio .card-ig > b{grid-column:1}.trio .card-ig > .tag{justify-self:start}}
+@container (max-width:400px){.pair{grid-template-columns:1fr}.trio .card-ig{display:flex}}
+.fz{display:flex;flex-direction:column;gap:10px}
+.fz-q{border:1px solid var(--f1);background:var(--f1s);border-radius:8px;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.fz-q small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--f1)}
+.fz-q b{font-family:var(--display);font-weight:500;font-size:19px;color:var(--f1);line-height:1.25}
+.fz-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.fz-b{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--surface)}
+.fz-b .fz-h{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.fz-b ul{margin:8px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:3px}
+.fz-r{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.card-ig b{font-family:var(--display);font-weight:500;font-size:15.5px}
+.card-ig .pg{margin-top:auto}
+.sigcard{border:1px solid var(--ink);border-radius:8px;overflow:hidden;font-size:13.5px}
+.sigcard .row{display:grid;grid-template-columns:120px 1fr;border-top:1px solid var(--line)}
+.sigcard .row:first-child{border-top:none}
+.sigcard .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:8px 10px;background:var(--surface-2);color:var(--muted)}
+.sigcard .v{padding:8px 10px}
+.sigcard .row.opt .k{background:transparent;border-right:1px dashed var(--line)}
+.factors{display:flex;flex-wrap:wrap;gap:6px}
+.factor{border:1px solid var(--f2);color:var(--f2);background:var(--f2s);border-radius:999px;padding:4px 11px;font-size:13.5px;font-weight:500}
+.qs{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:3px}
+.umb{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.umb span{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;background:var(--surface)}
+.umb span.core{border-color:var(--f3);color:var(--f3);background:var(--f3s);font-weight:500}
+.olist{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;counter-reset:o}
+.olist li{counter-increment:o;border:1px solid var(--line);border-radius:8px;padding:10px 12px 10px 38px;position:relative;font-size:14px;background:var(--surface)}
+.olist li::before{content:counter(o);position:absolute;left:12px;top:10px;font-family:var(--mono);font-size:12px;color:var(--c);font-weight:500}
+.olist li b{display:block;font-family:var(--display);font-weight:500;font-size:15.5px;margin-bottom:2px}
+.ulist{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.ulist li{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface)}
+.ulist li b{display:block;font-family:var(--display);font-weight:500;font-size:15.5px;margin-bottom:2px}
+.cones{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cone{border:1px solid var(--line);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:13.5px;background:var(--surface)}
+.cone svg{height:70px}
+.cone b{font-family:var(--display);font-weight:500;font-size:15.5px}
+
+/* practice */
+.prac{display:flex;flex-direction:column;gap:16px}
+.pstep{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pstep-h{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);border-left:4px solid var(--c);flex-wrap:wrap}
+.pstep-h h3{font-size:21px}
+.prog{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.bar{width:120px;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c)}
+.checks{list-style:none;margin:0;padding:6px 0}
+.checks li{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:8px 16px;font-size:14.5px}
+.checks li:hover{background:var(--surface-2)}
+.checks input{width:17px;height:17px;margin-top:2px;accent-color:var(--c)}
+.checks label{cursor:pointer}
+.checks .done label{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.checks .grp{display:block;padding:10px 16px 2px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);grid-template-columns:none}
+.checks .grp:hover{background:transparent}
+
+/* sources */
+.srclist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.src-i{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;padding:12px 16px;border-top:1px solid var(--line)}
+.src-i:first-child{border-top:none}
+.src-i.hi{background:var(--accent-soft)}
+.src-ref{font-size:14.5px}
+.src-ref i{font-style:italic}
+.src-uses{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12.5px;color:var(--muted);margin-top:4px}
+.src-uses a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted)}
+.src-note{font-size:12.5px;color:var(--warn);margin-top:4px}
+.src-links{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:13px;text-align:right}
+.src-links a{white-space:nowrap}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-bottom:16px}
+.legend div{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px}
+.stat b{font-family:var(--display);font-size:26px;font-weight:500;display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--muted)}
+
+/* voices */
+.voices{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.voice{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;text-align:left}
+.voice:hover{border-color:var(--ink)}
+.voice h3{font-size:17px}
+.voice .aff{font-size:13px;color:var(--muted)}
+.voice .pp{display:flex;flex-wrap:wrap;gap:4px}
+
+.agent{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.agent-row{display:grid;grid-template-columns:140px 1fr auto;gap:12px;padding:10px 14px;border-top:1px solid var(--line);align-items:baseline;font-size:14px}
+.agent-row:first-child{border-top:none}
+.agent-row b{font-family:var(--display);font-weight:500;font-size:16px}
+.callout{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:8px;padding:10px 14px;font-size:14px;background:var(--surface)}
+.res-g{margin-bottom:24px}
+.res-g h2{font-size:18px;margin-bottom:10px}
+.foot{border-top:1px solid var(--line);padding-block:20px 40px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--ground);padding:9px 16px;border-radius:8px;z-index:50;font-size:14px}
+
+
+/* empezar aquí */
+.intro-lead{font-size:clamp(19px,2.4vw,23px);line-height:1.45;max-width:40ch;font-family:var(--display);font-weight:500;letter-spacing:-.01em}
+.intro-lead mark{background:none;color:var(--red-ink)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.three .box h4{font-size:18px}
+.nots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.nots li{border:1px dashed var(--line);border-radius:10px;padding:12px 14px;font-size:14.5px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.nots li b{font-family:var(--display);font-weight:500;font-size:17px}
+.nots li b::before{content:"No es ";color:var(--red-ink)}
+.ideas{counter-reset:i;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.ideas li{counter-increment:i;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;padding:14px 16px;border-top:1px solid var(--line);align-items:baseline}
+.ideas li:first-child{border-top:none}
+.ideas li::before{content:counter(i);font-family:var(--display);font-weight:700;font-size:26px;color:var(--c);line-height:1}
+.ideas h3{font-size:18px;margin-bottom:3px}
+.ideas p{font-size:14.5px;color:var(--muted)}
+.route{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.route a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.route a:hover{border-color:var(--c)}
+.route a b{font-family:var(--display);font-weight:500;font-size:16.5px}
+.route a span{font-size:13.5px;color:var(--muted)}
+.route a .pg{color:var(--c)}
+.gracias{columns:2 320px;column-gap:14px}
+.gracia{break-inside:avoid;margin-bottom:14px;border-radius:12px;padding:16px 18px;background:var(--red-soft);display:flex;flex-direction:column;gap:6px}
+.gracia:nth-child(3n+2){background:var(--accent-soft)}
+.gracia:nth-child(3n){background:var(--surface);border:1px solid var(--line)}
+.gracia h3{font-size:19px;line-height:1.2}
+.gracia p{font-size:14.5px}
+.gracia .pg{align-self:flex-start}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.words div{padding:12px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14px}
+.words b{display:block;font-family:var(--display);font-weight:500;font-size:16.5px;color:var(--accent)}
+.next{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:760px){.three,.nots{grid-template-columns:1fr}.ideas li{grid-template-columns:32px minmax(0,1fr)}.ideas li .pg{grid-column:2}}
+@media (max-width:900px){
+  .proc{grid-template-columns:1fr}
+  .step{border-left:none;border-top:1px solid var(--line)}
+  .step:first-child{border-top:none}
+  .step::before{top:0;bottom:0;right:auto;width:4px;height:auto}
+  .hero,.ph-head{grid-template-columns:1fr}
+  .hero figure,.ph-head figure{max-width:340px}
+  .cones{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .pair,.trio{grid-template-columns:1fr}
+  .src-i{grid-template-columns:1fr}
+  .src-links{align-items:flex-start;text-align:left}
+  .agent-row{grid-template-columns:1fr}
+  .sigcard .row{grid-template-columns:96px 1fr}
+  .igs{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .chip,.sub,.voice,.nav a{transition:border-color .15s,background .15s,color .15s}
+}
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#inicio"><span>Guía de estudio · no oficial</span><b>The Field Guide to Design Futures</b><i>Giovanni Caruso y Silvio Cioni · 2026</i></a>
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Buscar en fichas, conceptos y fuentes" aria-label="Buscar" autocomplete="off">
+    </div>
+    <a class="cta" href="https://designfutures.guide" target="_blank" rel="noopener">Libro original <small>designfutures.guide</small> ↗</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+  </div>
+</header>
+
+<main class="wrap" id="view"></main>
+
+<footer class="wrap foot">
+  <span>Adaptación de estudio de <i>The Field Guide to Design Futures</i> (Giovanni Caruso y Silvio Cioni, Fictional, 2026, 1.ª ed.), licencia CC BY-NC-SA 4.0. Ilustraciones de Stefano Cardini, del mismo libro. Esta guía se comparte bajo la misma licencia, sin uso comercial.</span>
+  <span>Los números de página corresponden a la paginación impresa del libro. Los resúmenes en español son paráfrasis; para citar, ve al original: <a href="https://designfutures.guide" target="_blank" rel="noopener">designfutures.guide</a>.</span>
+</footer>
+
+<script>
+(() => {
+// ================= DATOS =================
+const PH = {
+  pre:  {t:"Preliminares", en:"Front matter", c:"f0", pp:"11–26", step:0},
+  df:   {t:"Design Futures", en:"Design Futures", c:"f1", pp:"27–48", step:0, img:33},
+  fr:   {t:"Framing", es:"Encuadre", en:"Framing", c:"f1", pp:"49–54", step:1, img:50},
+  sc:   {t:"Scanning", es:"Escaneo", en:"Scanning", c:"f2", pp:"55–100", step:2, img:56},
+  sm:   {t:"Sense-making", es:"Dar sentido", en:"Sense-making", c:"f2", pp:"101–117", step:2, img:102},
+  vi:   {t:"Visioning", es:"Visionar", en:"Visioning", c:"f3", pp:"118–169", step:3, img:119},
+  di:   {t:"Dissemination", es:"Diseminación", en:"Dissemination", c:"f4", pp:"170–183", step:4, img:171},
+  as:   {t:"Assessment", es:"Evaluación", en:"Assessment", c:"f4", pp:"184–191", step:4, img:185},
+  ta:   {t:"Taking action", es:"Tomar acción", en:"Taking action", c:"f5", pp:"192–195", step:5, img:193},
+  viva: {t:"Está vivo", en:"It's alive", c:"f5", pp:"196–207", step:0, img:96},
+  post: {t:"Reflexiones y epílogo", en:"Reflections, Afterword", c:"f0", pp:"209–215", step:0}
+};
+const SLUG = {framing:"fr", scanning:"sc", sensemaking:"sm", visioning:"vi", dissemination:"di", assessment:"as", action:"ta", marco:"df", vivo:"viva"};
+const SLUG_OF = Object.fromEntries(Object.entries(SLUG).map(([k,v])=>[v,k]));
+const STEPS = [
+  {n:1, t:"Framing", es:"Encuadrar", c:"f1", phases:["fr"], d:"Establecer contexto, propósito y foco aclarando el alcance de la exploración."},
+  {n:2, t:"Scanning y Sense-making", es:"Escanear y dar sentido", c:"f2", phases:["sc","sm"], d:"Investigar para sacar a la luz pistas y cambios; sintetizar patrones, tensiones y perspectivas."},
+  {n:3, t:"Visioning", es:"Visionar", c:"f3", phases:["vi"], d:"Co-crear narrativas y escenarios de futuro que den vida a las posibilidades."},
+  {n:4, t:"Dissemination y Assessment", es:"Diseminar y evaluar", c:"f4", phases:["di","as"], d:"Usar relatos y artefactos para involucrar audiencias; evaluar, ajustar o descartar visiones."},
+  {n:5, t:"Taking Action", es:"Tomar acción", c:"f5", phases:["ta"], d:"Iniciar esfuerzos estratégicos hoy para incrustar visiones de largo plazo en sistemas reales."}
+];
+
+// Fichas: [página, fase, tipo (a=autores, c=colaborador, q=cita), título, autor, resumen, [fuentes]]
+const FI = [
+ [11,"pre","c","Prólogo","Joseph Lindley","El diseño hace cosas en el mundo y también le da sentido al mundo. Repasa cómo la imaginación sobrevivió a la era de la racionalidad (dadaísmo, futurismo italiano, Bauhaus, investigación en diseño) y describe el libro como no lineal y modular, «como las novelas de Elige tu propia aventura». Invita a ser una urraca (idea de Rachel Cooper): tomar lo que inspire, sin prejuicios. El libro debe ser «compañero y musa», no manual.",["m-simon"]],
+ [17,"pre","c","Prólogo a la aún-no-existente 5.ª edición","Jorge Camacho","Un prólogo escrito como ficción desde «Ciudad de México, aún-no 2050». Recuerda precursores como la House of the Future de Alison y Peter Smithson (1956) y sitúa la consolidación del campo hacia 2010 (Dunne y Raby, Near Future Laboratory, Stuart Candy y Jake Dunagan). Presenta a los autores como fundadores de Speculative Futures Milan (2019) y propone ver la práctica como política prefigurativa (y antiprefigurativa).",["m-smithson"]],
+ [21,"pre","a","Notas de los autores","Caruso y Cioni","El libro no es un manual: no tiene capítulos ni métodos paso a paso. Cada página es un texto breve y casi autónomo, de tres tipos: textos de los autores (la columna vertebral), textos de colaboradores y citas de la literatura. La secuencia sigue aproximadamente el recorrido de un proyecto, pero es una construcción: se puede leer en cualquier orden. Se inspira en el formato de The Tiny MBA. Y aclaran: no hay conos.",["hillman2020"]],
+ [25,"pre","a","Introducción","Caruso y Cioni","Tras más de quince años de choques y mezclas entre diseño y estudios de futuros, el libro ofrece instantáneas, provocaciones y preguntas, no prescripciones. Pide leerlo con mente abierta y crítica, desarmarlo y remezclarlo. Se necesitan arquetipos nuevos y otras formas de imaginar el futuro, no perseguir lo «nuevo», que suele ser lo mismo disfrazado.",[]],
+ [28,"df","q","El futuro es oscuro","Virginia Woolf, 1915","El futuro es oscuro, y eso, en general, es lo mejor que el futuro puede ser (paráfrasis).",["woolf1915"]],
+ [29,"df","q","El pasado como refugio","Silvio Lorusso","Cuando imaginar el futuro se vuelve otra forma de quedarse atascado en el presente, el pasado es el último refugio para una mente que mira adelante (paráfrasis).",[]],
+ [31,"df","a","Design Futures","Caruso y Cioni","Práctica que une el diseño (como metodología) con los futuros para explorar y dar forma a presentes alternativos y futuros posibles. Reúne sobre todo Diseño Especulativo, Ficción de Diseño y Futuros Experienciales. No predice: ayuda a cuestionar supuestos, desafiar normas y explorar direcciones, y apoya la reflexión, el debate y las decisiones estratégicas o éticas. Es herramienta crítica y proceso creativo para dar sentido, involucrar y ganar agencia. Es plural: «futures».",[]],
+ [32,"df","a","Práctica híbrida","Caruso y Cioni","No es sumar métodos de estudios de futuros y de diseño como piedras en fila, sino fundirlos: el diseño especulativo produce experiencias tangibles, los prototipos encienden el diálogo y las narrativas reforman supuestos. «Olvida cambiar de herramienta; piensa en inventar una receta nueva».",[]],
+ [34,"df","c","Integración y worldbuilding","Amna Qureshi · University of Lapland","Design Futures surge de un intercambio interdisciplinario activo; lo importante es la integración, no aplicar métodos lado a lado. Al tejer indagación especulativa con práctica de diseño, se vuelve una forma de construir mundos (worldbuilding) donde lo creativo y lo crítico se informan mutuamente.",[]],
+ [35,"df","c","Todo diseño crea un futuro","Viraj Joshi","Cada acto de diseño crea un futuro dentro del cual existe ese producto o servicio.",[]],
+ [36,"df","q","Diseñar sin visión de futuro","Cameron Tonkinwise","Un diseñador que no tiene una idea clara del futuro más amplio que está diseñando al introducir un producto no solo es poco convincente: es irresponsable (paráfrasis).",["tonkinwise2015"]],
+ [37,"df","c","¿Por qué diseño?","Tobias Revell","A veces el diseño no es lo adecuado. Encanta porque hace reales las ideas, pero puede sobrestimar sus capacidades por su impacto emocional. Pregúntate si es la respuesta apropiada: activistas, organizadores, legisladores, ingenieros o científicos pueden estar mejor ubicados. Considera tu rol como escucha o, a lo sumo, facilitador.",[]],
+ [38,"df","c","Lo que los diseñadores hacen bien","Viraj Joshi","Dos cosas: crear mejores visiones de futuros preferibles (con investigación, valores propios, centralidad del planeta) y mostrar cómo esa visión puede volverse realidad (prototipos, pilotos, visualización).",[]],
+ [39,"df","q","Qué es investigación de futuros","Robert B. Textor","La investigación de futuros es cualquier indagación sistemática sobre futuros alternativos posibles o probables para una población o grupo social (paráfrasis).",["textor1980"]],
+ [40,"df","a","Es una mentalidad, no una práctica","Caruso y Cioni","Futures Thinking es una mentalidad; Design Futures es una práctica. El pensamiento de futuros no es una metodología que se aprende como el Design Thinking, aunque se venda así. Es cultivar una perspectiva flexible ante la incertidumbre, la complejidad y el cambio. Mantenlos separados: el primero da forma a tu mirada, el segundo guía tu práctica.",[]],
+ [42,"df","a","Futuring by Design","Caruso y Cioni","El proceso que propone el libro: Framing (contexto, propósito, foco); Scanning y Sense-making (pistas emergentes, patrones, tensiones); Visioning (narrativas y escenarios co-creados); Dissemination y Assessment (relatos y artefactos para involucrar audiencias; evaluar, ajustar o descartar visiones); Taking Action (esfuerzos estratégicos hoy para incrustar visiones de largo plazo en sistemas, estructuras y comportamientos).",[]],
+ [43,"df","a","Más que un atributo","Caruso y Cioni","El «design» de Design Futures cambia el proceso: democratiza el trabajo de futuros, lo vuelve participativo y lo ancla en el mundo real. La investigación de campo y el prototipado arraigan los escenarios en experiencias vividas; exponer las visiones a audiencias permite evaluar aceptación y consecuencias con personas reales.",[]],
+ [44,"df","c","Todos hacemos futuros","Tina Fung, Samuel Yu · Speculative Futures Sydney","Imaginar futuros es una habilidad humana básica, pero cada persona e industria se relaciona distinto con el futuro. Comunica el valor de la práctica especulativa de forma cercana a la perspectiva de cada quien.",[]],
+ [45,"df","q","Decisiones en el presente","Anab Jain","El diseño especulativo nunca fue sobre «el futuro» como ejercicio abstracto, sino sobre informar decisiones distintas en el presente (paráfrasis).",["jain2025a"]],
+ [46,"df","c","Lo irreal hoy es real mañana","Masaki Iwabuchi · JPMorgan Chase, Tohoku University","Las empresas suelen resolver problemas inmediatos y mejorar la comodidad dentro de la realidad existente. Los grandes retos (desigualdad, ambiente) piden ideas radicales que se descartan como «irreales». Los design futurists deben desafiar normas y especular fuera de la realidad actual.",["dunne2019"]],
+ [47,"df","c","Espacios para distintos niveles","Tina Fung, Samuel Yu · Speculative Futures Sydney","Además de espacios de introducción para quien empieza, hacen falta espacios donde practicantes experimentados refinen su práctica y espacios donde distintos niveles se mezclen.",[]],
+ [48,"df","c","Diseñar con encantamiento","Coe Douglas","La práctica necesita más magia y asombro ante lo inefable: una chispa que libere de la racionalidad rígida de la técnica. El diseño de futuros debería ser maleable y radicalmente transformador.",["campagna2018"]],
+ [49,"fr","a","Framing","Caruso y Cioni","Aquí se establecen alcance, propósito y dirección: temas clave, áreas de indagación y dominios; preguntas críticas, actores involucrados (stakeholders) y límites del sistema. Sacar a la luz supuestos y factores de contexto prepara la exploración, alinea perspectivas y aclara objetivos para navegar complejidad e incertidumbre.",[]],
+ [51,"fr","q","Situar","Bespoke","Situar es alinearse y definir el situs actual: el aquí y ahora del equipo y del desafío. Ahí hay un interés, recursos disponibles, una cultura de trabajo, sueños colectivos e individuales (paráfrasis).",["bespoke2017"]],
+ [52,"fr","c","Las cuatro reglas del Assemblage Space","John V. Willshire · Smithery","1. Ten tanta curiosidad por el pasado como por el futuro. 2. Cuidado con los efectos distorsionantes del presente (lo reciente se ve más grande). 3. Sé consciente de tu estrechez: lo que parece absurdo para ti es muy probable para otros. 4. No hay cono (ni Assemblage Space): son prismas para mirar, no prisiones para la imaginación.",["willshire"]],
+ [53,"fr","q","Antes del primer post-it","Scott Smith y Madeline Ashby","Toda exploración empieza mucho antes del primer post-it en la pizarra: el alcance arranca con una pregunta que expresa una incertidumbre o una necesidad (paráfrasis).",["smithashby2020"]],
+ [54,"fr","a","Lo que importa","Caruso y Cioni","Encuadrar no es solo poner límites: es descubrir los valores, esperanzas y prioridades del grupo, comunidad u organización. También da un primer vistazo a cómo se recibirá el trabajo de futuros: supuestos, conocimiento actual y dónde hay apertura a aprender. Lo que surja aquí dará forma a todo lo demás.",[]],
+ [55,"sc","a","Scanning","Caruso y Cioni","Atender a tendencias emergentes y también a micro-detalles y comportamientos pasados por alto. Combina escaneo del entorno y del horizonte con observación en contexto y trabajo de campo exploratorio. La observación situada captura los bordes de comportamientos, tecnologías y cambios culturales emergentes.",[]],
+ [57,"sc","a","Dos lentes para escanear","Caruso y Cioni","El escaneo del entorno identifica tendencias duraderas y fuerzas que ya moldean el presente; el escaneo del horizonte busca señales débiles e indicadores tempranos de cambio. Usar solo uno limita la vista; juntos capturan lo emergente y lo establecido.",[]],
+ [58,"sc","a","Etnografía periférica","Caruso y Cioni","Enfoque de investigación que mira prácticas marginales, comportamientos ignorados y usos no convencionales de la tecnología para encontrar señales tempranas de transformación cultural (Nova, 2016). Atender a los bordes de la vida social permite anticipar cambios antes de que lleguen al centro.",["nova2016"]],
+ [59,"sc","q","Peripheral ethnographies","Nicolas Nova","Nova explica que le interesan las prácticas marginales, rituales curiosos, apropiaciones raras de tecnología, objetos que envejecen, cosas que no encajan: lo que los investigadores de futuros llaman señales débiles y que los diseñadores pueden usar para orientar su trabajo (paráfrasis).",["nova2016"]],
+ [60,"sc","c","Mantener el giro local","Karla Paniagua","En la investigación que sostiene piezas de ficción de diseño hay que mantener el giro local, porque las visiones de futuro tienden a homologarse con discursos dominantes (películas, series, ciencia ficción) que no expresan las creencias de quienes participan en el taller.",["mitrovic2021","gfl"]],
+ [61,"sc","a","Abrazar lo impredecible","Caruso y Cioni","La apertura a lo inesperado mantiene viva la práctica. Las ideas más valiosas suelen venir de los márgenes, de tecnologías de nicho o voces ignoradas. En vez de aferrarse a marcos establecidos: nuevos métodos, socios improbables, curiosidad por señales débiles e historias ocultas.",[]],
+ [62,"sc","c","Etnografía especulativa","Sara Innocenti","Preguntarse cómo podrían ser las cosas ayuda a salir de cómo deberían ser. La observación etnográfica combinada con pensamiento especulativo trata la ambigüedad y la incertidumbre como fuerzas productivas. Representar no es duplicar la realidad, sino interrogar los supuestos culturales de la vida cotidiana y amplificar posibilidades excluidas.",["foucault2005","wilkie2017"]],
+ [63,"sc","c","Desfamiliarización","Gabriele Ferri (TU/e), Inte Gloerich (AUAS)","Concepto de la teoría literaria que abre posibilidades de diseño al volver extraño lo familiar. Ejercicio simple: describir objetos como si fuera para alguien de Marte. Crea espacio para la reflexión crítica, como la etnografía que revela raíces culturales implícitas.",["bell2005"]],
+ [64,"sc","a","Más allá del escritorio","Caruso y Cioni","El escaneo en Design Futures va mucho más allá de la investigación de escritorio: sin trabajo de campo o indagación etnográfica no es Design Futures. Entrevistas y reportes muestran grandes tendencias; la comprensión real viene de observar personas, prácticas marginales y comportamientos cotidianos en los bordes.",[]],
+ [65,"sc","a","Atención activa","Caruso y Cioni","Práctica continua de estar alerta a pistas sutiles, señales emergentes y patrones inesperados (Smith y Ashby, 2020). Combina curiosidad y reflexión crítica para detectar cambios antes de que sean visibles; crea una conciencia de fondo.",["smithashby2020"]],
+ [66,"sc","a","Sintonizar","Caruso y Cioni","Sentir, sintonizar y notar son técnicas situadas y corporales para observar y escuchar entornos más allá de ver y oír. Son especialmente útiles en mundos más-que-humanos: permiten percibir relaciones de interdependencia y la agencia de entidades no humanas, y descentrar lo humano.",[]],
+ [67,"sc","a","Escanear con intención","Caruso y Cioni","Escanear es prestar atención sistemática a los bordes de los sistemas, donde el cambio suele aparecer primero. Es una práctica continua de encontrar, reconocer y documentar señales, drivers y tendencias (Smith y Ashby, 2020), y de construir inventarios de señales para reconocer patrones.",["smithashby2020"]],
+ [68,"sc","q","Arqueología del presente","Laurent Olivier","Una arqueología del presente observa cómo la actividad humana transforma la materialidad del mundo; así deja de mirar al pasado en sí y apunta al futuro, a los procesos de emergencia (paráfrasis).",["laurent2019"]],
+ [69,"sc","c","Los datos no son neutrales","Michael Dunbar, Chris Speed · RMIT University","Los datos existentes suelen reflejar imperativos económicos y visiones reduccionistas. El diseño puede contrarrestarlo valorando lo que escapa a las métricas: biodiversidad, relacionalidad, memoria cultural, salud ecológica.",["dignazio2020"]],
+ [70,"sc","a","Señales","Caruso y Cioni","Indicios sutiles pero significativos de que el futuro puede ser distinto al presente: ideas, comportamientos, tecnologías o cambios culturales nuevos. Algunas anuncian cambios sistémicos; otras, giros en tendencias en curso. Son semillas de futuros posibles; no todas producen transformación.",[]],
+ [71,"sc","a","Drivers","Caruso y Cioni","Fuerzas significativas y continuas que ya moldean el mundo. No son hechos aislados sino racimos estructurados de señales relacionadas y tendencias de largo plazo que revelan una dirección (Howard, 2021). Dan contexto a datos dispersos. También se llaman fuerzas motrices, fuerzas de cambio o tendencias emergentes.",["howard2021"]],
+ [72,"sc","q","Nubes y gotas","Sean Howard · Institute for the Future","Los drivers son a las señales lo que las nubes a las gotas de lluvia: se superponen, convergen y precipitan señales (paráfrasis).",["howard2021"]],
+ [73,"sc","a","Un flujo de escaneo inteligente","Caruso y Cioni","El flujo de trabajo es la columna del escaneo, sea continuo o bajo demanda (Smith y Ashby, 2020): debe ser práctico. Lectores de noticias curados y feeds temáticos ayudan, pero el valor viene de organizar: agrupar fuentes por dominio, etiquetar con claridad y mantener formatos consistentes.",["smithashby2020"]],
+ [74,"sc","a","Recolectar y curar señales","Caruso y Cioni","Cada señal debería incluir título, descripción, fuente y por qué importa. Imágenes y preguntas reflexivas profundizan la comprensión. Etiquetar y categorizar de forma sistemática entre investigadores hace emerger patrones. Una colección bien curada se vuelve un centro de inteligencia compartida.",[]],
+ [75,"sc","a","Qué hace que una señal importe","Caruso y Cioni","No toda novedad es señal de cambio. Pregunta si algo realmente se aparta de la norma, qué tipo de cambio representa y si se está extendiendo o es una moda pasajera. Mirar frecuencia, fuerza, madurez, alcance y dirección ayuda a distinguir casos aislados de señales tempranas de cambios más amplios.",[]],
+ [76,"sc","c","Datos situados","Michael Dunbar, Chris Speed · RMIT University","Los datos pueden entenderse como cultural y ecológicamente situados, con límites y sesgos. El diseño puede buscar narrativas ocultas, preguntar qué se excluye y dar lugar a otras formas de conocer: historias indígenas, perspectivas más-que-humanas y sistemas relacionales.",["wiltse2020"]],
+ [77,"sc","a","Un marco de futuros aplicados","Caruso y Cioni","En una organización, el marco de investigación de futuros señala temas clave, abre conversaciones y aumenta la conciencia de futuros entre equipos. No es fijo: se adapta a nuevos retos y crece con la organización.",[]],
+ [78,"sc","a","El rol de un equipo de futuros","Caruso y Cioni","Un equipo dedicado (independiente, transversal o externo) mantiene a la organización alerta: escanea señales y tendencias, construye escenarios y comparte hallazgos. También coordina aprendizaje, gestiona comunidades de investigación y conecta con quienes deciden.",[]],
+ [79,"sc","c","Bucles que incluyen sistemas naturales","Michael Dunbar, Chris Speed · RMIT University","El diseño informado por datos debe ir más allá de lo humano y lo económico: crear bucles de retroalimentación que aprendan del mundo e incorporen ecologías locales, saberes indígenas y relaciones sociales.",["gabrys2016"]],
+ [80,"sc","c","No asumamos que somos jardineros","Eloise Smith-Foster","No empieces queriendo plantar semillas de cambio. Escucha primero si eres bienvenido y mira qué ya está creciendo. ¿Quién decide qué es flor y qué es maleza? ¿Estás apartándote o estorbando? ¿Qué parte del jardín eres tú?",["oliveira2021"]],
+ [81,"sc","c","Crea tus propias herramientas","Chris Jackson · We Create Futures","Muchas herramientas de futuros vienen de las ciencias sociales y políticas y del ámbito militar. No temas aplicar tu creatividad a métodos y herramientas: haz mezclas nuevas con mirada de diseñador.",[]],
+ [82,"sc","c","Prepararte y preparar a tu audiencia","Phil Balagtas","Muchas organizaciones ven los futuros como un lujo. Antes de empezar, considera a tu audiencia: sensibilidades, metas, vocabulario y cómo hace hoy su estrategia. Usa ejemplos que les lleguen; con su atención y compromiso, diseña el recorrido. Cada organización necesitará métodos y resultados distintos.",["balagtas2024"]],
+ [83,"sc","c","Pensamiento de polaridades","Albéric Maillet","Además de trazar visiones deseables, tu responsabilidad es ayudar a navegar la tensión entre perspectivas sobre el tiempo dentro del grupo. No se trata de convencer de elegir el futuro sobre el presente, sino de sostener ambas tensiones: pasar de «o esto o aquello» a «esto y aquello».",["johnson1992"]],
+ [84,"sc","a","Proyectos de investigación de futuros","Caruso y Cioni","Los investigadores de futuros convierten incertidumbre en comprensión y acción: detectan señales y drivers, interpretan datos y hacen accesibles los escenarios. Todo proyecto necesita objetivos claros, buenos métodos, roles definidos y plazos realistas, anclados en el marco de investigación de la organización.",[]],
+ [85,"sc","c","Estar siempre preparado","Tina Fung, Samuel Yu · Speculative Futures Sydney","Tener materiales y herramientas a mano permite introducir el trabajo de futuros en proyectos con poco aviso; reducir el tiempo de preparación facilita que otros lo adopten.",[]],
+ [86,"sc","c","Hazlo significativo","Tobias Revell","La mayoría no se sienta a pensar en el futuro. En vez de pedir que les importe, ocúpate tú de lo que les importa: ¿cómo les ayuda pensar en futuros con sus propios problemas? Ejemplos: una visión compartida para que equipos colaboren; anticipar qué habilidades invertir hoy.",[]],
+ [87,"sc","a","The Future Mundane","Caruso y Cioni","Enfocarse en personas comunes, incluir tecnologías heredadas y aceptar el carácter imperfecto y acumulativo del avance tecnológico (Foster, 2013). Busca un futuro tangible y cercano, con experiencias y problemas cotidianos.",["foster2013"]],
+ [88,"sc","c","La tentación de la píldora mágica","Tobias Revell","Ante problemas difíciles se salta a soluciones mágicas. Pero el cambio tecnológico trae contrapartidas: al inventar el barco se inventa el naufragio (Virilio, 1999). El trabajo es hacer real lo especulativo: nuevas comodidades traen nuevas incomodidades. ¿Qué precio estamos dispuestos a pagar?",["virilio1999"]],
+ [89,"sc","q","Future Mundane y ficción de diseño","Julian Bleecker","El Future Mundane se relaciona con la ficción de diseño porque ambos especulan sobre el futuro, pero enfatiza la integración sutil y discreta de la tecnología en las rutinas diarias (paráfrasis).",["bleecker2024b"]],
+ [90,"sc","a","Futuros cotidianos","Caruso y Cioni","Los futuros más convincentes no son autos voladores: están en la vida diaria de gente común, con tecnologías imperfectas y concesiones prácticas. Imagina cómo las innovaciones se integran en silencio en las rutinas. Los futuros cercanos y los presentes alternativos valen tanto como los lejanos.",[]],
+ [91,"sc","a","Imágenes del futuro","Caruso y Cioni","Representaciones que las personas tienen de cómo podría ser el futuro: reflejan esperanzas, miedos, expectativas y supuestos moldeados por cultura, medios y experiencia. Influyen en cómo se interpreta el cambio y se decide. Analizarlas muestra cómo una cultura responde a la incertidumbre.",[]],
+ [92,"sc","c","No hace falta mirar décadas adelante","Phil Balagtas","Algunos creen que el trabajo de futuros solo vale a 5–10 años o más. Pero cada minuto después de este es futuro: usa estas herramientas también para consecuencias de corto plazo, como un análisis de amenazas y oportunidades.",["balagtas2024"]],
+ [93,"sc","c","Piensa siempre en retro","Patrick Tanguay","Las imágenes de «futuros presentes» suelen venir de más atrás de lo que creemos. Los retrofuturos inspiran y dan contexto. Ejemplo: la esfera de Bernal, la comunicación inalámbrica, la ingeniería genética y la inteligencia colectiva aparecieron en la serie To-Day and To-Morrow (años veinte), editada por C. K. Ogden para Kegan Paul.",["m-ogden"]],
+ [94,"sc","q","Futuros especulativos","Johanna Hoffman","«Futuros especulativos» es un término paraguas para enfoques de diseño que crean visiones de alta resolución de realidades posibles; cultiva pensamiento crítico sobre el presente e imaginación (paráfrasis).",["hoffman2022"]],
+ [95,"sc","a","Una práctica paraguas","Caruso y Cioni","Design Futures da espacio al diálogo entre Speculative Futures, Adversarial Design, Interrogative Design, Speculative Fiction, Critical Design, Speculative Design, Discursive Design, Experiential Futures, Design Fiction, Participatory Futures, Science Fiction Prototyping, Peripheral Ethnography y, cada vez más, Transition Design. Su fuerza está en esa diversidad.",[]],
+ [97,"sc","q","Futuros preferibles que blanquean","Tobias Revell","Le preocupa que los futuros preferibles, aunque importantes, distraigan de enfrentar futuros o presentes indeseables y blanqueen los problemas (paráfrasis).",["revell2022"]],
+ [98,"sc","q","El futuro será menos blanco","Cameron Tonkinwise","No hay nada especulativo en que el futuro será cada vez menos blanco. Es moralmente repugnante que lo peor que las personas blancas imaginan para sí en distopías sean condiciones que ya imponen a personas no blancas (paráfrasis).",["tonkinwise2015"]],
+ [99,"sc","c","Necesitamos sociología del diseño","Theo Ploeg","El diseño cambia comportamientos, sociedad y valores. La sociología del diseño ayuda a entender esos cambios en vez de moralizarlos, y a descubrir el significado de objetos, rituales y sistemas cotidianos, hoy y en un futuro imaginado.",["lupton2017"]],
+ [100,"sc","q","Experiential futures y design fiction","Stuart Candy y Jake Dunagan","Futuros experienciales y ficción de diseño están muy entrelazados: aunque nacieron por separado (unos entre futuristas, otros entre diseñadores), sus similitudes como prácticas híbridas pesan más que sus diferencias (paráfrasis).",["candy2017"]],
+ [101,"sm","a","Sense-making","Caruso y Cioni","Organizar e interpretar datos y señales para comprenderlos: ordenar, agrupar y mapear para identificar patrones, temas, tendencias o drivers. Distingue señal de ruido. Con herramientas de diseño se explora, prioriza y agrupa, se descubren conexiones ocultas y lecturas divergentes, y la información dispersa se vuelve dirección.",[]],
+ [103,"sm","c","Empezar a dar sentido","Amanda Reeves","Experimentamos el mundo con los sentidos, y los sentidos moldean cómo le damos sentido. Elige materiales que involucren los sentidos para crear una experiencia de ese futuro en el presente.",["yong2022"]],
+ [104,"sm","c","El montón de ceniza de los futuros pasados","Søren Rosenbak","Los Design Futures también se vuelven historia y acaban en sótanos y basureros. Revuélvelos como un mapache curioso, pero con paciencia: no uses futuros pasados para validar tus especulaciones presentes. Sé radicalmente empático, crítico e indulgente a la vez.",[]],
+ [105,"sm","c","Los datos como historias parciales","Michael Dunbar, Chris Speed · RMIT University","Los datos son un registro parcial y sesgado: suelen excluir sistemas naturales, perspectivas no humanas y dinámicas sociales ajenas a los imperativos económicos. El diseño puede atender esas omisiones.",["smithashby2020"]],
+ [106,"sm","a","La cara oculta de la Luna","Caruso y Cioni","Dar sentido es la contraparte del escaneo: reunir señales es solo la mitad. Sin interpretación es como investigar sin destilar hallazgos. Corta el ruido, destaca lo que importa y guía la acción.",[]],
+ [107,"sm","c","Futuros que desafían sesgos de datos","Michael Dunbar, Chris Speed · RMIT University","Si los datos son producto sesgado de sistemas económicos y tecnológicos, el diseño puede cuestionar sus supuestos y reimaginar qué se mide y qué se valora, para futuros más equitativos, ecológicos e inclusivos.",["daly2019"]],
+ [108,"sm","q","Sentir es integrar","Bespoke","Dar sentido a las señales es mapear, priorizar y explorar su potencial; sentir es integrar el conocimiento previo con la colección de señales (paráfrasis).",["bespoke2017"]],
+ [109,"sm","a","De señales a drivers","Caruso y Cioni","Identificar drivers convierte el escaneo en estrategia: al agrupar y mapear temas se ven las fuerzas profundas, no solo tendencias aisladas. Entender los drivers y sus relaciones da estructura y ancla la imaginación en patrones reales.",[]],
+ [110,"sm","a","Evaluar drivers","Caruso y Cioni","Evaluar drivers es entender su influencia en contexto: refinar, analizar y comparar de forma iterativa, cada uno y como sistema. Lo que más importa es cómo se conectan e interactúan; así se aclaran el peso y la dirección del cambio.",[]],
+ [111,"sm","a","Construir un inventario de drivers","Caruso y Cioni","Organizar tendencias y fuerzas en categorías claras da una visión equilibrada y deja ver huecos en la investigación. Un inventario bien mantenido es referencia y diagnóstico: invita a preguntarse qué falta.",[]],
+ [112,"sm","q","Tiempo y certeza","Scott Smith y Madeline Ashby","Un primer chequeo con un inventario estructurado da razones para volver y cavar más. Suele ser útil empezar a mapear con dos criterios: tiempo y certeza (paráfrasis).",["smithashby2020"]],
+ [113,"sm","a","Estar listos para el futuro","Caruso y Cioni","Futures readiness es la capacidad de personas y organizaciones de anticipar, responder e influir activamente en cambios emergentes: una mentalidad que acepta la incertidumbre, aprende de forma continua y usa pensamiento imaginativo y crítico.",[]],
+ [114,"sm","a","Futuros transformadores","Caruso y Cioni","Usar prácticas de diseño participativo para que comunidades y organizaciones co-creen visiones alternativas capaces de desafiar el statu quo y reimaginar sistemas. Democratiza la exploración y da a las personas un rol activo.",[]],
+ [115,"sm","c","Especulación y compromiso","Margherita Paleari","Design Futures no es solo especulación sino compromiso: involucrar a los actores en co-diseño permite construir colectivamente futuros deseables y capacidad compartida de transformación.",[]],
+ [116,"sm","c","Un acto de esperanza","Marite P. Irvine · Ateneo RIFE, Forge Futures","Al diseñar juntos exploramos los lados oscuros y luminosos de lo posible y decidimos qué futuro crear: un acto de esperanza, comunidad y rebeldía contra narrativas limitadas y limitantes.",[]],
+ [117,"sm","q","El futuro es un verbo","Bruce Sterling","La gente necesita una visión motivadora de lo que viene y la conciencia de que después vendrá más: el futuro es un proceso, no un destino; un verbo, no un sustantivo (paráfrasis).",["sterling2004"]],
+ [118,"vi","a","Visioning","Caruso y Cioni","Imaginar y expresar escenarios y artefactos que den vida a futuros posibles, con investigación, imaginación, relato y prototipado. En el centro están los patrones de las fases anteriores, mezclados con extrapolación creativa. Escenarios y artefactos especulativos comunican de forma provocadora e invitan a reflexionar.",[]],
+ [120,"vi","c","Evitar el Bovine Design","Gabriele Ferri (TU/e), Inte Gloerich (AUAS)","El «diseño bovino» imita la vida plácida de las vacas lecheras: sigue la rutina sin desviarse, explota caminos gastados y empuja a la gente por ellos. En ficción de diseño y diseño especulativo hay que imaginar futuros que se aparten radicalmente del consumismo habitual.",["light2017"]],
+ [121,"vi","a","Escenarios","Caruso y Cioni","Historias imaginativas basadas en evidencia que describen futuros alternativos: combinan hallazgos con extrapolación creativa. No son predicciones: sirven para examinar el cambio, poner a prueba supuestos y desafiar expectativas, con continuidad y ruptura. Siempre se desarrollan en conjuntos; pueden ser relatos, visualizaciones, informes o experiencias inmersivas.",[]],
+ [122,"vi","c","Una patafísica para el futuro","Coe Douglas","Propone convertir el cono de futuros en una espiral que desciende y se estrecha, renunciando a lo probable, plausible, posible y hasta preferible, hacia la singularidad patafísica de lo absurdo (preposterous): soluciones imaginarias que ven las cosas como si fueran radicalmente otras.",["jarry1911"]],
+ [123,"vi","q","No hay un solo futuro","Jim Dator","No hay un único futuro «allá afuera» por predecir: hay muchos futuros alternativos por anticipar y pre-experimentar en alguna medida (paráfrasis).",["dator2009"]],
+ [124,"vi","q","Ficciones sociales","IFTF","Los escenarios pueden describirse como historias, o ficciones sociales, que ocurren en futuros alternativos (paráfrasis).",["iftf2019"]],
+ [125,"vi","c","De la proyección a la acción","Agata Kowalska","En tiempos de policrisis no bastan más pronósticos: hay que imaginar y dar forma colectiva a alternativas frente a las narrativas dominantes. Design Futures ayuda a pasar de la proyección a la imaginación y a la acción.",[]],
+ [126,"vi","a","El rol de los escenarios","Caruso y Cioni","Dan una imagen del futuro para descubrir qué decisiones pueden requerirse en cada etapa y cómo llegar desde hoy. Son herramientas participativas adaptables: fomentan el debate público, ayudan a la planeación estratégica y apoyan decisiones complejas de largo plazo.",[]],
+ [127,"vi","a","Visiones compartidas","Caruso y Cioni","Crear escenarios en colaboración permite construir una visión compartida y entender los mecanismos del cambio; ayuda a evaluar las contrapartidas de distintas decisiones de largo plazo.",[]],
+ [128,"vi","a","Hacer visibles los futuros","Caruso y Cioni","Los escenarios efectivos no son predicciones: son historias con evidencia, construidas desde patrones y extendidas con creatividad. Combinar lo conocido con lo posible muestra continuidad y ruptura, y convierte el futuro en algo que se puede explorar, cuestionar y construir juntos.",[]],
+ [129,"vi","a","Futuros participativos","Caruso y Cioni","Enfoques que involucran activamente a personas y organizaciones en explorar y dar forma a futuros. Buscan democratizar el pensamiento de futuros, apoyar visiones compartidas, informar decisiones presentes e inspirar acción colectiva.",[]],
+ [130,"vi","q","Pensar y sentir juntos","The Global Swarm · Nesta","En su núcleo, los futuros participativos son un medio para que las personas piensen (y sientan) de forma distinta, abierta y crítica sobre el futuro, juntas (paráfrasis).",["nesta2019swarm"]],
+ [131,"vi","c","Democratizar no es monetizar","Phil Balagtas","Ser futurista es un privilegio parecido al «efecto perspectiva» de los astronautas (Yaden et al., 2016), y trae responsabilidad con la sociedad y el planeta. Democratizar exige dejar el dogma y la propiedad territorial de los métodos y llevar este trabajo fuera de academia, empresa y gobierno.",["balagtas2024","yaden2016"]],
+ [132,"vi","c","El diseño como activismo","Juliana Schneider","Ante crisis ambientales y sociales, el diseño es herramienta de incidencia y cambio sistémico. Hay que empoderarse para actuar más allá del diseño e inspirar a jóvenes diseñadores a cuestionar supuestos: no solo lo que es, sino qué pasaría si.",["fuadluke2009"]],
+ [133,"vi","c","Mirarse al espejo","Eloise Smith-Foster","No somos objetivos. Se pregunta qué paradigmas coloniales perpetúa por cómo se presenta, se relaciona, facilita, escucha, sostiene silencios y conflictos, redistribuye poder y aplica herramientas. ¿Cómo limitan nuestros procesos la imaginación de otros? ¿Qué hay más allá de las herramientas anglo y eurocéntricas?",["lorde2017"]],
+ [134,"vi","c","Más allá de lo humano-céntrico","Chris Jackson · We Create Futures","Considera cómo ir más allá de futuros centrados en lo humano: aumenta la creatividad, la inclusión y la amplitud de tu práctica.",[]],
+ [135,"vi","c","El futuro no es solo nuestro","Sahibzada Mayed","La idea de un futuro singular tiene raíces coloniales que refuerzan el dominio humano. Anna Tsing (2015) recuerda que hay muchos proyectos de hacer mundo, humanos y no humanos. Nuestros futuros están entretejidos.",["tsing2015"]],
+ [136,"vi","c","Conocer de otro modo","Gabriele Ferri (TU/e), Inte Gloerich (AUAS)","Enfoque epistémico que viene del diseño más-que-humano y posthumano: critica los límites del diseño centrado en lo humano e incluye a lo no humano en roles participativos, subrayando la interconexión con el entorno.",["mackey2023"]],
+ [137,"vi","c","Desafiar la supremacía humana","Eloise Smith-Foster","¿Supones que los humanos están separados de la naturaleza y con derecho a dañar, controlar, poseer, explotar, extraer o destruir lo no humano en tu trabajo? ¿Qué requeriría descentrar lo humano y orientarse a una relación correcta con lo no humano?",["kimmerer2020"]],
+ [138,"vi","c","Fabulación especulativa en primera persona","Gabriele Ferri (TU/e), Inte Gloerich (AUAS)","La fabulación especulativa (Donna Haraway) difumina hecho y ficción para cuestionar categorías. El taller «First-Person Speculative Fabulation» combina fabulación colectiva y ficción de diseño para que comunidades marginadas imaginen alternativas a sus circunstancias en tiempos de crisis.",["gloerich2023","haraway2016"]],
+ [139,"vi","a","Escenarios y toma de decisiones","Caruso y Cioni","Los escenarios cumplen roles vitales en la decisión estratégica: mapean horizontes para aclarar direcciones, crean propósito para inspirar y alinear equipos, y apoyan la acción colectiva.",[]],
+ [140,"vi","c","Un plan estratégico para el futuro","Martin Tomitsch, Steve Baty","Los planes tradicionales ven el futuro de forma reactiva: incierto y volátil. Un plan estratégico para el futuro toma una decisión deliberada sobre él, con intención, y sirve a la organización y a los ecosistemas donde opera.",["tomitsch2023"]],
+ [141,"vi","q","Lo que no sabemos que no sabemos","Igor Schwarzmann","Cada iniciativa estratégica crea nuevas zonas donde aparecen puntos ciegos. En vez de ver lo desconocido como sorpresa externa, se puede tratar como propiedad emergente de nuestros sistemas de conocimiento: producida, quizá mapeable y relevante hoy (paráfrasis).",["schwarzmann2025"]],
+ [142,"vi","a","Mapear horizontes","Caruso y Cioni","Los escenarios amplían el pensamiento estratégico más allá de lo inmediato: explorar desarrollos, retos y oportunidades en horizontes de mediano y largo plazo ayuda a anticipar riesgos y prepararse para más resultados posibles.",[]],
+ [143,"vi","a","Crear propósito","Caruso y Cioni","Los escenarios fomentan un sentido compartido de propósito: al descubrir valores, necesidades y aspiraciones ayudan a formar una visión de futuro preferido y a cuestionar supuestos culturales u organizacionales.",[]],
+ [144,"vi","a","Actuar juntos","Caruso y Cioni","Los escenarios catalizan la acción colectiva: ofrecen un marco compartido para alinear esfuerzos hacia un futuro deseado y empoderan a personas y grupos para liderar el cambio.",[]],
+ [145,"vi","q","Más gente, mejores decisiones","Ramos, Sweeney, Peach y Smith · Nesta","Involucrar a más personas en pensar el futuro llevará a mejores decisiones (paráfrasis).",["ramos2019"]],
+ [146,"vi","a","Escenarios efectivos","Caruso y Cioni","Un buen escenario es familiar y está anclado: conecta con detalles reconocibles y dinámicas plausibles, basado en investigación y datos, no solo en imaginación. Refleja la urgencia, tensión o estabilidad de la evidencia, no un sesgo personal, y hace claros sus patrones. Compacto y accesible, ayuda a que la gente se vea en el futuro.",[]],
+ [147,"vi","c","Espacios seguros para suspender la incredulidad","Tina Fung, Samuel Yu · Speculative Futures Sydney","Imaginar choca con las restricciones del «mundo real». Crea espacios donde la gente, sobre todo quien empieza, pueda explorar sin preocuparse de que sea «práctico».",[]],
+ [148,"vi","c","Diseñar la confrontación","Bastien Kerspern, Léa Lippera, Estelle Hary · Design Friction","La confrontación es el momento en que el futuro (relato, artefacto o experiencia) choca con la realidad de su audiencia. Desarrolla junto al escenario un marco que invite al diálogo o la acción: debate, exposición, taller o juego. Considera tres parámetros: quién es la audiencia, el contexto (poder, actualidad, tiempo y lugar) y los objetivos.",[]],
+ [149,"vi","a","Anclar escenarios en la vida diaria","Caruso y Cioni","Empezar con historias cotidianas: relatos simples y ricos en contexto, basados en señales y drivers, que muestren rutinas, rituales y tareas. Primera persona y tiempo presente dan inmediatez; titulares memorables ayudan a recordar; voces diversas enriquecen y sirven de chequeo de coherencia.",[]],
+ [150,"vi","a","De fragmentos a futuros","Caruso y Cioni","La síntesis convierte historias en escenarios: tejerlas en un todo coherente. Pueden ser escritos, visuales o híbridos; lo clave es combinar con propósito. En cualquier medio, el escenario debe ser compacto, bien estructurado y accesible.",[]],
+ [151,"vi","c","Practicar la polifonía de visiones","Bastien Kerspern, Léa Lippera, Estelle Hary · Design Friction","Los futuros son plurales y disonantes. Desarrolla el mismo escenario desde varias perspectivas (quien impulsa el cambio, quien se opone y quien es indiferente) para que la audiencia forme su propia opinión.",["designfriction2016"]],
+ [152,"vi","a","Evaluar escenarios","Caruso y Cioni","Medir qué tan lejos está un grupo u organización de un futuro preferido y cómo cada escenario ayuda a cerrar esa distancia. Un escenario debe resonar con aspiraciones o valores y funcionar como brújula: identificar riesgos a evitar, oportunidades a explorar y retos a superar.",[]],
+ [153,"vi","c","Criticar visiones de futuro","Gabriele Ferri (TU/e), Inte Gloerich (AUAS)","Entender las ideologías implícitas en diseños orientados al futuro evita reforzar visiones seductoras pero dañinas. Las visiones influyen en qué diseños e infraestructuras se persiguen. Los métodos de ficción deben combinarse con su crítica en la educación, con metodología humanística.",["ferri2023"]],
+ [154,"vi","c","El dilema de señalar la ficción","Bastien Kerspern, Léa Lippera, Estelle Hary · Design Friction","Dejar que el público olvide que es ficción puede dar reacciones genuinas, pero arriesga confundir realidad y ficción y acelerar el futuro que se quiere cuestionar. Si dudas, incluye avisos y varios marcadores temporales; una fecha sola no basta, como mostró el proyecto Selfish Ledger de Google.",["m-selfish"]],
+ [155,"vi","c","Tiempo para reflexionar","Tina Fung, Samuel Yu · Speculative Futures Sydney","Imaginar es divertido, pero el valor está en los hallazgos. Reserva tiempo para reflexión y discusión, con personas de trayectorias diversas.",[]],
+ [156,"vi","a","Artefactos del futuro","Caruso y Cioni","Objeto cotidiano diseñado para dar vida a un futuro posible. Ubicado en el contexto de hoy, provoca conversación e imaginación sobre el mundo que podríamos habitar: representa cómo la vida diaria podría verse o sentirse distinta.",[]],
+ [157,"vi","a","Ficticios pero plausibles","Caruso y Cioni","No son productos reales de hoy, pero podrían existir. Esa ambigüedad intencional invita a reflexionar y a reconsiderar qué podría volverse parte de la vida diaria.",[]],
+ [158,"vi","a","Provocar con el detalle","Caruso y Cioni","Pueden ser físicos o digitales, falsos o no funcionales, si representan el escenario de forma realista. Para ser creíbles necesitan suficiente detalle; decide el nivel adecuado: unos escenarios piden objetos muy detallados y otros se benefician de bocetos abiertos y mínimos.",[]],
+ [159,"vi","q","Tótems","Julian Bleecker","Los objetos de ficción de diseño son tótems a través de los cuales se cuenta o imagina una historia mayor: como artefactos de otro lugar que cuentan historias de otros mundos (paráfrasis).",["bleecker2009"]],
+ [160,"vi","a","Arquetipos de ficción de diseño","Caruso y Cioni","Artefactos culturalmente reconocibles (medios u objetos familiares) arraigados en la memoria colectiva. Cada arquetipo tiene elementos definitorios, o tropos, que funcionan como ganchos creativos (Bleecker et al., 2022). Modificar sutilmente los tropos conserva la forma familiar y refleja el cambio que se quiere explorar.",["bleecker2022"]],
+ [161,"vi","c","Provotipos que se explican solos","Bastien Kerspern, Léa Lippera, Estelle Hary · Design Friction","Crea «provotipos» (prototipos provocadores) que encarnen un futuro con claridad y funcionen solos, sin guías, escenarios paralelos ni alguien que explique. Evita artefactos «parlanchines» como noticias ficticias.",[]],
+ [162,"vi","c","Olvida lo «innovador» y comercial","Karla Paniagua","Cuando el resultado debe ser un objeto para vender, la especulación se desinfla. El propósito no es que los objetos funcionen ni adivinar, sino poner ante nuestros ojos las consecuencias (deseables o no) de nuestras decisiones. No subordines la crítica a la corrección política ni al éxito comercial.",["paniagua2023"]],
+ [163,"vi","a","Trabajar con arquetipos","Caruso y Cioni","Los arquetipos son contenedores de una visión alternativa: amplían el mundo donde se sitúan y ayudan a entender el presente. Permiten idear de forma tangible y funcionan como herramientas estratégicas para provocar discusión y desafiar supuestos.",[]],
+ [164,"vi","a","Artefactos para el debate social","Caruso y Cioni","Una práctica discursiva en diseño busca provocar debate social con artefactos comunicativos, desde propuestas conceptuales hasta prototipos físicos, como catalizadores de discusión (Tharp y Tharp, 2019).",["tharp2019"]],
+ [165,"vi","q","Los debates hay que hacerlos pasar","Cameron Tonkinwise","Los debates no surgen solos de un artefacto, por crítico o especulativo que sea: hay que hacer que ocurran, y eso es difícil y lleva tiempo diseñarlo (paráfrasis).",["tonkinwise2015"]],
+ [166,"vi","a","Disonancia discursiva","Caruso y Cioni","Uso intencional de la ambigüedad, la contradicción o lo «extrañamente familiar» para romper expectativas lo justo: provoca curiosidad y pensamiento crítico sin alejar a la audiencia. Se ajusta en cinco dimensiones: claridad, realidad, familiaridad, veracidad y deseabilidad (Tharp y Tharp, 2019).",["tharp2019"]],
+ [167,"vi","c","Escala alterada","Erica Moreti","Jim Dator dijo que el futuro no se puede estudiar porque no existe. La magia está en su poder exploratorio: crear versiones, metáforas o dimensiones que generen dudas razonables. Los estudios de futuros son como una banda de jazz: una escala alterada que genera tensión. Barry Harris: hay que meter un poco de «error» y hacerlo sonar bien.",["gioia2016","efstathiou2021"]],
+ [168,"vi","a","Invertir la ruta: de objetos a mundos","Caruso y Cioni","Los artefactos pueden venir antes del escenario, surgiendo directamente de señales y drivers. En ficción de diseño funcionan como sondas de una realidad alternativa (Bleecker, 2024). Como arqueólogos del futuro, podemos preguntar cómo funcionan y qué valores o creencias materializan.",["bleecker2024a"]],
+ [169,"vi","c","La filosofía es la clave","Theo Ploeg","El worldbuilding es central en sus proyectos. El modelo de siete fundamentos de Leah Zaidi le mostró que la «filosofía» fundacional (lo que creemos verdadero) es la raíz de toda transformación, el núcleo del sistema de valores.",["zaidi2017"]],
+ [170,"di","a","Dissemination","Caruso y Cioni","Prototipar y compartir escenarios y artefactos con las audiencias previstas para que perciban las visiones y se involucren con sus implicaciones (Montgomery y Woebken, 2016). Hacer tangible lo intangible hace surgir temas críticos, provoca reflexión e invita al diálogo; las ideas se contrastan, se refinan y a veces se desafían.",["montgomery2016"]],
+ [172,"di","q","Visitar futuros","Stuart Candy","Podemos diseñar situaciones que nos ayuden a entender futuros posibles visitándolos (paráfrasis).",["candy2016"]],
+ [173,"di","a","Escenarios experienciales","Caruso y Cioni","Futuros posibles convertidos en «qué pasaría si» tangibles, con materiales, acciones o ambos: imágenes, artefactos, instalaciones o performances. Invitan a la experiencia sensorial directa; son «más texturales que textuales» (Lockton y Candy, 2019).",["lockton2019"]],
+ [174,"di","a","Principios de los futuros experienciales","Caruso y Cioni","Tres principios (Candy, 2010): no rompas el universo (todo debe sentirse parte de un futuro coherente); diseña para la punta del iceberg (fragmentos ricos que sugieren un mundo mayor, sin sobreexplicar); y abraza el arte de la doble mirada (objetos que parecen ordinarios o absurdos y revelan capas al mirarlos más).",["candy2010"]],
+ [175,"di","a","Juegos de futuros","Caruso y Cioni","Subconjunto de los juegos que sirve como herramienta participativa para sumergirse en escenarios y artefactos. Al simular sistemas y fomentar el juego de roles cultivan empatía, pensamiento crítico y planteamiento colaborativo de problemas, y vuelven experiencias las visiones abstractas.",[]],
+ [176,"di","q","Guerrilla Futures","Stuart Candy","Guerrilla Futures combina prospectiva estratégica con medios tácticos para producir encuentros inesperados con mundos posibles: mostrar, además de contar, para influir en cómo actuamos hoy (paráfrasis).",["candy2013"]],
+ [177,"di","q","El contexto es clave","Stuart Candy","En los futuros experienciales, y sobre todo en los de guerrilla, el contexto es clave: un objeto muy simple ganó significado por el lugar, las circunstancias y la audiencia (paráfrasis).",["candy2024"]],
+ [178,"di","a","Juegos de futuros experienciales","Caruso y Cioni","Rama de los juegos de futuros enfocada en encarnar futuros imaginados mediante experiencias interactivas, reales o inmersivas, donde los futuros se exploran colaborativamente jugando. Sirven para idear, reflexionar críticamente y evaluar implicaciones de decisiones.",[]],
+ [179,"di","a","El valor de los futuros experienciales","Caruso y Cioni","Pensar el futuro puede provocar resistencia o defensividad, pero esas barreras suelen disolverse en la experiencia compartida. Al asumir roles en un entorno co-creado, las personas exploran sus propias ideas y conectan con las de otros.",[]],
+ [180,"di","a","Futuros encarnados","Caruso y Cioni","En escenarios compartidos, los participantes exploran dinámicas de poder desde distintos lugares. Encarnar el futuro con experiencia directa es mucho más impactante que leer o hablar de él.",[]],
+ [181,"di","a","Entrar en el futuro","Caruso y Cioni","En escenarios experienciales las personas dejan de ser observadoras y entran a mundos construidos sin explicación extra. Lo que engancha es poder asumir roles activos y, idealmente, ser coautoras de cómo se desarrolla.",[]],
+ [182,"di","a","Empujar los límites para actuar","Caruso y Cioni","En cualquier medio, el juego de roles es de las formas más efectivas de conectar personalmente con futuros. Cuando las personas se sienten capaces de empujar los límites de un mundo ficticio, esos límites se empujan.",[]],
+ [183,"di","a","Situar los artefactos","Caruso y Cioni","Diseminar no es solo comunicar resultados: es incrustar artefactos e ideas en contextos cotidianos (Candy, 2010) para observar reacciones, descubrir interpretaciones y recoger retroalimentación sobre posibles impactos.",["candy2010"]],
+ [184,"as","a","Assessment","Caruso y Cioni","Reflexionar críticamente sobre las visiones para descubrir creencias ocultas y puntos ciegos, y asegurar que sigan siendo relevantes, robustas y ancladas en realidades emergentes. Se hace en colaboración con audiencias y actores, integrando direcciones alternativas cuando haga falta.",[]],
+ [186,"as","q","Explorar para saber cómo seguir","Scott Smith y Madeline Ashby","El punto de explorar el futuro es entender mejor cómo avanzar desde el presente (paráfrasis).",["smithashby2020"]],
+ [187,"as","q","Afectados y decisores","Benedikt Groß y Eileen Mandir","El discurso surge en la conversación entre quienes serán afectados por tus escenarios en el futuro y quienes hoy marcan el rumbo de esos futuros (paráfrasis).",["mandir2024"]],
+ [188,"as","a","Contextualización","Caruso y Cioni","Ubicar artefactos en entornos reales donde el futuro se sienta relevante (Candy y Dunagan, 2017). Puede planearse o ser espontáneo. Si se planea, el lugar se elige según la investigación, el artefacto, las personas y las preguntas: un pabellón, una tienda, una máquina expendedora, una tienda en línea, un congreso o un museo.",["candy2017"]],
+ [189,"as","q","Visceral y concreto","Elliott P. Montgomery y Chris Woebken","Interactuar con un artefacto futuro en un entorno contextualizado involucra a las personas a nivel visceral y permite considerar futuros en términos concretos, más allá de los futuros estetizados de Hollywood y la publicidad (paráfrasis).",["montgomery2016"]],
+ [190,"as","a","Probar el mañana en campo","Caruso y Cioni","Los métodos etnográficos no solo recogen señales: también capturan cómo las personas responden a artefactos y experiencias futuras. Observar reacciones y conversaciones en entornos cotidianos muestra cómo se interpretan, cuestionan o adoptan las visiones.",[]],
+ [191,"as","a","El significado se construye","Caruso y Cioni","El objetivo no es predecir resultados ni evaluar qué tan usables son los artefactos, sino provocar conversación, debate y dudas, e invitar a renegociar significados a medida que emergen de la interacción.",[]],
+ [192,"ta","a","Taking action","Caruso y Cioni","Momento en que los futuros empiezan a materializarse con acción concreta: pasos deliberados hacia visiones de largo plazo, con dirección estratégica y ejecución anclada en el presente. Hay que construir las condiciones para que esos futuros emerjan; el futuro se vuelve un proceso dentro de los sistemas actuales.",[]],
+ [194,"ta","a","Platforming","Caruso y Cioni","Incrustar estructuras orientadas al futuro dentro de las organizaciones (Fry, 2008): espacios donde se idean estrategias, se crean nuevas entidades dentro de unidades existentes y comunidades de práctica comparten conocimiento. Son centros de experimentación para enfoques alternativos, ideas utópicas e iniciativas de largo plazo.",["fry2008"]],
+ [195,"ta","a","Plataformas de futuros","Caruso y Cioni","Van más allá de iniciativas aisladas o hojas de ruta rígidas: entornos continuos y adaptativos donde se cultivan conceptos, prototipos y capacidades. Funcionan como espacios prefigurativos para modelar futuros deseados en tiempo real sin comprometer la cultura central.",[]],
+ [196,"viva","a","Es Design Futures. Es plural. Está vivo.","Caruso y Cioni","La práctica se forma con experimentación continua y el encuentro de aportes diversos. Las etiquetas importan menos que sostener puntos de vista divergentes en diálogo, sin presión por sintetizarlos. No es libertad sin rigor: es una práctica indisciplinada pero atenta.",[]],
+ [197,"viva","c","Design Futures también viaja en sonido","Karla Paniagua","Los paisajes sonoros de futuros exploran escenarios especulativos con diseño sonoro y no dependen del acceso a materiales o habilidades manuales.",["santiago2024"]],
+ [198,"viva","c","Futuros inspirados en la naturaleza","Simone Engelhardt","Escucha la sabiduría de la naturaleza en vez de seguir tendencias; aprende de la fauna para romper el pensamiento lineal; crea futuros en armonía con el mundo natural.",[]],
+ [199,"viva","q","Las imaginaciones más bellas","Simone Engelhardt","Las imaginaciones más bellas nacen de la naturaleza (paráfrasis).",["engelhardt2024"]],
+ [200,"viva","c","Cómo imaginar futuros regenerativos","Savannah Vize, Andrea Gilly Márquez · Falay Transition Design","Escuchar a lo más-que-humano; aprender con la naturaleza; nombrar lo innombrado; viajar entre visiones micro y macro; invitar a generaciones futuras y pasadas a conversar; soñar de lo plausible a lo posible a lo absurdo; conectar mente, cuerpo y corazón; dar lugar al juego.",[]],
+ [201,"viva","q","Interdependencia en el centro","Laura Traldi (entrevista a Elisa Giaccardi)","En lugar del ser humano como medida de todas las cosas (modelo de Vitruvio), poner en el centro la interdependencia entre las partes, en la línea de David Abram, que codificó la idea de lo más-que-humano. Algunos lo llaman enfoque centrado en la vida o en el planeta (paráfrasis).",["traldi2025","abram1997"]],
+ [202,"viva","q","El burrito del futuro","Kleske, Schwarzmann y Rebaudengo","Si en vez de especular sobre el cono del futuro especulas sobre el eje vertical del presente, amplías el punto de partida y reconoces que existen múltiples presentes: aparecen muchos conos y el cono se vuelve un burrito, un espacio circular de bordes difusos (paráfrasis).",["kleske2024"]],
+ [203,"viva","q","Entangled Foresight","Anab Jain · Superflux","En Superflux llaman «Entangled Foresight» a mantener una visión longitudinal mientras se trabaja horizontalmente entre opciones: ver lejos y ancho a la vez. Pide sostener la incomodidad de varias perspectivas sin volver a marcos de «o esto o aquello» (paráfrasis).",["jain2025b"]],
+ [204,"viva","q","El ahora ciego","Kevin Kelly","Nadie quiere mudarse al futuro hoy; muchos lo temen y nos quedamos en el «ahora corto». Quizá esta ceguera de futuro sea la aflicción inevitable del mundo moderno: solo queda el Ahora Ciego (paráfrasis).",["kelly2011"]],
+ [205,"viva","q","Heredar futuros","Ulises Navarro Aguiar y Karl Palmås","La idea de un futuro radicalmente incierto se volvió una narrativa conveniente que oculta continuidades de larga duración. Proponen pasar de la idea de hacer futuros a la de heredar futuros que necesitan redirección (paráfrasis).",["navarro2025"]],
+ [206,"viva","a","Co-crear futuros","Caruso y Cioni","Design Futures es fundamentalmente participativo: vive de la apertura, el diálogo y la colaboración, y busca cultivar mentalidades, culturas y prácticas que sostengan un pensamiento de largo plazo, imaginativo y transformador.",[]],
+ [207,"viva","q","Obligación moral","Genevieve Bell","Si podías ver un mundo mejor, estabas moralmente obligado a ayudar a traerlo a la existencia (paráfrasis).",["bell2020"]],
+ [209,"post","a","Reflexiones","Caruso y Cioni","¿Ayuda dar a cada enfoque su propia etiqueta o solo crea silos? Hay fatiga y repetición, y el diseño parece rezagado. Design Futures es híbrido y se enriquece al mezclarse con diseño social, de políticas, sistémico y de transición. Aún no encuentra su lugar en organizaciones enfocadas en el corto plazo: sin interés no avanza; con demasiada demanda se mercantiliza. La pregunta real: ¿qué impacto queremos tener?",[]],
+ [211,"post","c","Epílogo","Julian Bleecker","Unos niños jugando en un bosque no distinguen lo posible de lo imposible: así es la imaginación sin disciplina ni certificación. Con They Live (1988) como metáfora, invita a ponerse las gafas y ver el campo como un terreno de fragmentos. Advierte que convertir «futuros» en «design futures» puede domesticarlo. El libro es como un diario de campo arqueológico: el lector debe hacer el trabajo de conectar. «Eres tu propio futurista».",["m-theylive"]]
+];
+
+// Fuentes. u = enlace impreso en el libro; f = enlace encontrado (no está en el libro); fk = qué es lo encontrado
+// estado del enlace del libro: ok (respondió), bloq (el sitio bloquea la verificación automática; DOI registrado), caido
+const SRC = {
+ "abram1997":{r:"Abram, D. (1997). The spell of the sensuous: Perception and language in a more-than-human world. Random House.",k:"libro",use:[[201,"mención"],[217,"bib"]],f:"https://openlibrary.org/works/OL15845262W",fk:"catálogo"},
+ "auger2013":{r:"Auger, J. (2013). Speculative design: Crafting the speculation. Digital Creativity, 24(1), 11–35.",k:"artículo",use:[[217,"bib"]],u:"https://doi.org/10.1080/14626268.2013.767276",st:"bloq"},
+ "balagtas2024":{r:"Balagtas, P. (2024). Making futures work: Integrating futures thinking for design, innovation and strategy. O'Reilly.",k:"libro",use:[[82,"amplía"],[92,"amplía"],[131,"amplía"],[217,"bib"]],f:"https://openlibrary.org/works/OL38015935W",fk:"catálogo"},
+ "barad2007":{r:"Barad, K. (2007). Meeting the universe halfway: Quantum physics and the entanglement of matter and meaning. Duke University Press.",k:"libro",use:[[217,"bib"]],f:"https://doi.org/10.1215/9780822388128",fk:"DOI de la editorial"},
+ "bardzell2013":{r:"Bardzell, J., & Bardzell, S. (2013). What is “critical” about critical design? CHI '13, 3297–3306. ACM.",k:"artículo",use:[[217,"bib"]],u:"https://doi.org/10.1145/2470654.2466451",st:"bloq"},
+ "bardzell2012":{r:"Bardzell, S., Bardzell, J., Forlizzi, J., Zimmerman, J., & Antanitis, J. (2012). Critical design and critical theory: The challenge of designing for provocation. DIS '12, 288–297. ACM.",k:"artículo",use:[[217,"bib"]],u:"https://doi.org/10.1145/2317956.2318001",st:"bloq"},
+ "bendor2025":{r:"Bendor, R., & Lupetti, M. L. (2025). Teaching speculative design. International Journal of Technology and Design Education, 35, 403–425.",k:"artículo",use:[[217,"bib"]],u:"https://doi.org/10.1007/s10798-024-09908-3",st:"ok"},
+ "berardi2011":{r:"Berardi, F. (2011). After the future. AK Press.",k:"libro",use:[[218,"bib"]],f:"https://openlibrary.org/works/OL20432419W",fk:"catálogo"},
+ "berardi2019":{r:"Berardi, F. (2019). Futurability: The age of impotence and the horizon of possibility. Verso.",k:"libro",use:[[218,"bib"]],f:"https://openlibrary.org/works/OL19730941W",fk:"catálogo"},
+ "bespoke2017":{r:"Bespoke. (2017). Book of futures: A bespoke guide to design futures. Bespoke ApS.",k:"libro",use:[[51,"cita"],[108,"cita"],[218,"bib"]],f:"https://bespokecph.com/book-of-futures-back-in-stock/",fk:"página de la editorial",n:"La editorial registra varias ediciones; la bibliografía la llama «Book of Futures. Bespoke Copenhagen»."},
+ "bleecker2009":{r:"Bleecker, J. (2009). Design fiction: A short essay on design, science, fact and fiction. Near Future Laboratory.",k:"ensayo",use:[[159,"cita"],[218,"bib"]],f:"https://nearfuturelaboratory.com/blog/2009/03/design-fiction-a-short-essay-on-design-science-fact-and-fiction/",fk:"página del autor"},
+ "bleecker2024a":{r:"Bleecker, J. (2024). This is design fiction. But this is not. Near Future Laboratory.",k:"web",use:[[168,"texto"],[218,"bib"]],u:"https://nearfuturelaboratory.com/blog/2024/01/what-design-fiction-is-not/",st:"ok"},
+ "bleecker2024b":{r:"Bleecker, J. (2024). The Future Mundane. Near Future Laboratory.",k:"web",use:[[89,"cita"]],u:"https://nearfuturelaboratory.com/blog/2024/02/the-future-mundane/",st:"ok"},
+ "bleecker2022":{r:"Bleecker, J., Foster, N., Girardin, F., & Nova, N. (2022). The manual of design fiction. Near Future Laboratory.",k:"libro",use:[[160,"texto"],[218,"bib"]],f:"https://nearfuturelaboratory.com/library/2022/10/the-manual-of-design-fiction-hardcover/",fk:"página de la editorial"},
+ "brandalise2020":{r:"Brandalise, I., & Eira, H. (2020). Patadesign: A pedagogical experiment on design of exception, absurd artifacts, and imaginary interfaces. Dearq, (26), 36–43.",k:"artículo",use:[[218,"bib"]],u:"https://doi.org/10.18389/dearq26.2020.04",st:"ok"},
+ "braidotti2019":{r:"Braidotti, R. (2019). Posthuman knowledge. Polity.",k:"libro",use:[[218,"bib"]],f:"https://openlibrary.org/works/OL20778313W",fk:"catálogo"},
+ "bridle2023a":{r:"Bridle, J. (2023a). Ways of being. Penguin.",k:"libro",use:[[218,"bib"]],f:"https://openlibrary.org/works/OL26003614W",fk:"catálogo"},
+ "bridle2023b":{r:"Bridle, J. (2023b). New dark age: Technology and the end of the future. Verso.",k:"libro",use:[[218,"bib"]],f:"https://openlibrary.org/works/OL17919031W",fk:"catálogo"},
+ "bonini2024":{r:"Bonini, T., & Treré, E. (2024). Algorithms of resistance: The everyday fight against platform power. MIT Press.",k:"libro",use:[[218,"bib"]],f:"https://doi.org/10.7551/mitpress/14329.001.0001",fk:"DOI de la editorial"},
+ "camacho2020":{r:"Camacho, J. (2020). Preface: Living in a cliffhanger. Preferable Worlds (Medium).",k:"web",use:[[218,"bib"]],u:"https://medium.com/preferable-worlds/preface-living-in-a-cliffhanger-f1e62257cd5",st:"bloq"},
+ "campagna2018":{r:"Campagna, F. (2018). Technic and magic: The reconstruction of reality. Bloomsbury Academic.",k:"libro",use:[[48,"amplía"],[218,"bib"]],f:"https://openlibrary.org/works/OL20595283W",fk:"catálogo"},
+ "campagna2021":{r:"Campagna, F. (2021). Prophetic culture: Recreation for adolescents. Bloomsbury Academic.",k:"libro",use:[[218,"bib"]],f:"https://doi.org/10.5040/9781350149663",fk:"DOI de la editorial"},
+ "candy2010":{r:"Candy, S. (2010). The futures of everyday life: Politics and the design of experiential scenarios.",k:"documento",use:[[174,"texto"],[183,"texto"],[218,"bib"]],u:"https://doi.org/10.13140/RG.2.1.1840.0248",st:"bloq"},
+ "candy2013":{r:"Candy, S. (2013). Guerrilla futures. SlideShare.",k:"presentación",use:[[176,"cita"]],u:"https://www.slideshare.net/slideshow/guerrilla-futures/27720333",st:"ok"},
+ "candy2016":{r:"Candy, S. (2016). Experiential futures: Show and tell. The Economist (The World in 2016).",k:"artículo",use:[[172,"cita"]],f:"https://www.researchgate.net/publication/305316754_Experiential_futures_Show_and_tell",fk:"ficha en ResearchGate"},
+ "candy2018":{r:"Candy, S. (2018). Experiential futures: A brief outline. The Futuryst.",k:"web",use:[[218,"bib"]],u:"https://futuryst.blogspot.com/2018/10/experiential-futures-brief-outline.html",st:"ok"},
+ "candy2024":{r:"Candy, S. (2024). Tomorrow's energy today: How we used guerrilla art and design at the World Energy Congress… Medium.",k:"web",use:[[177,"cita"]],u:"https://medium.com/@futuryst/tomorrows-energy-today-f9051ba4d139",st:"bloq"},
+ "candy2017":{r:"Candy, S., & Dunagan, J. (2017). Designing an experiential scenario: The People Who Vanished. Futures, 86, 136–153.",k:"artículo",use:[[100,"cita"],[188,"texto"],[218,"bib"]],u:"https://doi.org/10.1016/j.futures.2016.05.006",st:"ok",n:"En la p. 188 aparece como «Candy & Dunegan, 2017»."},
+ "calvino":{r:"Calvino, I. (2022). Il barone rampante [El barón rampante]. Mondadori.",k:"libro",use:[[219,"bib"]],f:"https://openlibrary.org/works/OL15322W",fk:"catálogo"},
+ "cechanowicz2016":{r:"Cechanowicz, L., Cantrell, B., & McDowell, A. (2016). World building and the future of media: A case study—Makoko 2036. IEEE Technology and Society Magazine, 35(4), 28–38.",k:"artículo",use:[[219,"bib"]],u:"https://doi.org/10.1109/MTS.2016.2618678",st:"ok"},
+ "coulton2018":{r:"Coulton, P., Lindley, J., & Cooper, R. (2018). The little book of design fiction for the Internet of Things. Lancaster University.",k:"libro",use:[[219,"bib"]],f:"https://openlibrary.org/works/OL27810530W",fk:"catálogo"},
+ "crawford2022":{r:"Crawford, K. (2022). Atlas of AI. Yale University Press.",k:"libro",use:[[219,"bib"]],f:"https://doi.org/10.12987/9780300252392",fk:"DOI de la editorial"},
+ "dator2009":{r:"Dator, J. (2009). Alternative futures at the Manoa School. Journal of Futures Studies, 14(2), 1–18.",k:"artículo",use:[[123,"cita"]],f:"https://jfsdigital.org/articles-and-essays/2009-2/vol-14-no-2-november/articles/futuristsalternative-futures-at-the-manoa-school/",fk:"revista (acceso abierto)",oa:1,n:"La bibliografía cita una reimpresión: Dator (2019), en Jim Dator: A Noticer in Time, Springer."},
+ "dator2019":{r:"Dator, J. (2019). Alternative futures at the Manoa School. En Jim Dator: A Noticer in Time (pp. 37–54). Springer.",k:"capítulo",use:[[219,"bib"]],u:"https://doi.org/10.1007/978-3-030-17387-6_5",st:"ok"},
+ "dourish2014":{r:"Dourish, P., & Bell, G. (2014). “Resistance is futile”: Reading science fiction alongside ubiquitous computing. Personal and Ubiquitous Computing, 18(4), 769–778.",k:"artículo",use:[[219,"bib"]],u:"https://doi.org/10.1007/s00779-013-0678-7",st:"ok"},
+ "dunne2013":{r:"Dunne, A., & Raby, F. (2013). Speculative everything: Design, fiction, and social dreaming. MIT Press.",k:"libro",use:[[219,"bib"]],f:"https://openlibrary.org/works/OL21807723W",fk:"catálogo"},
+ "dunne2025":{r:"Dunne, A., & Raby, F. (2025). Not here, not now: Speculative thought, impossibility, and the design imagination. MIT Press.",k:"libro",use:[[219,"bib"]],f:"https://doi.org/10.7551/mitpress/15700.001.0001",fk:"DOI de la editorial"},
+ "dunne2019":{r:"Dunne, A. (2019). A larger reality. Reading Design.",k:"web",use:[[46,"amplía"]],u:"https://www.readingdesign.org/a-larger-reality",st:"ok"},
+ "duarte2024":{r:"Duarte, G. A., Facchetti, A., & Yavuz, S. U. (Eds.). (2024). Towards the realm of materiality: Designing Philip K. Dick's non-existing technologies. Produzioni Nero.",k:"libro",use:[[219,"bib"]],f:"https://www.neroeditions.com/product/towards-the-realm-of-materiality/",fk:"página de la editorial"},
+ "escobar2018":{r:"Escobar, A. (2018). Designs for the pluriverse. Duke University Press.",k:"libro",use:[[219,"bib"]],f:"https://openlibrary.org/works/OL17890251W",fk:"catálogo"},
+ "farias2022":{r:"Farias, P. G., Bendor, R., & van Eekelen, B. F. (2022). Social dreaming together: A critical exploration of participatory speculative design. PDC 2022, vol. 2, 147–154. ACM.",k:"artículo",use:[[219,"bib"]],u:"https://doi.org/10.1145/3537797.3537826",st:"bloq"},
+ "fisher2022a":{r:"Fisher, M. (2022a). Ghosts of my life: Writings on depression, hauntology and lost futures. Zer0 Books.",k:"libro",use:[[220,"bib"]],f:"https://openlibrary.org/works/OL20712666W",fk:"catálogo"},
+ "fisher2022b":{r:"Fisher, M. (2022b). Capitalist realism: Is there no alternative? (2.ª ed.). Zer0 Books.",k:"libro",use:[[220,"bib"]],f:"https://openlibrary.org/works/OL15683250W",fk:"catálogo"},
+ "foster2013":{r:"Foster, N. (2013). The future mundane. Core77.",k:"web",use:[[87,"texto"],[220,"bib"]],u:"https://www.core77.com/posts/25678/the-future-mundane-25678",st:"ok"},
+ "foster2025":{r:"Foster, N. (2025). Could Should Might Don't: How we think about the future. Canongate.",k:"libro",use:[[220,"bib"]],f:"https://openlibrary.org/works/OL42551084W",fk:"catálogo"},
+ "fry2008":{r:"Fry, T. (2008). Design futuring: Sustainability, ethics and new practice. Berg.",k:"libro",use:[[194,"texto"],[220,"bib"]],f:"https://openlibrary.org/works/OL3617075W",fk:"catálogo"},
+ "fry2020":{r:"Fry, T. (2020). Defuturing: A new design philosophy. Bloomsbury.",k:"libro",use:[[220,"bib"]],f:"https://openlibrary.org/works/OL21648527W",fk:"catálogo"},
+ "garcia2022":{r:"Garcia, C. (2022). Design futures thinking, future studies. LinkedIn.",k:"web",use:[[220,"bib"]],u:"https://www.linkedin.com/posts/clarice-garcia_design-futuresthinking-futurestudies-activity-6939917202020003840-5KR1",st:"ok"},
+ "geuss2024":{r:"Geuss, R. (2024). Philosophy and real politics. Princeton University Press.",k:"libro",use:[[220,"bib"]],f:"https://openlibrary.org/works/OL1829535W",fk:"catálogo"},
+ "gidley2017":{r:"Gidley, J. M. (2017). The future: A very short introduction. Oxford University Press.",k:"libro",use:[[220,"bib"]],f:"https://doi.org/10.1093/actrade/9780198735281.001.0001",fk:"DOI de la editorial"},
+ "gitelman2006":{r:"Gitelman, L. (2006). Always already new: Media, history, and the data of culture. MIT Press.",k:"libro",use:[[220,"bib"]],f:"https://doi.org/10.7551/mitpress/1208.001.0001",fk:"DOI de la editorial"},
+ "gloerich2023":{r:"Gloerich, I., & Ferri, G. (2023). First-person speculative fabulation: A workshop method for times of crisis. Mediapolis, 8(4).",k:"artículo",use:[[138,"amplía"],[220,"bib"]],f:"https://www.mediapolisjournal.com/2023/11/speculative-fabulation/",fk:"revista (acceso abierto)",oa:1},
+ "gram2025":{r:"Gram, M. (2025). The invention of design: A twentieth-century history. Basic Books.",k:"libro",use:[[220,"bib"]],f:"https://www.hachettebookgroup.com/titles/maggie-gram/the-invention-of-design/9781541600645/",fk:"página de la editorial"},
+ "grouchnikov2024":{r:"Grouchnikov, K. (2024). Production design of “Dune”: Interview with Patrice Vermette. Pushing Pixels.",k:"web",use:[[220,"bib"]],u:"https://www.pushing-pixels.org/2024/04/10/production-design-of-dune-interview-with-patrice-vermette.html",st:"ok"},
+ "haraway2016":{r:"Haraway, D. (2016). Staying with the trouble: Making kin in the Chthulucene. Duke University Press.",k:"libro",use:[[138,"mención"],[220,"bib"]],f:"https://doi.org/10.1215/9780822373780",fk:"DOI de la editorial"},
+ "halse2013":{r:"Halse, J. (2013). Ethnographies of the possible. En Gunn, Otto & Smith (Eds.), Design Anthropology (pp. 180–198). Routledge.",k:"capítulo",use:[[220,"bib"]],u:"https://www.routledge.com/Design-Anthropology-Theory-and-Practice/Gunn-Otto-Smith/p/book/9780857853691",st:"ok"},
+ "hernandez2025":{r:"Hernández Ibinarriaga, D. (2025). Decolonising and indigenising design. Routledge.",k:"libro",use:[[221,"bib"]],f:"https://doi.org/10.4324/9781032645681",fk:"DOI de la editorial"},
+ "hill2014":{r:"Hill, D. (2014). Dark matter and Trojan horses: A strategic design vocabulary. Strelka Press.",k:"libro",use:[[221,"bib"]],f:"https://openlibrary.org/works/OL26420556W",fk:"catálogo"},
+ "hill2025":{r:"Hill, D. (2025). Small vehicles of Shanghai. But what was the question? (Medium).",k:"web",use:[[221,"bib"]],u:"https://medium.com/butwhatwasthequestion/small-vehicles-of-shanghai-deepseeking-the-city-c404c92218c5",st:"bloq"},
+ "hoffman2022":{r:"Hoffman, J. (2022). Speculative futures: Design approaches to navigate change, foster resilience, and co-create the cities we need. North Atlantic Books.",k:"libro",use:[[94,"cita"],[221,"bib"]],f:"https://www.northatlanticbooks.com/shop/speculative-futures/",fk:"página de la editorial"},
+ "howard2021":{r:"Howard, S. (2021). Drivers and signals: How are they different? Institute for the Future.",k:"web",use:[[71,"texto"],[72,"cita"],[221,"bib"]],u:"https://www.iftf.org/insights/drivers-signals-differences/",st:"ok"},
+ "hunt2023":{r:"Hunt, T. (2023). The MIRED world in the Anthropocene. Autopublicado.",k:"libro",use:[[221,"bib"]],f:"https://www.ted-hunt.com/MIRED.html",fk:"página del autor"},
+ "ingold2017":{r:"Ingold, T. (2017). Anthropology contra ethnography. HAU, 7(1), 21–26.",k:"artículo",use:[[221,"bib"]],u:"https://doi.org/10.14318/hau7.1.005",st:"bloq"},
+ "ingold2023":{r:"Ingold, T. (2023). The rise and fall of generation now. Polity.",k:"libro",use:[[221,"bib"]],f:"https://www.wiley.com/en-us/The+Rise+and+Fall+of+Generation+Now-p-9781509556625",fk:"página de la editorial"},
+ "ishiguro2010":{r:"Ishiguro, K. (2010). Never let me go. Faber & Faber.",k:"novela",use:[[221,"bib"]],f:"https://openlibrary.org/works/OL59038W",fk:"catálogo"},
+ "ishiguro2021":{r:"Ishiguro, K. (2021). Klara and the sun. Faber & Faber.",k:"novela",use:[[221,"bib"]],f:"https://openlibrary.org/works/OL20883297W",fk:"catálogo"},
+ "jain2020":{r:"Jain, A. (2020). Calling for a more-than-human politics. Medium.",k:"web",use:[[221,"bib"]],u:"https://medium.com/@anabjain/calling-for-a-more-than-human-politics-f558b57983e6",st:"bloq"},
+ "jain2019":{r:"Jain, A., & Candy, S. (2019). Critical activism. Journal of Futures Studies, 23(3), 99–104.",k:"artículo",use:[[221,"bib"]],f:"https://jfsdigital.org/articles-and-essays/vol-23-no-3-march-2019/critical-activism/",fk:"revista (acceso abierto)",oa:1},
+ "jain2025a":{r:"Jain, A. (2025). Two AIs talking (arguing) with each other. LinkedIn.",k:"web",use:[[45,"cita"]],u:"https://www.linkedin.com/posts/anabjain_two-ais-talking-arguing-with-each-other-activity-7336678357805260801-PAPK/",st:"ok"},
+ "jain2025b":{r:"Jain, A. (2025). Entangled foresight: A futuring strategy for uncertainty. LinkedIn.",k:"web",use:[[203,"cita"]],u:"https://www.linkedin.com/posts/anabjain_if-we-focus-on-long-term-futures-do-we-activity-7330545194997534721-iTTB",st:"ok"},
+ "jameson2007":{r:"Jameson, F. (2007). Archaeologies of the future. Verso.",k:"libro",use:[[221,"bib"]],f:"https://openlibrary.org/works/OL71495W",fk:"catálogo"},
+ "jasanoff2015":{r:"Jasanoff, S., & Kim, S.-H. (Eds.). (2015). Dreamscapes of modernity. University of Chicago Press.",k:"libro",use:[[221,"bib"]],f:"https://doi.org/10.7208/chicago/9780226276663.001.0001",fk:"DOI de la editorial"},
+ "johannessen2017":{r:"Johannessen, L. K. (2017). The young designer's guide to speculative and critical design. NTNU.",k:"artículo",use:[[221,"bib"]],f:"https://www.ntnu.edu/documents/139799/1279149990/16+TPD4505.leon.johannessen.pdf/1c9221a2-2f1b-42fe-ba1f-24bb681be0cd",fk:"PDF en NTNU (acceso abierto)",oa:1},
+ "kelly2011":{r:"Kelly, K. (2011). Protopia. The Technium.",k:"web",use:[[204,"cita"]],u:"https://kk.org/thetechnium/protopia",st:"ok"},
+ "kelly2022":{r:"Kelly, K. (2022). How to future. The Technium.",k:"web",use:[[222,"bib"]],u:"https://kk.org/thetechnium/how-to-future/",st:"ok"},
+ "kirby2010":{r:"Kirby, D. A. (2010). The future is now: Diegetic prototypes and the role of popular films in generating real-world technological development. Social Studies of Science, 40(1), 41–70.",k:"artículo",use:[[222,"bib"]],u:"https://doi.org/10.1177/0306312709338325",st:"bloq"},
+ "kirby2011":{r:"Kirby, D. A. (2011). Lab coats in Hollywood. MIT Press.",k:"libro",use:[[222,"bib"]],f:"https://doi.org/10.7551/mitpress/8483.001.0001",fk:"DOI de la editorial"},
+ "latour1993":{r:"Latour, B. (1993). We have never been modern. Harvard University Press.",k:"libro",use:[[222,"bib"]],f:"https://openlibrary.org/works/OL25374767W",fk:"catálogo"},
+ "leguin2019":{r:"Le Guin, U. K. (2019). The carrier bag theory of fiction. Ignota.",k:"ensayo",use:[[222,"bib"]],f:"https://www.ursulakleguin.com/the-carrier-bag-theory-of-fiction",fk:"sitio oficial de la autora",n:"La bibliografía indica «Cosmogenesis»; la edición de 2019 es de Ignota."},
+ "lindley2015":{r:"Lindley, J., & Coulton, P. (2015). Game of drones. CHI PLAY '15, 613–618. ACM.",k:"artículo",use:[[222,"bib"]],u:"https://doi.org/10.1145/2793107.2810300",st:"bloq"},
+ "lindley2016":{r:"Lindley, J., & Coulton, P. (2016). Pushing the limits of design fiction: The case for fictional research papers. CHI '16, 4032–4043. ACM.",k:"artículo",use:[[222,"bib"]],u:"https://doi.org/10.1145/2858036.2858446",st:"bloq"},
+ "lindley2014":{r:"Lindley, J., & Sharma, D. (2014). Anticipatory ethnography: Design fiction as an input to design ethnography. EPIC 2014, 237–253.",k:"artículo",use:[[222,"bib"]],u:"https://doi.org/10.1111/1559-8918.01030",st:"bloq"},
+ "lindley2015b":{r:"Lindley, J., Sharma, D., & Potts, R. (2015). Operationalizing design fiction with anticipatory ethnography. EPIC 2015, 58–71.",k:"artículo",use:[[222,"bib"]],u:"https://doi.org/10.1111/1559-8918.2015.01040",st:"bloq"},
+ "lockton2019":{r:"Lockton, D., & Candy, S. (2019). A vocabulary for visions in designing for transitions. Cuadernos del Centro de Estudios en Diseño y Comunicación, 73, 27–49.",k:"artículo",use:[[173,"texto"],[222,"bib"]],u:"https://www.academia.edu/36760846/Cuaderno_Journal_73_Design_in_Perspective_Transition_Design_Monograph",st:"bloq"},
+ "lorusso2023":{r:"Lorusso, S. (2023). What design can't do. Set Margins'.",k:"libro",use:[[222,"bib"]],f:"https://silviolorusso.com/work/what-design-cant-do/",fk:"página del autor"},
+ "mandir2024":{r:"Mandir, E., & Groß, B. (2024). Designing futures: Speculation, critique, innovation. Laurence King.",k:"libro",use:[[187,"cita"],[222,"bib"]],f:"https://books.google.com/books/about/Designing_Futures.html?id=Opx30AEACAAJ",fk:"ficha en Google Books",n:"La p. 187 invierte el orden de autores: «Groß & Mandir»."},
+ "mitrovic2015":{r:"Mitrović, I. (2015). Introduction to speculative design practice – Eutropia, a case study. Croatian Designers Association; Universidad de Split.",k:"libro",use:[[223,"bib"]],f:"https://speculative.hr/en/introduction-to-speculative-design-practice/",fk:"página del proyecto (PDF abierto)",oa:1},
+ "mitrovic2019":{r:"Mitrović, I. (2019). New reflections on speculativity. SpeculativeEdu.",k:"web",use:[[223,"bib"]],u:"https://speculativeedu.eu/new-reflections-on-speculativity/",st:"ok"},
+ "mitrovic2021":{r:"Mitrović, I., Auger, J., Hanna, J., & Helgason, I. (Eds.). (2021). Beyond speculative design: Past – present – future. SpeculativeEdu.",k:"libro",use:[[60,"amplía"],[223,"bib"]],f:"https://speculativeedu.eu/beyond-speculative-design-past-present-future/",fk:"página del libro (PDF abierto)",oa:1},
+ "montfort2017":{r:"Montfort, N. (2017). The future. MIT Press.",k:"libro",use:[[223,"bib"]],f:"https://doi.org/10.7551/mitpress/10522.001.0001",fk:"DOI de la editorial"},
+ "montgomery2020":{r:"Montgomery, E. P. (2020). An unresolved mapping of speculative design V 2.0.",k:"web",use:[[223,"bib"]],u:"https://www.epmid.com/Mapping-Speculative-Design",st:"ok"},
+ "montgomery2016":{r:"Montgomery, E. P., & Woebken, C. (2016). Extrapolation Factory – Operator's manual. CreateSpace.",k:"libro",use:[[170,"texto"],[189,"cita"],[223,"bib"]],f:"https://openlibrary.org/works/OL37483403W",fk:"catálogo"},
+ "morton2013":{r:"Morton, T. (2013). Hyperobjects: Philosophy and ecology after the end of the world. University of Minnesota Press.",k:"libro",use:[[223,"bib"]],f:"https://doi.org/10.5749/9781452940540",fk:"DOI de la editorial"},
+ "noessel":{r:"Noessel, C. (s. f.). Sci-fi interfaces.",k:"web",use:[[223,"bib"]],u:"https://scifiinterfaces.com",st:"ok"},
+ "nova2016":{r:"Nova, N. (2016). Peripheral ethnographies. Pasta & Vinegar.",k:"web",use:[[58,"texto"],[59,"cita"],[223,"bib"]],u:"https://www.nicolasnova.net/pasta-and-vinegar/2016/10/20/peripheral-ethnographies/",st:"ok"},
+ "polak1973":{r:"Polak, F. (1973). The image of the future. Elsevier.",k:"libro",use:[[223,"bib"]],f:"https://openlibrary.org/works/OL6260943W",fk:"catálogo"},
+ "revell2022":{r:"Revell, T. (2022). BOX083: Can't preferable your way out of politics. The Bounding Box.",k:"web",use:[[97,"cita"],[223,"bib"]],u:"https://blog.tobiasrevell.com/2022/11/24/box083-cant-preferable-your-way-out-of-politics/",st:"ok"},
+ "revell2024":{r:"Revell, T. (2024). BOX109: Design and the construction of imaginaries. The Bounding Box.",k:"web",use:[[223,"bib"]],u:"https://blog.tobiasrevell.com/2024/02/07/box109-design-and-the-construction-of-imaginaries/",st:"bloq"},
+ "richmond2020":{r:"Richmond, Y. W., Khovanskaya, V., Fox, S. E., Merrill, N., & Sengers, P. (2020). Infrastructural speculations. CHI '20. ACM.",k:"artículo",use:[[223,"bib"]],u:"https://doi.org/10.1145/3313831.3376515",st:"bloq"},
+ "rodari":{r:"Rodari, G. (2010). Grammatica della fantasia [Gramática de la fantasía]. Einaudi.",k:"libro",use:[[224,"bib"]],f:"https://openlibrary.org/works/OL29317167W",fk:"catálogo"},
+ "shamiyeh2025":{r:"Shamiyeh, M. (Ed.). (2025). Practices of futurecasting. Birkhäuser.",k:"libro",use:[[224,"bib"]],f:"https://openlibrary.org/works/OL38614840W",fk:"catálogo"},
+ "shedroff2012":{r:"Shedroff, N., & Noessel, C. (2012). Make it so: Interaction design lessons from science fiction. Rosenfeld Media.",k:"libro",use:[[224,"bib"]],f:"https://openlibrary.org/works/OL19885223W",fk:"catálogo"},
+ "shove2012":{r:"Shove, E., Pantzar, M., & Watson, M. (2012). The dynamics of social practice. SAGE.",k:"libro",use:[[224,"bib"]],f:"https://doi.org/10.4135/9781446250655",fk:"DOI de la editorial"},
+ "smith2025":{r:"Smith, R. C., Loi, D., Winschiers-Theophilus, H., Huybrechts, L., & Simonsen, J. (Eds.). (2025). Routledge international handbook of contemporary participatory design. Routledge.",k:"libro",use:[[224,"bib"]],f:"https://openlibrary.org/works/OL45782929W",fk:"catálogo"},
+ "smithashby2020":{r:"Smith, S., & Ashby, M. (2020). How to future: Leading and sense-making in an age of hyperchange. Kogan Page.",k:"libro",use:[[53,"cita"],[65,"texto"],[67,"texto"],[73,"texto"],[105,"amplía"],[112,"cita"],[186,"cita"],[224,"bib"]],f:"https://openlibrary.org/works/OL20746489W",fk:"catálogo",n:"En las pp. 53, 105, 112 y 186 aparece como «Scott, J., & Ashby, M.»; en el texto y la bibliografía, como «Smith, S., & Ashby, M.». El catálogo registra al autor como Scott Smith."},
+ "smithcox2023":{r:"Smith, S., & Cox-Smith, S. (2023). Future cultures. Kogan Page.",k:"libro",use:[[224,"bib"]],f:"https://openlibrary.org/works/OL34114549W",fk:"catálogo"},
+ "smyth2019":{r:"Smyth, M. (2019). The radical design movement. SpeculativeEdu.",k:"web",use:[[224,"bib"]],u:"https://speculativeedu.eu/the-radical-design-movement/",st:"ok"},
+ "sontag1965":{r:"Sontag, S. (1965). The imagination of disaster. Commentary.",k:"ensayo",use:[[224,"bib"]],u:"https://www.commentary.org/articles/susan-sontag/the-imagination-of-disaster/",st:"ok"},
+ "sterling2004":{r:"Sterling, B. (2004). The singularity: Your future as a black hole. The Long Now Foundation.",k:"charla",use:[[117,"cita"],[224,"bib"]],u:"https://longnow.org/talks/02004-sterling/",st:"ok"},
+ "sturdee2016":{r:"Sturdee, M., Coulton, P., Lindley, J. G., et al. (2016). Design fiction: How to build a Voight-Kampff machine. CHI EA '16, 375–385. ACM.",k:"artículo",use:[[224,"bib"]],u:"https://doi.org/10.1145/2851581.2892574",st:"bloq"},
+ "suddendorf2009":{r:"Suddendorf, T., Addis, D. R., & Corballis, M. C. (2009). Mental time travel and the shaping of the human mind. Phil. Trans. R. Soc. B, 364(1521), 1317–1324.",k:"artículo",use:[[224,"bib"]],u:"https://doi.org/10.1098/rstb.2008.0301",st:"bloq"},
+ "textor1980":{r:"Textor, R. B. (1980). A handbook on ethnographic futures research (3.ª ed.). Stanford University.",k:"libro",use:[[39,"cita"],[225,"bib"]],f:"https://openlibrary.org/works/OL42145229W",fk:"catálogo"},
+ "tharp2019":{r:"Tharp, B. M., & Tharp, S. M. (2019). Discursive design: Critical, speculative, and alternative things. MIT Press.",k:"libro",use:[[164,"texto"],[166,"texto"],[225,"bib"]],f:"https://openlibrary.org/works/OL20156351W",fk:"catálogo"},
+ "tsing2015":{r:"Tsing, A. L. (2015). The mushroom at the end of the world. Princeton University Press.",k:"libro",use:[[135,"amplía"],[225,"bib"]],u:"https://doi.org/10.1515/9781400873548",st:"ok"},
+ "toffler1970":{r:"Toffler, A. (1970). Future shock. Random House.",k:"libro",use:[[225,"bib"]],f:"https://openlibrary.org/works/OL2869043W",fk:"catálogo"},
+ "vonstackelberg2015":{r:"von Stackelberg, P., & McDowell, A. (2015). What in the world? Storyworlds, science fiction, and futures studies. Journal of Futures Studies, 20(2), 25–46.",k:"artículo",use:[[225,"bib"]],f:"https://jfsdigital.org/2015-2/vol-20-no-2-dec-2015/article/what-in-the-world-storyworlds-science-fiction-and-futures-studies/",fk:"revista (acceso abierto)",oa:1},
+ "voros2015":{r:"Voros, J. (2015). On examining Preposterous! futures. The Voroscope.",k:"web",use:[[225,"bib"]],u:"https://thevoroscope.com/2015/12/28/on-examining-preposterous-futures/",st:"ok"},
+ "voss2024":{r:"Voss, G. (2024). Systems ultra: Making sense of technology in a complex world. Verso.",k:"libro",use:[[225,"bib"]],f:"https://openlibrary.org/works/OL37568022W",fk:"catálogo"},
+ "walkerart2020":{r:"Walker Art Center. (2020). Defuturing the image of the future.",k:"web",use:[[225,"bib"]],u:"https://walkerart.org/magazine/defuturing-the-image-of-the-future/",st:"ok"},
+ "walker2019":{r:"Walker, R. (2019). The art of noticing. Knopf.",k:"libro",use:[[225,"bib"]],f:"https://openlibrary.org/works/OL20161789W",fk:"catálogo"},
+ "wizinsky2022":{r:"Wizinsky, M. (2022). Design after capitalism. MIT Press.",k:"libro",use:[[225,"bib"]],f:"https://doi.org/10.7551/mitpress/14274.001.0001",fk:"DOI de la editorial"},
+ "wille2025":{r:"Wille, J. I., Andreasen, S. J., & Wille, G. (2025). How to create a universe. University of Westminster Press.",k:"libro",use:[[225,"bib"]],f:"https://doi.org/10.16997/mpub.13071693",fk:"DOI de la editorial"},
+ "wolf2012":{r:"Wolf, M. J. P. (2012). Building imaginary worlds. Routledge.",k:"libro",use:[[225,"bib"]],f:"https://doi.org/10.4324/9780203096994",fk:"DOI de la editorial"},
+ "yaden2016":{r:"Yaden, D. B., et al. (2016). The overview effect: Awe and self-transcendent experience in space flight. Psychology of Consciousness, 3(1), 1–11.",k:"artículo",use:[[131,"texto"],[225,"bib"]],u:"https://doi.org/10.1037/cns0000086",st:"bloq"},
+ "zeiner2019":{r:"Zeiner, A. (2019). The responsibility of design: Adopting a futures-oriented mindset… The University of Texas at Austin.",k:"web",use:[[225,"bib"]],u:"https://designcreativetech.utexas.edu/responsibility-design-adopting-futures-oriented-mindset-support-more-responsible-design-practice",st:"ok"},
+ // solo en citas o lecturas sugeridas
+ "tonkinwise2015":{r:"Tonkinwise, C. (2015). Just design: Being dogmatic about defining speculative critical design future fiction. Medium.",k:"web",use:[[36,"cita"],[98,"cita"],[165,"cita"]],u:"https://medium.com/@camerontw/just-design-b1f97cb3996f",st:"bloq"},
+ "willshire":{r:"Willshire, J. V. Assemblage Space. Smithery.",k:"web",use:[[52,"amplía"]],u:"https://smithery.com/assemblage-space/",st:"ok"},
+ "laurent2019":{r:"Laurent, O. (2019). The future of archaeology in the age of presentism. Equinox Publishing.",k:"artículo",use:[[68,"cita"]],f:"https://journal.equinoxpub.com/JCA/article/view/11949",fk:"revista (Journal of Contemporary Archaeology)",n:"El libro escribe «Laurent, O.»; el autor es Laurent Olivier. Se publicó en Journal of Contemporary Archaeology, 6(1)."},
+ "foucault2005":{r:"Foucault, M. (2005). The order of things. Routledge.",k:"libro",use:[[62,"amplía"]],f:"https://doi.org/10.4324/9780203996645",fk:"DOI de la editorial"},
+ "wilkie2017":{r:"Wilkie, A., Martin, S., & Marsha, R. (Eds.). (2017). Speculative research: The lure of possible futures. Taylor & Francis.",k:"libro",use:[[62,"amplía"]],f:"https://www.routledge.com/Speculative-Research-The-Lure-of-Possible-Futures/Wilkie-Savransky-Rosengarten/p/book/9780367895129",fk:"página de la editorial",n:"Los editores son Alex Wilkie, Martin Savransky y Marsha Rosengarten; el libro escribe los nombres de pila como apellidos."},
+ "bell2005":{r:"Bell, G., Blythe, M., & Sengers, P. (2005). Making by making strange: Defamiliarization and the design of domestic technologies. ACM TOCHI, 12(2), 149–173.",k:"artículo",use:[[63,"amplía"]],u:"https://doi.org/10.1145/1067860.1067862",st:"bloq"},
+ "dignazio2020":{r:"D'Ignazio, C., & Klein, L. F. (2020). Data feminism. MIT Press.",k:"libro",use:[[69,"amplía"]],f:"https://data-feminism.mitpress.mit.edu/",fk:"edición en acceso abierto (MIT Press)",oa:1},
+ "wiltse2020":{r:"Wiltse, H. (2020). Relating to things: Design, technology and the artificial. Bloomsbury.",k:"libro",use:[[76,"amplía"]],f:"https://openlibrary.org/works/OL21672912W",fk:"catálogo"},
+ "gabrys2016":{r:"Gabrys, J. (2016). Program earth: Environmental sensing technology and the making of a computational planet. University of Minnesota Press.",k:"libro",use:[[79,"amplía"]],f:"https://openlibrary.org/works/OL20241063W",fk:"catálogo"},
+ "oliveira2021":{r:"Oliveira, V. M. de. (2021). Hospicing modernity. North Atlantic Books.",k:"libro",use:[[80,"amplía"]],f:"https://openlibrary.org/works/OL25457087W",fk:"catálogo"},
+ "johnson1992":{r:"Johnson, B. (1992). Polarity management: Identifying and managing unsolvable problems. HRD Press.",k:"libro",use:[[83,"amplía"]],f:"https://openlibrary.org/works/OL4043162W",fk:"catálogo"},
+ "virilio1999":{r:"Virilio, P. (1999). Politics of the very worst. Semiotext(e).",k:"libro",use:[[88,"amplía"]],f:"https://openlibrary.org/works/OL14961600W",fk:"catálogo"},
+ "lupton2017":{r:"Lupton, D. (2017). Design sociology parts 1–4. This Sociological Life.",k:"web",use:[[99,"amplía"]],u:"https://simplysociology.wordpress.com/2017/04/16/design-sociology-a-research-agenda/",st:"ok"},
+ "yong2022":{r:"Yong, E. (2022). An immense world. Random House.",k:"libro",use:[[103,"amplía"]],f:"https://openlibrary.org/works/OL25815646W",fk:"catálogo"},
+ "daly2019":{r:"Daly, A., Devitt, S. K., & Mann, M. (Eds.). (2019). Good data. Institute of Network Cultures.",k:"libro",use:[[107,"amplía"]],u:"https://networkcultures.org/wp-content/uploads/2019/01/Good_Data.pdf",st:"ok",oa:1},
+ "light2017":{r:"Light, A., Powell, A., & Shklovski, I. (2017). Design for existential crisis in the Anthropocene age. C&T '17, 270–279.",k:"artículo",use:[[120,"amplía"]],u:"https://doi.org/10.1145/3083671.3083688",st:"bloq"},
+ "jarry1911":{r:"Jarry, A. (1911). Exploits and opinions of Dr. Faustroll, pataphysician. Fasquelle.",k:"novela",use:[[122,"amplía"]],f:"https://en.wikipedia.org/wiki/Exploits_and_Opinions_of_Dr._Faustroll,_Pataphysician",fk:"ficha en Wikipedia"},
+ "iftf2019":{r:"IFTF. (2019). Equitable futures toolkit.",k:"toolkit",use:[[124,"cita"]],f:"https://legacy.iftf.org/fileadmin/user_upload/images/people/f4g/IFTF_equitable_futures_toolkit_v2_031319.pdf",fk:"PDF del IFTF",oa:1},
+ "nesta2019swarm":{r:"The Global Swarm. (2019). Towards more participatory futures. Nesta.",k:"web",use:[[130,"cita"]],u:"https://www.nesta.org.uk/blog/toward-more-participatory-futures/",st:"ok"},
+ "fuadluke2009":{r:"Fuad-Luke, A. (2009). Design activism: Beautiful strangeness for a sustainable world. Routledge.",k:"libro",use:[[132,"amplía"]],u:"https://doi.org/10.4324/9781849770941",st:"ok"},
+ "lorde2017":{r:"Lorde, A. (2017). Your silence will not protect you. Silver Press.",k:"libro",use:[[133,"amplía"]],f:"https://openlibrary.org/works/OL24345781W",fk:"catálogo"},
+ "mackey2023":{r:"Mackey, A., Vallejo de la Guarda, M., Tomico, O., Wakkary, R., Nachtigall, T., & de Waal, M. (2023). Becoming solar. Temes de Disseny, 39, 248–268.",k:"artículo",use:[[136,"amplía"]],u:"https://doi.org/10.46467/TdD39.2023.248-269",st:"bloq"},
+ "kimmerer2020":{r:"Kimmerer, R. W. (2020). Braiding sweetgrass. Penguin.",k:"libro",use:[[137,"amplía"]],f:"https://openlibrary.org/works/OL16819897W",fk:"catálogo"},
+ "tomitsch2023":{r:"Tomitsch, M., & Baty, S. (2023). Designing tomorrow. BIS Publishers.",k:"libro",use:[[140,"amplía"]],f:"https://openlibrary.org/works/OL36463168W",fk:"catálogo"},
+ "schwarzmann2025":{r:"Schwarzmann, I. (2025). Present archaeology – The present problem. Substack.",k:"web",use:[[141,"cita"]],u:"https://thenew.igorschwarzmann.com/p/present-archaeology-the-present-problem",st:"caido",f:"https://wiredvanity.substack.com/p/present-archaeology-the-present-problem",fk:"mismo artículo en su Substack"},
+ "ramos2019":{r:"Ramos, J., Sweeney, J., Peach, K., & Smith, L. (2019). Our futures: By the people, for the people. Nesta.",k:"informe",use:[[145,"cita"]],f:"https://www.nesta.org.uk/report/our-futures-people-people/",fk:"informe de Nesta (acceso abierto)",oa:1},
+ "designfriction2016":{r:"Design Friction. (2016). Proto-Policy: Using design fictions to negotiate social and political changes. Medium.",k:"web",use:[[151,"amplía"]],u:"https://medium.com/design-friction/proto-policy-using-design-fictions-to-negotiate-social-and-political-changes-740007813945",st:"bloq"},
+ "ferri2023":{r:"Ferri, G., & Gloerich, I. (2023). Risk and harm: Unpacking ideologies in the AI discourse. CUI '23, 284–289.",k:"artículo",use:[[153,"amplía"]],u:"https://doi.org/10.1145/3571884.3603751",st:"bloq"},
+ "paniagua2023":{r:"Paniagua, K., Chimal, A., López, P., & Flores, E. (2023). The futures of metaverse and the creative industries in Latin America. Journal of Futures Studies, 27(4), 1–16.",k:"artículo",use:[[162,"amplía"]],f:"https://jfsdigital.org/2023/05/20/the-futures-of-metaverse-and-the-creative-industries-in-latin-america-a-workshop-experience-at-centro-mexico/",fk:"revista (acceso abierto)",oa:1},
+ "gioia2016":{r:"Gioia, T. (2016). How to listen to jazz. Basic Books.",k:"libro",use:[[167,"amplía"]],f:"https://openlibrary.org/works/OL20030134W",fk:"catálogo"},
+ "efstathiou2021":{r:"Efstathiou, C. (2021). Dreaming through the ages. Modern Intellectual History, 18(1), 275–287.",k:"artículo",use:[[167,"amplía"]],u:"https://doi.org/10.1017/S1479244319000258",st:"ok"},
+ "zaidi2017":{r:"Zaidi, L. (2017). Building brave new worlds: Science fiction and transition design [tesis de maestría]. OCAD University.",k:"tesis",use:[[169,"amplía"]],u:"https://openresearch.ocadu.ca/id/eprint/2123/7/Zaidi_Leah_2017_MDes_SFI_MRP.pdf",st:"ok",oa:1},
+ "santiago2024":{r:"Santiago, L. (Prod.). (2024). Lab 2024. Futures Soundscapes CENTRO.",k:"audio",use:[[197,"amplía"]],f:"https://futuressoundscapes.bandcamp.com/",fk:"página de Futures Soundscapes CENTRO"},
+ "engelhardt2024":{r:"Engelhardt, S. (2024).",k:"cita",use:[[199,"cita"]],n:"El libro no da título ni medio."},
+ "traldi2025":{r:"Traldi, L. (2025). Who designs with us? The future of design also speaks non-human [entrevista a E. Giaccardi]. Interni Magazine.",k:"entrevista",use:[[201,"cita"]],f:"https://www.internimagazine.com/features/interviews/progettare-con-la-natura-e-lai-il-futuro-del-design-e-more-than-human/",fk:"artículo en Interni (en italiano)",n:"Coinciden tema, revista y año; la búsqueda no confirmó la firma de Traldi."},
+ "kleske2024":{r:"Kleske, J., Schwarzmann, I., & Rebaudengo, S. (2024). The future burrito: Why we need to expand our present, not our future [pódcast]. Follow the Rabbit.",k:"pódcast",use:[[202,"cita"]],f:"https://music.amazon.es/podcasts/a4f29165-567a-4c95-872d-248728007e09/follow-the-rabbit",fk:"página del pódcast (no del episodio)"},
+ "navarro2025":{r:"Navarro Aguiar, U., & Palmås, K. (2025). The design-ification of future making. Journal of Cultural Economy.",k:"artículo",use:[[205,"cita"]],u:"https://doi.org/10.1080/17530350.2024.2436845",st:"bloq"},
+ "bell2020":{r:"Bell, G. (2020). Responsibility to a beautiful land and its peoples. ANU School of Cybernetics.",k:"web",use:[[207,"cita"]],u:"https://cybernetics.anu.edu.au/news/2020/02/06/responsibility-to-a-beautiful-land-and-its-peoples/",st:"ok"},
+ "woolf1915":{r:"Woolf, V. (1915). [cita sin referencia completa]",k:"cita",use:[[28,"cita"]],n:"El libro solo indica autora y año."},
+ "gfl":{r:"Global Futures Lab Mexico. Experiencia de aprendizaje de Paolo Cardini (RISD) en el posgrado de Estudios de Futuros de CENTRO.",k:"proyecto",use:[[60,"amplía"]],f:"https://paolocardini.com/Global-Futures-Lab",fk:"página de Paolo Cardini"},
+ "hillman2020":{r:"Hillman, A. (2020). The Tiny MBA: 100 very short lessons about the long game of business. Stacking the Bricks.",k:"libro",use:[[22,"mención"]],f:"https://stackingthebricks.com/tinymba/",fk:"página de la editorial"},
+ "m-ogden":{r:"Ogden, C. K. (Ed.). To-Day and To-Morrow (serie de libros, Kegan Paul, años veinte).",k:"mención",use:[[93,"mención"]],f:"https://en.wikipedia.org/wiki/To-day_and_To-morrow",fk:"ficha en Wikipedia"},
+ "m-simon":{r:"Herbert Simon, «la ciencia de lo artificial» (mención en el prólogo).",k:"mención",use:[[12,"mención"]]},
+ "m-smithson":{r:"Alison y Peter Smithson, House of the Future (Daily Mail Ideal Home Exhibition, Londres, 1956).",k:"mención",use:[[17,"mención"]]},
+ "m-selfish":{r:"Google, The Selfish Ledger (proyecto mencionado como ejemplo).",k:"mención",use:[[154,"mención"]]},
+ "m-theylive":{r:"John Carpenter, They Live (película, 1988).",k:"mención",use:[[211,"mención"]]}
+};
+
+const CONCEPTS = [
+ {t:"Design Futures",en:"Design Futures",p:[31,32,43],ph:"df",d:"Práctica que une el diseño con los estudios de futuros para explorar y dar forma a presentes alternativos y futuros posibles, haciéndolos tangibles y experienciales. No predice: cuestiona supuestos y apoya decisiones."},
+ {t:"Futures Thinking",en:"Futures Thinking",p:[40],ph:"df",d:"Una mentalidad, no una metodología: una forma flexible de relacionarse con la incertidumbre, la complejidad y el cambio. Design Futures es la práctica."},
+ {t:"Futuring by Design",en:"Futuring by Design",p:[42],ph:"df",d:"El proceso que propone el libro: Framing; Scanning y Sense-making; Visioning; Dissemination y Assessment; Taking Action."},
+ {t:"Práctica paraguas",en:"Umbrella practice",p:[95],ph:"sc",d:"Design Futures como espacio de diálogo entre muchas prácticas: diseño especulativo, crítico, discursivo, ficción de diseño, futuros experienciales, participativos, diseño de transición, etc."},
+ {t:"Investigación de futuros",en:"Futures Research",p:[39,84],ph:"df",d:"Indagación sistemática sobre futuros alternativos posibles o probables para un grupo (Textor). En organizaciones: detectar señales y drivers, interpretar y hacer accesibles escenarios."},
+ {t:"Framing (encuadre)",en:"Framing",p:[49,54],ph:"fr",d:"Establecer alcance, propósito y dirección: temas, dominios, preguntas críticas, actores y límites del sistema; sacar a la luz supuestos y valores."},
+ {t:"Situar (situs)",en:"To situate",p:[51],ph:"fr",d:"Definir el aquí y ahora del equipo y del desafío: interés, recursos, cultura de trabajo, sueños (Bespoke)."},
+ {t:"Assemblage Space",en:"Assemblage Space",p:[52],ph:"fr",d:"Marco de John V. Willshire con cuatro reglas; la última dice que ni el cono ni el Assemblage Space existen: son prismas, no prisiones."},
+ {t:"Scanning (escaneo)",en:"Scanning",p:[55,67],ph:"sc",d:"Atención intencional y continua a tendencias, micro-detalles y bordes de los sistemas para encontrar y documentar señales, drivers y tendencias."},
+ {t:"Escaneo del entorno",en:"Environmental scanning",p:[57],ph:"sc",d:"Identifica tendencias duraderas y fuerzas que ya moldean el presente."},
+ {t:"Escaneo del horizonte",en:"Horizon scanning",p:[57],ph:"sc",d:"Busca señales débiles e indicadores tempranos de cambio."},
+ {t:"Etnografía periférica",en:"Peripheral Ethnography",p:[58,59],ph:"sc",d:"Investigar prácticas marginales, comportamientos ignorados y usos raros de la tecnología para detectar transformaciones culturales tempranas (Nova, 2016)."},
+ {t:"Desfamiliarización",en:"Defamiliarization",p:[63],ph:"sc",d:"Volver extraño lo familiar (por ejemplo, describir un objeto como para alguien de Marte) para abrir interpretaciones y reflexión crítica."},
+ {t:"Atención activa",en:"Active noticing",p:[65],ph:"sc",d:"Práctica continua de alerta a pistas sutiles y patrones inesperados; una conciencia de fondo."},
+ {t:"Sintonizar",en:"Tuning in",p:[66],ph:"sc",d:"Técnicas corporales y situadas (sentir, sintonizar, notar) para percibir entornos, útiles en mundos más-que-humanos."},
+ {t:"Señal",en:"Signal",p:[70,75],ph:"sc",d:"Indicio sutil pero significativo de que el futuro puede ser distinto: una idea, comportamiento, tecnología o cambio cultural nuevo. Se evalúa por frecuencia, fuerza, madurez, alcance y dirección."},
+ {t:"Driver (fuerza de cambio)",en:"Driver of change",p:[71,72,109],ph:"sc",d:"Fuerza significativa y continua que ya moldea el mundo: un racimo de señales y tendencias con dirección. «Los drivers son a las señales lo que las nubes a las gotas»."},
+ {t:"Future Mundane",en:"The Future Mundane",p:[87,89],ph:"sc",d:"Futuros de gente común, con tecnologías heredadas e imperfectas, integradas discretamente en la rutina (Foster, 2013)."},
+ {t:"Futuros cotidianos",en:"Everyday Futures",p:[90],ph:"sc",d:"Anclar los futuros en la vida diaria, con concesiones prácticas; los futuros cercanos y presentes alternativos valen tanto como los lejanos."},
+ {t:"Imágenes del futuro",en:"Images of the Future",p:[91],ph:"sc",d:"Representaciones (esperanzas, miedos, supuestos) que las personas tienen del futuro y que influyen en cómo deciden."},
+ {t:"Retrofuturos",en:"Retro futures",p:[93,104],ph:"sc",d:"Cómo se imaginó el futuro en el pasado: fuente de inspiración y contexto, nunca de validación."},
+ {t:"Sense-making (dar sentido)",en:"Sense-making",p:[101,106],ph:"sm",d:"Ordenar, agrupar y mapear lo recolectado para distinguir señal de ruido e identificar patrones y drivers."},
+ {t:"Inventario de drivers",en:"Driver inventory",p:[111,112],ph:"sm",d:"Organizar drivers en categorías para ver el conjunto y detectar huecos; se puede empezar a mapear por tiempo y certeza."},
+ {t:"Futures readiness",en:"Futures readiness",p:[113],ph:"sm",d:"Capacidad de anticipar, responder e influir activamente en cambios emergentes."},
+ {t:"Futuros transformadores",en:"Transformative futures",p:[114],ph:"sm",d:"Diseño participativo para co-crear visiones alternativas que desafían el statu quo y reimaginan sistemas."},
+ {t:"Visioning",en:"Visioning",p:[118,128],ph:"vi",d:"Imaginar y expresar escenarios y artefactos a partir de los patrones de la investigación y la extrapolación creativa."},
+ {t:"Escenario",en:"Future scenario",p:[121,146],ph:"vi",d:"Historia imaginativa basada en evidencia sobre un futuro alternativo. No es predicción. Siempre en conjuntos."},
+ {t:"Lo absurdo (patafísica)",en:"Preposterous / pataphysics",p:[122],ph:"vi",d:"Propuesta de Coe Douglas: convertir el cono en espiral hacia la singularidad de lo absurdo, con soluciones imaginarias radicalmente otras."},
+ {t:"Bovine Design",en:"Bovine Design",p:[120],ph:"vi",d:"Diseño que sigue la rutina como una vaca lechera: explota caminos gastados y limita la reimaginación radical."},
+ {t:"Futuros participativos",en:"Participatory Futures",p:[129,130],ph:"vi",d:"Enfoques que involucran a las personas para explorar y dar forma a futuros juntos; democratizan el pensamiento de futuros."},
+ {t:"Más-que-humano",en:"More-than-human",p:[66,134,135,136,137,201],ph:"vi",d:"Descentrar lo humano: reconocer la agencia de lo no humano e incluirlo en los procesos de diseño y futuros."},
+ {t:"Fabulación especulativa en primera persona",en:"First-person speculative fabulation",p:[138],ph:"vi",d:"Taller que une fabulación colectiva (Haraway) y ficción de diseño para que comunidades marginadas imaginen alternativas."},
+ {t:"Confrontación",en:"Confrontation",p:[148],ph:"vi",d:"Momento en que el futuro choca con la realidad de la audiencia; se diseña según audiencia, contexto y objetivos (Design Friction)."},
+ {t:"Polifonía de visiones",en:"Polyphony of visions",p:[151],ph:"vi",d:"Contar el mismo escenario desde quien impulsa, quien se opone y quien es indiferente."},
+ {t:"Artefacto del futuro",en:"Artefact from the future",p:[156,157,158],ph:"vi",d:"Objeto cotidiano ficticio pero plausible que da vida a un futuro y provoca conversación; necesita el nivel de detalle adecuado."},
+ {t:"Arquetipo de ficción de diseño",en:"Design Fiction Archetype",p:[160,163],ph:"vi",d:"Formato cultural reconocible (medio u objeto) cuyos tropos se modifican para mostrar un cambio (Bleecker et al., 2022)."},
+ {t:"Provotipo",en:"Provotype",p:[161],ph:"vi",d:"Prototipo provocador que se explica solo; se evitan artefactos «parlanchines» como noticias ficticias."},
+ {t:"Diseño discursivo",en:"Discursive design",p:[164],ph:"vi",d:"Artefactos comunicativos pensados para provocar debate social (Tharp y Tharp, 2019)."},
+ {t:"Disonancia discursiva",en:"Discursive Dissonance",p:[166],ph:"vi",d:"Ambigüedad o contradicción dosificada en cinco dimensiones (claridad, realidad, familiaridad, veracidad, deseabilidad) para provocar sin alejar."},
+ {t:"Worldbuilding",en:"Worldbuilding",p:[34,169],ph:"vi",d:"Construir mundos; en el modelo de siete fundamentos de Leah Zaidi, la filosofía (lo que creemos verdadero) es la raíz."},
+ {t:"Dissemination",en:"Dissemination",p:[170,183],ph:"di",d:"Prototipar y compartir escenarios y artefactos con audiencias, e incrustarlos en contextos cotidianos para observar reacciones."},
+ {t:"Escenario experiencial",en:"Experiential scenario",p:[173,174],ph:"di",d:"Un «qué pasaría si» tangible (imágenes, artefactos, instalaciones, performances): más textural que textual."},
+ {t:"Juegos de futuros",en:"Futures games",p:[175,178],ph:"di",d:"Juegos participativos para sumergirse en escenarios, con simulación y roles; los experienciales los encarnan en entornos reales o inmersivos."},
+ {t:"Guerrilla Futures",en:"Guerrilla Futures",p:[176,177],ph:"di",d:"Prospectiva más medios tácticos para producir encuentros inesperados con mundos posibles (Candy)."},
+ {t:"Assessment (evaluación)",en:"Assessment",p:[184,191],ph:"as",d:"Reflexión crítica y colaborativa sobre las visiones para descubrir creencias ocultas y puntos ciegos. No evalúa usabilidad: busca conversación y renegociar significados."},
+ {t:"Contextualización",en:"Contextualisation",p:[188],ph:"as",d:"Ubicar artefactos en entornos reales y pertinentes (una tienda, una máquina expendedora, un museo) para explorar futuros."},
+ {t:"Taking action",en:"Taking action",p:[192],ph:"ta",d:"Pasos deliberados hoy para construir las condiciones en que emerjan las visiones."},
+ {t:"Platforming y Futures Platforms",en:"Platforming",p:[194,195],ph:"ta",d:"Estructuras orientadas al futuro incrustadas en organizaciones: espacios prefigurativos de experimentación continua (Fry, 2008)."},
+ {t:"Pensamiento de polaridades",en:"Polarity thinking",p:[83],ph:"sc",d:"Sostener a la vez las tensiones del presente y la mirada larga: de «o esto o aquello» a «esto y aquello» (Maillet)."},
+ {t:"Future burrito",en:"The future burrito",p:[202],ph:"viva",d:"Especular sobre el presente (múltiples presentes) en vez de solo sobre el cono del futuro."},
+ {t:"Entangled Foresight",en:"Entangled Foresight",p:[203],ph:"viva",d:"Ver lejos y ancho a la vez, sosteniendo varias perspectivas (Superflux)."},
+ {t:"Heredar futuros",en:"Inheriting futures",p:[205],ph:"viva",d:"Pasar de «hacer futuros» a heredar futuros que necesitan redirección (Navarro Aguiar y Palmås)."}
+];
+
+// Práctica: lo que el libro propone hacer, fase por fase
+const PRAC = {
+ 1:[
+  ["Antes de empezar",[
+   ["Pregúntate si el diseño es la respuesta adecuada o si otros actores están mejor ubicados.",37],
+   ["Escucha primero si eres bienvenido y qué está creciendo ya.",80],
+   ["Conoce a tu audiencia: sensibilidades, metas, vocabulario y cómo hace estrategia hoy.",82],
+   ["Conecta el trabajo con los problemas reales de la gente, no al revés.",86]]],
+  ["Encuadrar",[
+   ["Formula la pregunta que expresa una incertidumbre o una necesidad.",53],
+   ["Define el situs: interés, recursos, cultura de trabajo y sueños del equipo.",51],
+   ["Identifica temas, áreas de indagación y dominios a explorar.",49],
+   ["Define preguntas críticas, actores involucrados y límites del sistema.",49],
+   ["Saca a la luz supuestos y factores de contexto.",49],
+   ["Descubre valores, esperanzas y prioridades del grupo.",54],
+   ["Mide el conocimiento actual y dónde hay apertura a aprender.",54],
+   ["Ten tanta curiosidad por el pasado como por el futuro; cuidado con la distorsión del presente.",52]]]
+ ],
+ 2:[
+  ["Escanear",[
+   ["Combina escaneo del entorno (tendencias establecidas) y del horizonte (señales débiles).",57],
+   ["Sal del escritorio: haz trabajo de campo y observación etnográfica.",64],
+   ["Busca en los márgenes: prácticas raras, apropiaciones de tecnología, cosas que no encajan.",58],
+   ["Mantén el giro local; no copies las visiones de las películas y series dominantes.",60],
+   ["Desfamiliariza: describe lo cotidiano como si fuera para alguien de Marte.",63],
+   ["Documenta cada señal con título, descripción, fuente y por qué importa (más imagen y pregunta reflexiva).",74],
+   ["Filtra: ¿se aparta de la norma? ¿qué cambio representa? ¿se extiende o es pasajera?",75],
+   ["Valora frecuencia, fuerza, madurez, alcance y dirección.",75],
+   ["Organiza el flujo: fuentes por dominio, etiquetas claras, formato consistente.",73],
+   ["Pregunta qué excluyen tus datos (lo no humano, saberes indígenas, lo no económico).",76],
+   ["Mira los retrofuturos y los futuros cotidianos, no solo lo espectacular.",93]]],
+  ["Dar sentido",[
+   ["Ordena, agrupa y mapea las señales para ver patrones.",101],
+   ["Agrupa señales en drivers: las fuerzas profundas detrás de ellas.",109],
+   ["Evalúa los drivers en contexto: cómo se conectan e interactúan.",110],
+   ["Mantén un inventario por categorías y busca los huecos.",111],
+   ["Empieza a mapear con dos criterios: tiempo y certeza.",112],
+   ["No uses futuros pasados para validar tus especulaciones.",104]]]
+ ],
+ 3:[
+  ["Escenarios",[
+   ["Parte de historias cotidianas basadas en señales y drivers.",149],
+   ["Escribe en primera persona y en presente; ponles titulares memorables.",149],
+   ["Incluye voces diversas; úsalas también para chequear coherencia.",149],
+   ["Sintetiza en escenarios compactos, bien estructurados y accesibles.",150],
+   ["Trabaja en conjuntos de escenarios, con continuidad y ruptura.",121],
+   ["Que reflejen la evidencia, no tu sesgo personal.",146],
+   ["Cuenta el mismo escenario desde quien impulsa, quien se opone y quien es indiferente.",151],
+   ["Evalúalos frente al futuro preferido: riesgos, oportunidades, retos.",152],
+   ["Critica las ideologías implícitas en tus visiones.",153],
+   ["Reserva tiempo para reflexionar con perspectivas diversas.",155]]],
+  ["Artefactos",[
+   ["Diseña un objeto cotidiano ficticio pero plausible.",157],
+   ["Decide el nivel de detalle: muy detallado o boceto abierto.",158],
+   ["Usa un arquetipo reconocible y modifica sus tropos.",160],
+   ["Que se explique solo; evita artefactos parlanchines como noticias ficticias.",161],
+   ["Dosifica la disonancia: claridad, realidad, familiaridad, veracidad, deseabilidad.",166],
+   ["No lo subordines al éxito comercial.",162],
+   ["Evita el Bovine Design: apártate del consumismo habitual.",120],
+   ["Considera perspectivas más allá de lo humano.",134]]]
+ ],
+ 4:[
+  ["Diseminar",[
+   ["Diseña la confrontación: audiencia, contexto y objetivos.",148],
+   ["Prepara un marco para el diálogo: debate, exposición, taller o juego.",148],
+   ["Decide cómo señalar que es ficción (avisos, varios marcadores temporales).",154],
+   ["No rompas el universo; diseña para la punta del iceberg; busca la doble mirada.",174],
+   ["Sitúa los artefactos en contextos cotidianos.",183],
+   ["Considera juegos y juego de roles para que la gente entre al futuro.",182]]],
+  ["Evaluar",[
+   ["Elige el lugar según la investigación, el artefacto, las personas y las preguntas.",188],
+   ["Observa reacciones y conversaciones con métodos etnográficos.",190],
+   ["Busca conversación, debate y dudas, no medir usabilidad.",191],
+   ["Evalúa en colaboración: saca a la luz creencias ocultas y puntos ciegos.",184]]]
+ ],
+ 5:[
+  ["Tomar acción",[
+   ["Define pasos concretos y deliberados, anclados en el presente.",192],
+   ["Construye las condiciones para que esos futuros emerjan.",192],
+   ["Haz un plan estratégico que tome una decisión deliberada sobre el futuro.",140],
+   ["Crea estructuras estables: plataformas de futuros, comunidades de práctica.",194],
+   ["Sostén un marco de investigación y, si se puede, un equipo de futuros.",77]]]
+ ]
+};
+
+const VOICES_AFF = {"Joseph Lindley":"Prólogo","Jorge Camacho":"Prólogo","Julian Bleecker":"Epílogo"};
+
+// ================= UTILIDADES =================
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const cv = k => `--c:var(--${PH[k]?.c||k});--cs:var(--${PH[k]?.c||k}s)`;
+const pg = p => `<span class="pg">p. <b>${p}</b></span>`;
+const phName = k => PH[k].es ? `${PH[k].t} · ${PH[k].es}` : PH[k].t;
+function toast(m){ const t=document.createElement("div"); t.className="toast"; t.textContent=m; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
+const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch{ return d; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} } };
+
+const FICHAS = FI.map(([p,ph,ty,t,a,x,s])=>({p,ph,ty,t,a,x,s}));
+const TYL = {a:"Autores", c:"Colaborador", q:"Cita"};
+const PHASE_ORDER = ["pre","df","fr","sc","sm","vi","di","as","ta","viva","post"];
+
+function linkOf(id){ const s=SRC[id]; if(!s) return null; return s.u && s.st!=="caido" ? s.u : (s.f || s.u || null); }
+function shortRef(id){ const s=SRC[id]; if(!s) return id; const m=s.r.match(/^(.+?\(\d{4}[a-z]?\)|.+?\(s\. f\.\))/); return m?m[1]:s.r.slice(0,60); }
+
+function fichaHtml(f, opts={}){
+  const src = (f.s||[]).filter(id=>SRC[id]);
+  return `<article class="ficha ${f.ty==="q"?"q":""}" style="${cv(f.ph)}">
+    <div class="ficha-h"><span class="tag t-${f.ty}">${TYL[f.ty]}</span>${pg(f.p)}</div>
+    <h4>${esc(f.t)}</h4>
+    <p>${esc(f.x)}</p>
+    <div class="who">${opts.showPhase?`<span class="fdot"></span>${esc(PH[f.ph].t)} · `:""}${esc(f.a)}</div>
+    ${src.length?`<div class="src">${src.map(id=>`<button type="button" data-src="${id}">${esc(shortRef(id))}</button>`).join("")}</div>`:""}
+  </article>`;
+}
+
+// ================= INFOGRAFÍAS =================
+const IG = {
+ proceso:{t:"Futuring by Design",p:"42",ph:"df",c:"f1",wide:1,h:()=>procHtml()},
+ mente:{t:"Mentalidad y práctica",p:"40",ph:"df",c:"f1",h:()=>`<div class="pair">
+   <div class="box hl" style="${cv("f1")}"><span class="eyebrow">Futures Thinking</span><h4>Una mentalidad</h4><p>Cultivar una perspectiva flexible ante la incertidumbre, la complejidad y el cambio. Ver posibilidades e implicaciones dondequiera que mires.</p><p class="note">No se empaqueta como el Design Thinking.</p></div>
+   <div class="box hl" style="${cv("f5")}"><span class="eyebrow">Design Futures</span><h4>Una práctica</h4><p>Une diseño y futuros para explorar y dar forma a presentes alternativos y futuros posibles, con narrativas, prototipos y artefactos.</p></div></div>
+   <p class="note">«Deja que el Futures Thinking dé forma a tu mirada y que Design Futures guíe tu práctica».</p>`},
+ textos:{t:"Cómo está hecho el libro",p:"21",ph:"pre",c:"f1",h:()=>`<div class="trio">
+   <div class="card-ig" style="${cv("f1")}"><span class="tag t-a" style="align-self:flex-start">Autores</span><b>Columna vertebral</b><span>Textos de Caruso y Cioni que definen cada momento.</span></div>
+   <div class="card-ig" style="${cv("f3")}"><span class="tag t-c" style="align-self:flex-start">Colaboradores</span><b>Conversación</b><span>Más de 30 voces, sin dirección de los autores, ubicadas para dialogar.</span></div>
+   <div class="card-ig" style="${cv("f5")}"><span class="tag t-q" style="align-self:flex-start">Citas</span><b>Andamiaje</b><span>Fragmentos de la literatura existente que sostienen la conversación.</span></div></div>
+   <p class="note">Sin capítulos ni métodos. La secuencia sigue más o menos el recorrido de un proyecto, pero se puede leer en cualquier orden.</p>`},
+ cono:{t:"El libro y el cono de futuros",p:"23, 52, 122, 202, 230",ph:"df",c:"f5",wide:1,h:()=>`<div class="cones">
+   <div class="cone"><svg viewBox="0 0 120 70"><path d="M10 35 L110 8 L110 62 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" style="color:var(--muted)"/><line x1="10" y1="35" x2="110" y2="35" stroke="var(--muted)" stroke-width="1"/><circle cx="10" cy="35" r="3.5" fill="var(--ink)"/></svg><b>«No hay conos»</b><span>Los autores lo repiten al inicio y al final del libro.</span><span class="pg">p. 23 · 230</span></div>
+   <div class="cone"><svg viewBox="0 0 120 70"><rect x="14" y="10" width="36" height="50" rx="4" fill="none" stroke="var(--f1)" stroke-width="1.5"/><rect x="62" y="10" width="44" height="50" rx="4" fill="none" stroke="var(--f1)" stroke-width="1.5"/><line x1="50" y1="35" x2="62" y2="35" stroke="var(--f1)" stroke-width="1.5"/></svg><b>Prismas, no prisiones</b><span>Willshire: no hay cono ni Assemblage Space; son formas de mirar.</span><span class="pg">p. 52</span></div>
+   <div class="cone"><svg viewBox="0 0 120 70"><path d="M60 35 m0 0 a4 4 0 1 1 8 0 a10 10 0 1 1 -20 0 a16 16 0 1 1 32 0 a22 22 0 1 1 -44 0 a28 28 0 1 1 56 0" fill="none" stroke="var(--f3)" stroke-width="1.5"/></svg><b>El cono como espiral</b><span>Coe Douglas: una espiral que desciende hacia lo absurdo (preposterous).</span><span class="pg">p. 122</span></div>
+   <div class="cone"><svg viewBox="0 0 120 70"><ellipse cx="60" cy="35" rx="48" ry="24" fill="none" stroke="var(--f4)" stroke-width="1.5"/><path d="M20 35 L52 22 L52 48Z M44 35 L76 24 L76 46Z M68 35 L100 22 L100 48Z" fill="none" stroke="var(--f4)" stroke-width="1"/></svg><b>El cono como burrito</b><span>Rebaudengo: muchos presentes, muchos conos, bordes difusos.</span><span class="pg">p. 202</span></div></div>`},
+ assemblage:{t:"Las cuatro reglas del Assemblage Space",p:"52",ph:"fr",h:()=>`<ol class="olist" style="${cv("fr")}">
+   <li><b>Curiosidad por el pasado</b>Tanta como por el futuro.</li>
+   <li><b>Cuidado con el presente</b>Lo reciente distorsiona y se ve más grande.</li>
+   <li><b>Conoce tu estrechez</b>Lo absurdo para ti es probable para otros.</li>
+   <li><b>No hay cono</b>Prismas para mirar, no prisiones.</li></ol><p class="note">John V. Willshire, Smithery.</p>`},
+ encuadre:{t:"Qué se define al encuadrar",p:"49, 51, 53, 54",ph:"fr",wide:1,h:()=>`<div class="fz">
+   <div class="fz-q"><div><small>Punto de partida</small><b>Una pregunta que expresa una incertidumbre o una necesidad</b></div>${pg(53)}</div>
+   <div class="fz-g">
+    <div class="fz-b"><div class="fz-h"><span>Lo que se define</span><span>p. 49</span></div><ul><li>Temas, áreas de indagación y dominios</li><li>Preguntas críticas</li><li>Actores involucrados</li><li>Límites del sistema</li><li>Supuestos y factores de contexto</li></ul></div>
+    <div class="fz-b"><div class="fz-h"><span>El aquí y ahora (situs)</span><span>p. 51</span></div><ul><li>El interés</li><li>Los recursos disponibles</li><li>La cultura de trabajo</li><li>Sueños colectivos e individuales</li></ul></div>
+    <div class="fz-b"><div class="fz-h"><span>Lo que importa</span><span>p. 54</span></div><ul><li>Valores, esperanzas y prioridades</li><li>Conocimiento actual</li><li>Dónde hay apertura a aprender</li></ul></div>
+   </div>
+   <div class="fz-r"><span>Resultado: una exploración anclada, con propósito y alineada con la intención estratégica.</span>${pg(49)}</div></div>`},
+ lentes:{t:"Dos lentes para escanear",p:"57",ph:"sc",h:()=>`<svg viewBox="0 0 400 200" role="img" aria-label="Escaneo del entorno y del horizonte">
+   <circle cx="150" cy="100" r="82" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5" fill-opacity=".7"/>
+   <circle cx="250" cy="100" r="82" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5" fill-opacity=".7"/>
+   <text x="118" y="88" text-anchor="middle" font-size="14" font-weight="600">Entorno</text>
+   <text x="118" y="108" text-anchor="middle" font-size="11.5">tendencias</text><text x="118" y="123" text-anchor="middle" font-size="11.5">duraderas, fuerzas</text><text x="118" y="138" text-anchor="middle" font-size="11.5">que ya actúan</text>
+   <text x="282" y="88" text-anchor="middle" font-size="14" font-weight="600">Horizonte</text>
+   <text x="282" y="108" text-anchor="middle" font-size="11.5">señales débiles,</text><text x="282" y="123" text-anchor="middle" font-size="11.5">indicadores</text><text x="282" y="138" text-anchor="middle" font-size="11.5">tempranos</text>
+   <text x="200" y="104" text-anchor="middle" font-size="12" font-weight="600">juntos</text></svg>
+   <p class="note">Usar solo uno limita la vista. Se complementan con observación situada y trabajo de campo (p. 55, 64).</p>`},
+ senal:{t:"Anatomía de una señal",p:"74, 75",ph:"sc",h:()=>`<div class="sigcard">
+   <div class="row"><div class="k">Título</div><div class="v">Nombre breve y claro</div></div>
+   <div class="row"><div class="k">Descripción</div><div class="v">Qué está pasando</div></div>
+   <div class="row"><div class="k">Fuente</div><div class="v">De dónde viene</div></div>
+   <div class="row"><div class="k">Por qué importa</div><div class="v">Qué cambio podría anunciar</div></div>
+   <div class="row opt"><div class="k">+ Imagen</div><div class="v">Profundiza la comprensión</div></div>
+   <div class="row opt"><div class="k">+ Pregunta</div><div class="v">Pregunta reflexiva para la discusión</div></div>
+   <div class="row opt"><div class="k">+ Etiquetas</div><div class="v">Categorías compartidas entre investigadores</div></div></div>
+   <span class="eyebrow">Para saber si importa (p. 75)</span>
+   <div class="factors"><span class="factor">Frecuencia</span><span class="factor">Fuerza</span><span class="factor">Madurez</span><span class="factor">Alcance</span><span class="factor">Dirección</span></div>
+   <ul class="qs"><li>¿Se aparta realmente de la norma?</li><li>¿Qué tipo de cambio representa?</li><li>¿Se está extendiendo o es una moda pasajera?</li></ul>`},
+ nubes:{t:"Señales y drivers: gotas y nubes",p:"70–72, 109",ph:"sm",h:()=>`<svg viewBox="0 0 400 220" role="img" aria-label="Los drivers son nubes que precipitan señales">
+   ${[[110,62,1],[210,50,1.15],[300,70,.95]].map(([x,y,s])=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-48 14 a20 20 0 0 1 8 -32 a26 26 0 0 1 46 -6 a20 20 0 0 1 34 12 a16 16 0 0 1 -2 26 Z" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5"/></g>`).join("")}
+   <text x="210" y="56" text-anchor="middle" font-size="13" font-weight="600">driver</text>
+   ${Array.from({length:26},(_,i)=>{const x=70+(i*11.3)%275, y=110+((i*37)%70); return `<path d="M${x} ${y} q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/>`;}).join("")}
+   <text x="20" y="208" font-size="11.5" class="m">cada gota = una señal</text>
+   <text x="380" y="208" text-anchor="end" font-size="11.5" class="m">las nubes se superponen y convergen</text></svg>
+   <p class="note">«Los drivers son a las señales lo que las nubes a las gotas de lluvia» (Howard, 2021, citado en p. 72). Agrupar y mapear señales revela las fuerzas profundas (p. 109).</p>`},
+ mapa:{t:"Primer mapa del inventario",p:"111, 112",ph:"sm",h:()=>`<svg viewBox="0 0 400 230" role="img" aria-label="Mapa por tiempo y certeza">
+   <line x1="50" y1="195" x2="380" y2="195" stroke="var(--ink)" stroke-width="1.5"/><path d="M380 195 l-8 -4 v8z" fill="var(--ink)"/>
+   <line x1="50" y1="195" x2="50" y2="20" stroke="var(--ink)" stroke-width="1.5"/><path d="M50 20 l-4 8 h8z" fill="var(--ink)"/>
+   <line x1="215" y1="30" x2="215" y2="190" stroke="var(--line)" stroke-dasharray="4 4"/><line x1="55" y1="108" x2="375" y2="108" stroke="var(--line)" stroke-dasharray="4 4"/>
+   <text x="215" y="218" text-anchor="middle" font-size="13" font-weight="600">tiempo</text>
+   <text x="22" y="108" text-anchor="middle" font-size="13" font-weight="600" transform="rotate(-90 22 108)">certeza</text>
+   ${[[110,70],[160,150],[260,60],[300,160],[340,120],[95,160],[250,130]].map(([x,y])=>`<rect x="${x-18}" y="${y-9}" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/>`).join("")}</svg>
+   <p class="note">Scott Smith y Madeline Ashby sugieren empezar a mapear con dos criterios: tiempo y certeza (p. 112). El inventario por categorías muestra huecos y qué falta investigar (p. 111).</p>`},
+ roles:{t:"Para qué sirven los escenarios al decidir",p:"139, 142–144",ph:"vi",h:()=>`<div class="trio" style="${cv("vi")}">
+   <div class="card-ig"><b>Mapear horizontes</b><span>Ampliar la mirada a mediano y largo plazo; anticipar riesgos y oportunidades.</span><span class="pg">p. 142</span></div>
+   <div class="card-ig"><b>Crear propósito</b><span>Descubrir valores, necesidades y aspiraciones; cuestionar supuestos.</span><span class="pg">p. 143</span></div>
+   <div class="card-ig"><b>Actuar juntos</b><span>Marco compartido para alinear esfuerzos y liderar el cambio.</span><span class="pg">p. 144</span></div></div>`},
+ escenario:{t:"De historias a escenarios",p:"121, 146, 149–152",ph:"vi",wide:1,h:()=>`<svg viewBox="0 0 760 170" role="img" aria-label="Flujo de construcción de escenarios">
+   ${[["Señales y drivers","de la investigación","149"],["Historias cotidianas","1.ª persona, presente, titulares","149"],["Voces diversas","también chequean coherencia","149"],["Síntesis","compacta, estructurada, accesible","150"],["Conjunto de escenarios","continuidad y ruptura","121"],["Evaluación","frente al futuro preferido","152"]].map(([a,b,p],i)=>{const x=10+i*125; return `<rect x="${x}" y="40" width="112" height="84" rx="8" fill="${i===4?"var(--f3s)":"var(--surface)"}" stroke="${i===4?"var(--f3)":"var(--line)"}"/><text x="${x+56}" y="70" text-anchor="middle" font-size="12.5" font-weight="600">${a.split(" ").slice(0,2).join(" ")}</text>${a.split(" ").length>2?`<text x="${x+56}" y="86" text-anchor="middle" font-size="12.5" font-weight="600">${a.split(" ").slice(2).join(" ")}</text>`:""}<text x="${x+56}" y="108" text-anchor="middle" font-size="10.5" class="m">p. ${p}</text>${i<5?`<path d="M${x+114} 82 h8" stroke="var(--muted)" stroke-width="1.5"/><path d="M${x+124} 82 l-5 -3 v6z" fill="var(--muted)"/>`:""}<text x="${x+56}" y="148" text-anchor="middle" font-size="10.5" class="m">${b.length>22?b.slice(0,22)+"…":b}</text>`;}).join("")}</svg>
+   <p class="note">Un buen escenario es familiar y está anclado en la evidencia, no en el sesgo personal; no es una predicción (p. 121, 146).</p>`},
+ polifonia:{t:"Polifonía de visiones",p:"151",ph:"vi",h:()=>`<svg viewBox="0 0 400 210" role="img" aria-label="Un escenario, tres voces">
+   <rect x="140" y="80" width="120" height="50" rx="8" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="110" text-anchor="middle" font-size="14" font-weight="600">Un escenario</text>
+   ${[["Impulsa el cambio",70,30],["Se opone",330,30],["Indiferente",200,190]].map(([t,x,y])=>`<line x1="200" y1="105" x2="${x}" y2="${y}" stroke="var(--line)" stroke-width="1.2"/><rect x="${x-65}" y="${y-16}" width="130" height="32" rx="16" fill="var(--surface)" stroke="var(--ink)"/><text x="${x}" y="${y+5}" text-anchor="middle" font-size="13">${t}</text>`).join("")}
+   <rect x="140" y="80" width="120" height="50" rx="8" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="110" text-anchor="middle" font-size="14" font-weight="600">Un escenario</text></svg>
+   <p class="note">El mismo futuro contado desde tres perspectivas deja que la audiencia forme su propia opinión (Design Friction).</p>`},
+ confronta:{t:"Diseñar la confrontación",p:"148",ph:"vi",h:()=>`<div class="trio" style="${cv("vi")}">
+   <div class="card-ig"><b>Audiencia</b><span>Quién participa: su perfil y experiencias previas.</span></div>
+   <div class="card-ig"><b>Contexto</b><span>Dinámicas de poder, actualidad, momento y lugar.</span></div>
+   <div class="card-ig"><b>Objetivos</b><span>Para qué se produce el encuentro.</span></div></div>
+   <p class="note">Junto al escenario, diseña un marco de diálogo o acción: debate, exposición, taller o juego (Design Friction).</p>`},
+ disonancia:{t:"Disonancia discursiva: cinco dimensiones",p:"166",ph:"vi",h:()=>`<div style="display:flex;flex-direction:column;gap:8px">${["Claridad","Realidad","Familiaridad","Veracidad","Deseabilidad"].map(d=>`<div style="display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;font-size:14px"><b style="font-weight:500">${d}</b><svg viewBox="0 0 200 14" preserveAspectRatio="none" style="height:14px"><line x1="4" y1="7" x2="196" y2="7" stroke="var(--line)" stroke-width="2"/><circle cx="4" cy="7" r="3" fill="var(--muted)"/><circle cx="196" cy="7" r="3" fill="var(--muted)"/></svg></div>`).join("")}</div>
+   <p class="note">Ajustar ambigüedad, contradicción o lo «extrañamente familiar» lo justo para provocar curiosidad sin alejar a la audiencia (Tharp y Tharp, 2019). El libro no fija valores: cada proyecto decide la dosis.</p>`},
+ iceberg:{t:"Tres principios de los futuros experienciales",p:"174",ph:"di",h:()=>`<ol class="olist" style="${cv("di")}">
+   <li><b>No rompas el universo</b>Todo debe sentirse parte de un futuro coherente.</li>
+   <li><b>La punta del iceberg</b>Fragmentos ricos que sugieren un mundo mayor, sin sobreexplicar.</li>
+   <li><b>La doble mirada</b>Parece ordinario o absurdo y revela capas al mirarlo más.</li></ol><p class="note">Stuart Candy (2010), citado por los autores.</p>`},
+ paraguas:{t:"Una práctica paraguas",p:"31, 95",ph:"sc",c:"f3",h:()=>`<svg viewBox="0 0 400 90" role="img" aria-label="Paraguas"><path d="M40 80 Q200 -40 360 80 Q320 60 280 80 Q240 60 200 80 Q160 60 120 80 Q80 60 40 80Z" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="58" text-anchor="middle" font-size="15" font-weight="600">Design Futures</text></svg>
+   <div class="umb">${["Speculative Design","Design Fiction","Experiential Futures"].map(x=>`<span class="core">${x}</span>`).join("")}${["Critical Design","Discursive Design","Speculative Futures","Adversarial Design","Interrogative Design","Speculative Fiction","Participatory Futures","Science Fiction Prototyping","Peripheral Ethnography","Transition Design"].map(x=>`<span>${x}</span>`).join("")}</div>
+   <p class="note">Resaltadas: las tres que la p. 31 nombra como principales.</p>`},
+ regen:{t:"Cómo imaginar futuros regenerativos",p:"200",ph:"viva",c:"f5",h:()=>`<ul class="ulist">${["Escuchar a lo más-que-humano","Aprender con la naturaleza","Nombrar lo innombrado, hacer visible lo invisible","Viajar entre lo micro y lo macro","Invitar a generaciones futuras y pasadas","Soñar de lo plausible a lo absurdo","Conectar mente, cuerpo y corazón","Dar lugar al juego"].map(x=>`<li>${x}</li>`).join("")}</ul><p class="note">Savannah Vize y Andrea Gilly Márquez, Falay Transition Design.</p>`}
+};
+const IG_BY_PHASE = {pre:["textos"],df:["proceso","mente","cono","paraguas"],fr:["encuadre","assemblage"],sc:["lentes","senal","paraguas"],sm:["nubes","mapa"],vi:["escenario","roles","polifonia","confronta","disonancia"],di:["iceberg"],as:[],ta:[],viva:["regen","cono"]};
+
+function pix(color, rows, cls){
+  const w=100, st=7, h=rows*st; let r="";
+  for(let i=0;i<rows;i++){ const x=(rows-1-i)*st*0.9; r+=`<rect x="${x.toFixed(1)}" y="${i*st}" width="${(w-x-(i*st*0.35)).toFixed(1)}" height="${st+0.4}" fill="${color}"/>`; }
+  return `<svg class="px ${cls}" viewBox="0 0 ${w} ${h}" aria-hidden="true">${r}</svg>`;
+}
+function igHtml(k){ const g=IG[k]; return `<section class="ig ${g.wide?"wide":""}" id="ig-${k}" style="${cv(g.c||g.ph)}"><div class="ig-h"><h3>${esc(g.t)}</h3>${pg(g.p)}</div>${g.h()}</section>`; }
+
+function procHtml(){
+  return `<div class="proc">${STEPS.map(s=>`<div class="step" style="--c:var(--${s.c})"><span class="n">PASO ${s.n}</span><h3>${esc(s.es)}</h3><p>${esc(s.d)}</p>
+    <div class="subs">${s.phases.map(k=>`<a class="sub" href="#${SLUG_OF[k]}"><span>${esc(PH[k].t)}</span><span class="pg">p. ${PH[k].pp}</span></a>`).join("")}</div></div>`).join("")}</div>
+    <div class="proc-foot"><span>Antes del proceso: <a href="#marco">Design Futures</a> (p. 27–48).</span><span>Después: <a href="#vivo">Está vivo</a> (p. 196–207).</span><span>Los autores aclaran que es una propuesta: puedes no seguirla, criticarla o reemplazarla (p. 22).</span></div>`;
+}
+
+// ================= VISTAS =================
+const NAV = [["inicio","Inicio"],["empezar","Empezar aquí"],["recorrido","Recorrido"],["libro","Leer el libro"],["conceptos","Conceptos"],["infografias","Infografías"],["practica","Práctica"],["fuentes","Fuentes"],["voces","Voces"]];
+let route = "inicio", q = "";
+const state = { libroPh:"todas", libroTy:"todos", libroVoz:"", srcFilter:"todas", srcHi:"", phTy:"todos" };
+
+function renderNav(){
+  const phaseRoute = SLUG[route] ? "recorrido" : route;
+  $("#nav").innerHTML = NAV.map(([k,t])=>`<a href="#${k}" ${phaseRoute===k&&!q?'aria-current="page"':""}>${t}</a>`).join("");
+}
+
+function viewInicio(){
+  const nF=FICHAS.length, nS=Object.keys(SRC).length, nC=CONCEPTS.length;
+  const nV=new Set(FICHAS.filter(f=>f.ty==="c").map(f=>f.a.split(" · ")[0])).size;
+  return `<section class="hero">
+    <div>
+      <span class="eyebrow">Caruso y Cioni · Fictional · 1.ª edición, enero 2026 · 231 páginas</span>
+      <h1 style="margin-top:10px">Una guía para leer, estudiar y <em>usar</em> la guía de campo.</h1>
+      <p class="lead">Todo lo que ves aquí sale del libro y lleva su página. Puedes seguir el recorrido de un proyecto de Design Futures, leer cada página resumida, repasar conceptos, ver infografías, marcar tu avance en la práctica y consultar todas las fuentes que el libro cita.</p>
+      <div class="meta">${pg("11–231")}<span class="pg"><b>${nF}</b> fichas</span><span class="pg"><b>${nC}</b> conceptos</span><span class="pg"><b>${nS}</b> fuentes</span><span class="pg"><b>${nV}</b> voces</span></div>
+      <div class="hero-cta"><a class="cta big" href="https://designfutures.guide" target="_blank" rel="noopener">Ir al libro original ↗<small>designfutures.guide · sitio oficial del libro</small></a><a class="cta big ghost" href="#empezar">¿Nuevo en esto? Empieza aquí<small>resumen en 5 minutos</small></a></div>
+    </div>
+    <figure class="ill-box" style="${cv("f1")}">${pix("var(--red)",6,"a")}${pix("var(--purple)",5,"b")}<img class="ill" src="img/p41.png" alt="Ilustración de Stefano Cardini: un ojo dentro de una cabeza, atravesado por un haz de luz que viene de una nube sonriente."><figcaption>Stefano Cardini · p. 41</figcaption></figure>
+  </section>
+  <section class="sec"><h2>El recorrido ${pg("42")}</h2>${procHtml()}</section>
+  <section class="sec"><h2>Cómo leer este sitio</h2>
+    <div class="rules">
+      <div class="rule"><h3>Todo tiene página</h3><p>Cada ficha, concepto o paso lleva la página impresa del libro para que puedas ir al original.</p></div>
+      <div class="rule"><h3>Resumen, no reemplazo</h3><p>Los textos en español son paráfrasis breves. Las citas de otros autores también: para citar, ve al original.</p></div>
+      <div class="rule"><h3>Nada inventado</h3><p>Las infografías solo ordenan lo que el libro dice. Si el libro no da un dato (por ejemplo, valores para la disonancia), el sitio lo aclara.</p></div>
+      <div class="rule"><h3>Enlaces con etiqueta</h3><p>En Fuentes se distingue el enlace que imprime el libro del que se encontró después y que el libro no trae.</p></div>
+    </div>
+  </section>
+  <section class="sec"><h2>El libro, en sus propias palabras</h2>
+    <div class="igs">${igHtml("textos")}${igHtml("mente")}</div>
+  </section>
+  <section class="sec"><h2>Relación con Campo de Futuros ${`<span class="eyebrow">tu agente</span>`}</h2>
+    <p style="color:var(--muted);max-width:70ch;margin-bottom:12px">Cada módulo del agente se apoya en una parte del libro. Úsalo para ir a la teoría que hay detrás de lo que hace.</p>
+    <div class="agent">${[["Encuadre","fr","Formular la incertidumbre, supuestos, afectados y lugar","49–54"],["Radar","sc","Señales de margen y establecidas, con por qué importa","55–75"],["Drivers","sm","Agrupar señales, inventario y huecos","101–112"],["Retrofuturos","sc","Cómo se imaginó antes, para entender, no validar","93, 104"],["Escenarios","vi","Conjuntos de escenarios y voces (impulsor, opositor, indiferente)","121–152"],["Artefactos","vi","Artefactos del futuro, arquetipos, disonancia","156–169"],["Juego","di","Juegos de futuros y juego de roles","175–182"],["Espejo","as","Evaluación crítica y puntos ciegos","153, 184–191"],["Acción","ta","Pasos concretos hoy","192–195"]].map(([m,k,d,p])=>`<div class="agent-row" style="${cv(k)}"><b><span class="fdot"></span>${m}</b><span>${d}</span><a class="pg" href="#${SLUG_OF[k]}">p. ${p}</a></div>`).join("")}</div>
+  </section>`;
+}
+
+
+function viewEmpezar(){
+  const idea=(k,t,x,p)=>`<li style="${cv(k)}"><div><h3>${t}</h3><p>${x}</p></div>${pg(p)}</li>`;
+  const r=(k,t,x,p)=>`<a href="#libro" data-goto="${p}" style="${cv(k)}"><span class="pg">p. ${p}</span><b>${t}</b><span>${x}</span></a>`;
+  const g=(t,x,p)=>`<article class="gracia"><h3>${t}</h3><p>${x}</p>${pg(p)}</article>`;
+  return `<div class="view-h"><span class="eyebrow">Si nunca has oído de esto</span><h1>Empezar aquí</h1></div>
+  <p class="intro-lead">Design Futures es usar el diseño para <mark>imaginar varios futuros posibles</mark>, hacerlos tangibles con historias y objetos, y usarlos para <mark>decidir mejor hoy</mark>.</p>
+  <p style="color:var(--muted);margin-top:10px">Resumen de la definición de los autores, p. 31. Lo que sigue es una selección de esta guía para orientarte; cada punto lleva su página.</p>
+
+  <section class="sec"><h2>En tres frases ${pg(31)}</h2>
+   <div class="three">
+    <div class="box hl" style="${cv("f1")}"><span class="eyebrow">Qué une</span><h4>Diseño + estudios de futuros</h4><p>No como herramientas puestas en fila, sino fundidas en «una receta nueva» (p. 32).</p></div>
+    <div class="box hl" style="${cv("f3")}"><span class="eyebrow">Cómo trabaja</span><h4>Haciendo el futuro tangible</h4><p>Narrativas, prototipos y artefactos del futuro que se pueden ver, tocar y discutir.</p></div>
+    <div class="box hl" style="${cv("f5")}"><span class="eyebrow">Para qué</span><h4>Cuestionar y decidir</h4><p>Cuestionar supuestos, desafiar normas y apoyar decisiones estratégicas o éticas.</p></div>
+   </div></section>
+
+  <section class="sec"><h2>Lo que no es</h2>
+   <ul class="nots">
+    <li><b>predecir</b><span>«En lugar de predecir qué pasará», ayuda a explorar direcciones. Los escenarios tampoco son predicciones.</span>${pg("31, 121")}</li>
+    <li><b>un manual</b><span>El libro no tiene capítulos ni métodos paso a paso. Cada diseñador debería redefinir su proceso en cada proyecto.</span>${pg("21–22")}</li>
+    <li><b>otro Design Thinking</b><span>Futures Thinking es una mentalidad; Design Futures es una práctica. No se empaquetan igual.</span>${pg(40)}</li>
+   </ul></section>
+
+  <section class="sec"><h2>Cinco ideas para entender el resto</h2>
+   <ol class="ideas">
+    ${idea("f1","Es plural: futuros","No hay un solo futuro por adivinar sino muchos posibles. Por eso el libro dice «futures», en plural.","30, 123")}
+    ${idea("f2","Señales y drivers","Una señal es un indicio pequeño de cambio; un driver es la fuerza grande que las agrupa. Los drivers son a las señales lo que las nubes a las gotas.","70–72")}
+    ${idea("f3","Escenarios, siempre varios","Historias basadas en evidencia sobre futuros alternativos. Se hacen en conjuntos y mejor si cuentan la vida cotidiana.","121, 149")}
+    ${idea("f4","Artefactos del futuro","Un objeto cotidiano ficticio pero plausible, puesto hoy en el mundo, para que la gente converse sobre ese futuro.","156–158")}
+    ${idea("f5","El objetivo es la conversación","No se mide si el artefacto es usable: se busca provocar debate, dudas y decisiones distintas en el presente.","45, 191")}
+   </ol></section>
+
+  <section class="sec"><h2>El camino de un proyecto ${pg(42)}</h2>${procHtml()}</section>
+
+  <section class="sec"><h2>Una primera lectura: diez páginas</h2>
+   <p style="color:var(--muted);margin-bottom:12px;max-width:70ch">Selección de esta guía, no del libro. Tócalas para leer su ficha. El libro se puede leer en cualquier orden (p. 21).</p>
+   <div class="route">
+    ${r("f1","Design Futures","La definición.",31)}
+    ${r("f1","Mentalidad, no práctica","Futures Thinking vs. Design Futures.",40)}
+    ${r("f1","Futuring by Design","El proceso en cinco pasos.",42)}
+    ${r("f1","Framing","Cómo se encuadra un proyecto.",49)}
+    ${r("f2","Señales","Qué son y para qué sirven.",70)}
+    ${r("f2","Qué hace que una señal importe","Cómo filtrar.",75)}
+    ${r("f3","Escenarios","Historias con evidencia, en conjuntos.",121)}
+    ${r("f4","Artefactos del futuro","Objetos para conversar.",156)}
+    ${r("f4","Principios experienciales","El iceberg y la doble mirada.",174)}
+    ${r("f5","Taking action","Del futuro imaginado a la acción.",192)}
+   </div></section>
+
+  <section class="sec"><h2>Las gracias del libro</h2>
+   <p style="color:var(--muted);margin-bottom:12px;max-width:70ch">Es un libro serio que no se toma demasiado en serio. Algunas de sus salidas, contadas brevemente.</p>
+   <div class="gracias">
+    ${g("No hay conos","Casi al final de sus notas, los autores avisan: no hay conos (el famoso cono de futuros). «Puede decepcionar a algunos, pero seguro lo superarán». En los agradecimientos insisten: ya lo dijimos, ¿no?","23, 230")}
+    ${g("Un prólogo desde 2050","Jorge Camacho escribe el prólogo de una 5.ª edición que todavía no existe, firmado en «Ciudad de México, aún-no 2050». El prólogo mismo es un artefacto del futuro.","17–20")}
+    ${g("Sé una urraca","Joseph Lindley recuerda que Rachel Cooper comparaba a los investigadores en diseño con urracas, aves que coleccionan cosas brillantes: si una idea inspira, úsala.","15")}
+    ${g("Explícaselo a alguien de Marte","El ejercicio de desfamiliarización: describir un objeto cotidiano como si fuera para un marciano, para volver extraño lo familiar.","63")}
+    ${g("Diseño bovino","El diseño que sigue la rutina como una vaca lechera, siempre por el mismo camino gastado. Evitarlo es el primer paso.","120")}
+    ${g("Como un mapache","Søren Rosenbak invita a revolver el montón de futuros pasados como un mapache curioso buscando un bocadillo, pero sin usarlos para darse la razón.","104")}
+    ${g("El cono se vuelve burrito","Si especulas sobre muchos presentes a la vez, aparecen muchos conos y el cono termina siendo un burrito de bordes difusos.","202")}
+    ${g("El barco y el naufragio","Tobias Revell cita a Virilio: al inventar el barco se inventa el naufragio. Cada comodidad nueva trae incomodidades nuevas.","88")}
+    ${g("Un poco de error, como en el jazz","Erica Moreti compara los estudios de futuros con una banda de jazz: hay que meter algo «equivocado» y hacerlo sonar bien.","167")}
+    ${g("Seis minutos a golpes por unas gafas","En el epílogo, Julian Bleecker usa la película They Live: una pelea de más de seis minutos porque un personaje se niega a ponerse unas gafas y ver el mundo de otra forma.","211–212")}
+    ${g("Dos almas cáusticas","En los agradecimientos, los autores se describen como «dos almas bastante cáusticas» y agradecen a quien trabajó con ellos a pesar de eso. En la introducción confiesan que les gusta la crítica.","26, 229")}
+    ${g("Las partidas de Uno","En la dedicatoria, Giovanni se declara decidido a ganar todas las partidas de Uno que le quedan por jugar con Alice y Leone… aunque está listo para dejar ir algunas.","dedicatoria")}
+   </div></section>
+
+  <section class="sec"><h2>Seis palabras para no perderse</h2>
+   <div class="words">
+    <div><b>Señal</b>Indicio pequeño de que algo podría cambiar. p. 70</div>
+    <div><b>Driver</b>Fuerza de cambio que agrupa muchas señales. p. 71</div>
+    <div><b>Escenario</b>Historia con evidencia sobre un futuro posible. p. 121</div>
+    <div><b>Artefacto del futuro</b>Objeto ficticio y plausible para conversar. p. 156</div>
+    <div><b>Framing</b>Definir la pregunta, el alcance y lo que importa. p. 49</div>
+    <div><b>Más-que-humano</b>Incluir a lo no humano en el diseño de futuros. p. 134–137</div>
+   </div>
+   <p style="margin-top:10px"><a href="#conceptos">Ver los ${CONCEPTS.length} conceptos →</a></p></section>
+
+  <section class="sec"><h2>Y ahora</h2>
+   <div class="next"><a class="cta big" href="#recorrido">Seguir el recorrido<small>los 5 pasos, con teoría y práctica</small></a><a class="cta big ghost" href="#practica">Probarlo en un proyecto<small>lista paso a paso</small></a><a class="cta big ghost" href="https://designfutures.guide" target="_blank" rel="noopener">Ir al libro original ↗<small>designfutures.guide</small></a></div></section>`;
+}
+function viewRecorrido(){
+  return `<div class="view-h"><span class="eyebrow">Paso a paso</span><h1>El recorrido de un proyecto</h1><p>El libro ordena sus páginas siguiendo, más o menos, el camino de un proyecto de Design Futures. Entra a cada momento para ver su definición, sus ideas clave, las voces que lo discuten y las infografías.</p></div>
+  ${procHtml()}
+  <section class="sec"><h2>Todas las secciones</h2>
+   <div class="gloss">${["df","fr","sc","sm","vi","di","as","ta","viva"].map(k=>{const n=FICHAS.filter(f=>f.ph===k).length; const def=FICHAS.find(f=>f.ph===k&&f.ty==="a"); return `<a class="term" href="#${SLUG_OF[k]}" style="${cv(k)};text-decoration:none;color:inherit"><span class="pg">p. ${PH[k].pp} · ${n} fichas</span><h3>${esc(phName(k))}</h3><p style="color:var(--muted)">${esc((def?.x||"").split(". ")[0])}.</p></a>`;}).join("")}</div></section>
+  <section class="sec">${igHtml("cono")}</section>`;
+}
+
+function viewFase(k){
+  const ph = PH[k]; const list = FICHAS.filter(f=>f.ph===k);
+  const def = list.find(f=>f.ty==="a");
+  const keys = list.filter(f=>f.ty==="a" && f!==def);
+  const step = STEPS.find(s=>s.phases.includes(k));
+  const order = ["df","fr","sc","sm","vi","di","as","ta","viva"]; const i=order.indexOf(k);
+  const prev=order[i-1], next=order[i+1];
+  const counts={todos:list.length,a:0,c:0,q:0}; list.forEach(f=>counts[f.ty]++);
+  const shown = list.filter(f=>state.phTy==="todos"||f.ty===state.phTy);
+  const igs = (IG_BY_PHASE[k]||[]);
+  const prac = step ? PRAC[step.n] : null;
+  return `<div style="${cv(k)}">
+  <div class="ph-head">
+    <div>
+      <div class="ph-kick"><span class="ph-dot"></span><span class="eyebrow">${step?`Paso ${step.n} de 5 · ${esc(step.es)}`:"Marco"} · p. ${ph.pp}</span></div>
+      ${step&&step.phases.length>1?`<div class="substeps">${step.phases.map(x=>`<a href="#${SLUG_OF[x]}" ${x===k?'aria-current="page"':""}>${esc(PH[x].t)}</a>`).join("")}</div>`:""}
+      <h1 style="margin-top:12px">${esc(ph.t)}</h1>
+      ${ph.es?`<p class="eyebrow" style="margin-top:6px">${esc(ph.es)}</p>`:""}
+      ${def?`<p class="ph-def">${esc(def.x)}</p><p class="ph-def-src">${pg(def.p)} <span class="pg">· texto de los autores</span></p>`:""}
+      ${keys.length?`<h2 style="font-size:18px;margin-top:26px">Ideas clave de los autores</h2><ul class="keys">${keys.map(f=>`<li><span><b style="font-weight:500">${esc(f.t)}.</b> ${esc(f.x.split(". ")[0])}.</span>${pg(f.p)}</li>`).join("")}</ul>`:""}
+    </div>
+    ${ph.img?`<figure class="ill-box"><img class="ill" src="img/p${ph.img}.png" alt="Ilustración de Stefano Cardini que abre la sección ${esc(ph.t)} (p. ${ph.img})."><figcaption>Stefano Cardini · p. ${ph.img}</figcaption></figure>`:""}
+  </div>
+  ${igs.length?`<section class="sec"><h2>Infografías</h2><div class="igs">${igs.map(igHtml).join("")}</div></section>`:""}
+  ${prac?`<section class="sec"><h2>En la práctica <a class="pg" href="#practica">ver lista completa →</a></h2>${pstepHtml(step, k)}</section>`:""}
+  <section class="sec"><h2>Todas las páginas de esta sección <span class="pg">${list.length} fichas</span></h2>
+    <div class="filters" role="toolbar" aria-label="Filtrar fichas">${[["todos","Todas"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-phty="${t}" aria-pressed="${state.phTy===t}">${l} <span class="n">${counts[t]}</span></button>`).join("")}</div>
+    <div class="fichas">${shown.map(f=>fichaHtml(f)).join("")}</div>
+  </section>
+  <nav class="phnav">${prev?`<a href="#${SLUG_OF[prev]}"><span>← Anterior</span>${esc(PH[prev].t)}</a>`:"<span></span>"}${next?`<a href="#${SLUG_OF[next]}"><span>Siguiente →</span>${esc(PH[next].t)}</a>`:""}</nav>
+  </div>`;
+}
+
+function voicesList(){
+  const m = new Map();
+  FICHAS.forEach(f=>{
+    if(f.ty!=="c") return;
+    const [names, aff] = f.a.split(" · ");
+    names.split(/, (?=[A-ZÉÁÍÓÚÑ])/).forEach(raw=>{
+      const mm = raw.match(/^(.+?) \((.+)\)$/); const n = (mm?mm[1]:raw).trim(); const a = mm?mm[2]:(aff||VOICES_AFF[n]||"");
+      if(!m.has(n)) m.set(n,{n,aff:a,pages:[],phs:new Set()});
+      const v=m.get(n); v.pages.push(f.p); v.phs.add(f.ph); if(!v.aff&&a) v.aff=a;
+    });
+  });
+  return [...m.values()].sort((a,b)=>b.pages.length-a.pages.length||a.n.localeCompare(b.n));
+}
+
+function viewLibro(){
+  const vf = state.libroVoz;
+  const list = FICHAS.filter(f=>(state.libroPh==="todas"||f.ph===state.libroPh)&&(state.libroTy==="todos"||f.ty===state.libroTy)&&(!vf||f.a.includes(vf)));
+  return `<div class="view-h"><span class="eyebrow">Página por página</span><h1>Leer el libro</h1><p>Cada página con texto del libro, resumida en español y en su orden original. Filtra por sección, por tipo de texto o por voz.</p></div>
+   <div class="filters">
+    <select class="sel" id="fPh" aria-label="Sección"><option value="todas">Todas las secciones</option>${PHASE_ORDER.map(k=>`<option value="${k}" ${state.libroPh===k?"selected":""}>${esc(PH[k].t)} · p. ${PH[k].pp}</option>`).join("")}</select>
+    ${[["todos","Todo"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-lty="${t}" aria-pressed="${state.libroTy===t}">${l}</button>`).join("")}
+    ${vf?`<button class="chip" type="button" data-clearvoz="1" aria-pressed="true">${esc(vf)} ✕</button>`:""}
+    <span class="count">${list.length} de ${FICHAS.length}</span>
+   </div>
+   <div class="fichas">${list.map(f=>fichaHtml(f,{showPhase:true})).join("")||`<p class="empty">No hay fichas con estos filtros.</p>`}</div>`;
+}
+
+function viewConceptos(){
+  const sorted=[...CONCEPTS].sort((a,b)=>a.t.localeCompare(b.t,"es"));
+  const letters=[...new Set(sorted.map(c=>norm(c.t)[0].toUpperCase()))];
+  return `<div class="view-h"><span class="eyebrow">Glosario</span><h1>Conceptos</h1><p>${CONCEPTS.length} términos del libro, definidos con sus propias palabras y con las páginas donde aparecen. El nombre en inglés es el que usa el libro.</p></div>
+   <div class="letters">${letters.map(l=>`<a href="#conceptos" data-letter="${l}">${l}</a>`).join("")}</div>
+   <div class="gloss">${sorted.map(c=>`<article class="term" id="c-${norm(c.t)[0].toUpperCase()}" style="${cv(c.ph)}"><span class="en">${esc(c.en)} · <a href="#${SLUG_OF[c.ph]||"libro"}">${esc(PH[c.ph].t)}</a></span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p><span class="pg">p. ${c.p.join(", ")}</span></article>`).join("")}</div>`;
+}
+
+function viewInfografias(){
+  const order=["proceso","cono","mente","textos","paraguas","encuadre","assemblage","lentes","senal","nubes","mapa","escenario","roles","polifonia","confronta","disonancia","iceberg","regen"];
+  return `<div class="view-h"><span class="eyebrow">Para ver de un vistazo</span><h1>Infografías</h1><p>Cada una ordena visualmente lo que dice una o varias páginas del libro, indicadas arriba a la derecha. No agregan categorías ni datos que el libro no trae.</p></div>
+   <div class="igs">${order.map(igHtml).join("")}</div>`;
+}
+
+function pstepHtml(s, only){
+  const done = store.get("dfg-prac",{});
+  const groups = PRAC[s.n];
+  const all = groups.flatMap(([g,items])=>items.map((it,i)=>`${s.n}-${g}-${i}`));
+  const nd = all.filter(id=>done[id]).length;
+  return `<div class="pstep" style="--c:var(--${s.c})"><div class="pstep-h"><div><span class="eyebrow">Paso ${s.n}</span><h3>${esc(s.es)}</h3></div><div class="prog"><div class="bar"><i style="width:${all.length?nd/all.length*100:0}%"></i></div>${nd}/${all.length}</div></div>
+   <ul class="checks">${groups.map(([g,items])=>`<li class="grp">${esc(g)}</li>${items.map(([t,p],i)=>{const id=`${s.n}-${g}-${i}`; const hid=`ck-${s.n}-${norm(g).replace(/\W+/g,"")}-${i}${only?"-"+only:""}`; return `<li class="${done[id]?"done":""}"><input type="checkbox" id="${hid}" data-ck="${esc(id)}" ${done[id]?"checked":""}><label for="${hid}">${esc(t)}</label>${pg(p)}</li>`;}).join("")}`).join("")}</ul></div>`;
+}
+function viewPractica(){
+  return `<div class="view-h"><span class="eyebrow">Teoría → práctica</span><h1>Práctica paso a paso</h1><p>Lo que el libro propone hacer en cada momento, convertido en una lista que puedes marcar. Cada punto lleva la página de donde sale. Tu avance se guarda solo en este navegador.</p></div>
+   <div class="callout" style="margin-bottom:16px">Los autores advierten que no es un manual: cada diseñador debería redefinir su proceso en cada proyecto e inventar sus métodos (p. 22). Usa esta lista como recordatorio, no como receta.</div>
+   <div class="prac">${STEPS.map(s=>pstepHtml(s)).join("")}</div>
+   <div style="margin-top:14px"><button class="chip" type="button" id="resetPrac">Borrar mi avance</button></div>`;
+}
+
+function srcStatus(s){
+  if(s.u && s.st==="ok") return ["t-book","Enlace del libro, funciona"];
+  if(s.u && s.st==="bloq") return ["t-book","Enlace del libro"];
+  if(s.f) return ["t-found","Encontrado, no está en el libro"];
+  return ["t-none","Sin enlace"];
+}
+function viewFuentes(){
+  const all = Object.entries(SRC).map(([id,s])=>({id,...s}));
+  const inBib = s=>s.use.some(u=>u[1]==="bib");
+  const F = {
+    todas:[ "Todas", ()=>true ],
+    libro:[ "Con enlace del libro", s=>!!s.u && s.st!=="caido" ],
+    encontrado:[ "Enlace encontrado", s=>!!s.f && !(s.u && s.st!=="caido") ],
+    sin:[ "Sin enlace", s=>!linkOf(s.id) ],
+    oa:[ "Acceso abierto", s=>!!s.oa ],
+    fuera:[ "Fuera de la bibliografía", s=>!inBib(s) ],
+    notas:[ "Con discrepancias", s=>!!s.n ]
+  };
+  const list = all.filter(F[state.srcFilter][1]).sort((a,b)=>a.r.localeCompare(b.r,"es"));
+  const cnt = k=>all.filter(F[k][1]).length;
+  const ROL={cita:"cita",amplía:"lectura sugerida",texto:"citado en el texto",bib:"bibliografía",mención:"mención"};
+  return `<div class="view-h"><span class="eyebrow">Inventario</span><h1>Fuentes</h1><p>Todo lo que el libro cita, sugiere leer o menciona, con las páginas donde aparece. Si el libro no trae enlace, se buscó uno. Nada se inventó: lo que no se encontró queda sin enlace.</p></div>
+   <div class="stats">
+    <div class="stat"><b>${all.length}</b><span>fuentes y menciones</span></div>
+    <div class="stat"><b>${all.filter(inBib).length}</b><span>en la bibliografía (p. 217–225)</span></div>
+    <div class="stat"><b>${cnt("libro")}</b><span>con enlace impreso</span></div>
+    <div class="stat"><b>${cnt("encontrado")}</b><span>con enlace encontrado</span></div>
+    <div class="stat"><b>${cnt("oa")}</b><span>de acceso abierto</span></div>
+   </div>
+   <div class="legend">
+    <div><span class="tag t-book">Del libro</span>Enlace o DOI impreso en el libro. Se comprobó el 24 sep 2026; todos los DOI están registrados. Algunos sitios (Medium, ACM, editoriales) bloquean la comprobación automática, pero el enlace es el del libro.</div>
+    <div><span class="tag t-found">Encontrado</span>El libro no trae enlace. Se buscó en catálogos (Open Library, Crossref) y en la web. Puede llevar a otra edición o año.</div>
+    <div><span class="tag t-oa">Abierto</span>El texto completo se puede leer gratis en el enlace.</div>
+    <div><span class="tag t-none">Sin enlace</span>No se encontró o el libro no da datos suficientes para buscar.</div>
+   </div>
+   <div class="filters">${Object.entries(F).map(([k,[l]])=>`<button class="chip" type="button" data-sf="${k}" aria-pressed="${state.srcFilter===k}">${l} <span class="n">${cnt(k)}</span></button>`).join("")}</div>
+   <div class="srclist">${list.map(s=>{const [cls,lab]=srcStatus(s); const link=linkOf(s.id);
+     return `<div class="src-i ${state.srcHi===s.id?"hi":""}" id="s-${s.id}">
+      <div><div class="src-ref">${esc(s.r)}</div>
+       <div class="src-uses"><span>${esc(s.k)}</span>${s.use.map(([p,r])=>{const f=FICHAS.find(x=>x.p===p); return f?`<a href="#libro" data-goto="${p}">p. ${p} · ${ROL[r]}</a>`:`<span>p. ${p} · ${ROL[r]}</span>`;}).join("")}</div>
+       ${s.n?`<div class="src-note">Nota: ${esc(s.n)}</div>`:""}
+       ${s.st==="caido"?`<div class="src-note">El enlace impreso (${esc(s.u)}) no responde; se enlaza el mismo texto en otra dirección.</div>`:""}
+      </div>
+      <div class="src-links"><span class="tag ${cls}">${lab}</span>${s.oa?`<span class="tag t-oa">Abierto</span>`:""}${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${s.u&&s.st!=="caido"?"Abrir":esc(s.fk||"Abrir")} ↗</a>`:""}</div>
+     </div>`;}).join("")}</div>`;
+}
+
+function viewVoces(){
+  const vs = voicesList();
+  return `<div class="view-h"><span class="eyebrow">Colaboradores</span><h1>Voces</h1><p>Las personas que escriben en el libro además de los autores, con las páginas de sus textos. Toca una tarjeta para leer solo sus fichas.</p></div>
+   <div class="voices">${vs.map(v=>`<button type="button" class="voice" data-voz="${esc(v.n)}"><h3>${esc(v.n)}</h3>${v.aff?`<span class="aff">${esc(v.aff)}</span>`:""}<div class="pp">${[...v.phs].map(k=>`<span class="tag t-c" style="${cv(k)}"><span class="fdot"></span>${esc(PH[k].t)}</span>`).join("")}</div><span class="pg">p. ${v.pages.join(", ")}</span></button>`).join("")}</div>
+   <section class="sec"><h2>Autores</h2><div class="rules">
+    <div class="rule"><h3>Giovanni Caruso</h3><p>Director de la Escuela de Diseño de Domus Academy (Milán); profesor de Design Futures e Interaction Design; principal de FICTIVE; cofundador de Speculative Futures Milan.</p><span class="pg">p. 231</span></div>
+    <div class="rule"><h3>Silvio Cioni</h3><p>Director de Educación de Domus Academy; profesor de Design Futures, Interaction Design y Service Design; principal de FICTIVE; co-curador de Speculative Futures Milan.</p><span class="pg">p. 231</span></div>
+   </div></section>`;
+}
+
+function viewBuscar(){
+  const n = norm(q);
+  const fs = FICHAS.filter(f=>norm(f.t+" "+f.x+" "+f.a).includes(n));
+  const cs = CONCEPTS.filter(c=>norm(c.t+" "+c.en+" "+c.d).includes(n));
+  const ss = Object.entries(SRC).filter(([id,s])=>norm(s.r).includes(n));
+  return `<div class="view-h"><span class="eyebrow">Búsqueda</span><h1>«${esc(q)}»</h1><p>${fs.length} fichas · ${cs.length} conceptos · ${ss.length} fuentes</p></div>
+   ${cs.length?`<div class="res-g"><h2>Conceptos</h2><div class="gloss">${cs.map(c=>`<article class="term" style="${cv(c.ph)}"><span class="en">${esc(c.en)}</span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p><span class="pg">p. ${c.p.join(", ")}</span></article>`).join("")}</div></div>`:""}
+   ${fs.length?`<div class="res-g"><h2>Fichas</h2><div class="fichas">${fs.map(f=>fichaHtml(f,{showPhase:true})).join("")}</div></div>`:""}
+   ${ss.length?`<div class="res-g"><h2>Fuentes</h2><div class="srclist">${ss.map(([id,s])=>`<div class="src-i"><div class="src-ref">${esc(s.r)}</div><div class="src-links"><button class="chip" type="button" data-src="${id}">Ver en Fuentes</button></div></div>`).join("")}</div></div>`:""}
+   ${!fs.length&&!cs.length&&!ss.length?`<p class="empty">No hay resultados. Prueba con otra palabra, en español o en inglés (por ejemplo «signal», «escenario», «artefacto»).</p>`:""}`;
+}
+
+function render(){
+  renderNav();
+  let h;
+  if (q) h = viewBuscar();
+  else if (SLUG[route]) h = viewFase(SLUG[route]);
+  else h = ({inicio:viewInicio, empezar:viewEmpezar, recorrido:viewRecorrido, libro:viewLibro, conceptos:viewConceptos, infografias:viewInfografias, practica:viewPractica, fuentes:viewFuentes, voces:viewVoces}[route]||viewInicio)();
+  $("#view").innerHTML = h;
+}
+
+function go(r, opts={}){
+  route = r; q = ""; $("#q").value = "";
+  if (location.hash.slice(1)!==r) { try{ history.pushState(null,"","#"+r); }catch{} }
+  store.set("dfg-route", r);
+  render();
+  if (opts.scrollTo){ requestAnimationFrame(()=>{ const el=document.getElementById(opts.scrollTo); if(el) el.scrollIntoView({block:"center"}); }); }
+  else if (!opts.keep) window.scrollTo(0,0);
+}
+
+// ================= EVENTOS =================
+window.addEventListener("hashchange", ()=>{ const h=location.hash.slice(1); if(h && h!==route) { state.phTy="todos"; go(h); } });
+document.addEventListener("click", e=>{
+  const a = e.target.closest('a[href^="#"]');
+  if (a && !a.dataset.letter && !a.dataset.goto){ e.preventDefault(); const r=a.getAttribute("href").slice(1); state.phTy="todos"; go(r); return; }
+  const lt = e.target.closest("[data-letter]"); if (lt){ e.preventDefault(); const el=document.getElementById("c-"+lt.dataset.letter); if(el) el.scrollIntoView({block:"start"}); return; }
+  const sb = e.target.closest("[data-src]"); if (sb){ state.srcFilter="todas"; state.srcHi=sb.dataset.src; go("fuentes",{scrollTo:"s-"+sb.dataset.src}); return; }
+  const gt = e.target.closest("[data-goto]"); if (gt){ e.preventDefault(); const p=+gt.dataset.goto; const f=FICHAS.find(x=>x.p===p); if(f){ state.libroPh=f.ph; state.libroTy="todos"; state.libroVoz=""; go("libro"); } return; }
+  const pt = e.target.closest("[data-phty]"); if (pt){ state.phTy=pt.dataset.phty; render(); return; }
+  const lty = e.target.closest("[data-lty]"); if (lty){ state.libroTy=lty.dataset.lty; render(); return; }
+  const cv_ = e.target.closest("[data-clearvoz]"); if (cv_){ state.libroVoz=""; render(); return; }
+  const sf = e.target.closest("[data-sf]"); if (sf){ state.srcFilter=sf.dataset.sf; state.srcHi=""; render(); return; }
+  const vz = e.target.closest("[data-voz]"); if (vz){ state.libroVoz=vz.dataset.voz; state.libroPh="todas"; state.libroTy="todos"; go("libro"); return; }
+  if (e.target.id==="resetPrac"){ store.set("dfg-prac",{}); render(); toast("Avance borrado"); return; }
+});
+document.addEventListener("change", e=>{
+  if (e.target.id==="fPh"){ state.libroPh=e.target.value; render(); return; }
+  const ck = e.target.closest("[data-ck]");
+  if (ck){ const d=store.get("dfg-prac",{}); if(ck.checked) d[ck.dataset.ck]=1; else delete d[ck.dataset.ck]; store.set("dfg-prac",d); const y=window.scrollY; render(); window.scrollTo(0,y); }
+});
+let qt; $("#q").addEventListener("input", e=>{ clearTimeout(qt); qt=setTimeout(()=>{ q=e.target.value.trim(); render(); if(q) window.scrollTo(0,0); },160); });
+
+// ================= INICIO =================
+const h0 = location.hash.slice(1);
+route = h0 || "inicio";
+render();
+})();
+</script>
