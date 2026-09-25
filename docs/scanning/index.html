@@ -413,8 +413,10 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .gracia h3{font-size:19px;line-height:1.2}
 .gracia p{font-size:14.5px}
 .gracia .pg{align-self:flex-start}
-.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
-.words div{padding:12px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14px}
+.words{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--line)}
+.words div{padding:12px 14px;font-size:14px;background:var(--surface)}
+@media (max-width:760px){.words{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.words{grid-template-columns:1fr}}
 .words b{display:block;font-family:var(--display);font-weight:500;font-size:16.5px;color:var(--accent)}
 .next{display:flex;flex-wrap:wrap;gap:10px}
 @media (max-width:760px){.three,.nots{grid-template-columns:1fr}.ideas li{grid-template-columns:32px minmax(0,1fr)}.ideas li .pg{grid-column:2}}
