@@ -209,6 +209,9 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 
 /* concepts */
 .gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.lgroup{margin-top:28px;scroll-margin-top:150px}
+.lhead{display:flex;align-items:baseline;gap:10px;font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:6px;margin-bottom:14px}
+.lhead span{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted)}
 .term{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--c)}
 .term h3{font-size:18px}
 .term .en{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
@@ -335,6 +338,12 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 /* empezar aquí */
 .intro-lead{font-size:clamp(19px,2.4vw,23px);line-height:1.45;max-width:40ch;font-family:var(--display);font-weight:500;letter-spacing:-.01em}
 .intro-lead mark{background:none;color:var(--red-ink)}
+.ctx{max-width:72ch;font-size:15.5px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.duo .box p{font-size:14.5px}
+.duo .box p + p{margin-top:8px}
+.duo h4{font-size:18px;margin:4px 0 8px}
+@media (max-width:760px){.duo{grid-template-columns:1fr}}
 .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .three .box h4{font-size:18px}
 .nots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -1137,6 +1146,19 @@ function viewEmpezar(){
   <p class="intro-lead">Design Futures es usar el diseño para <mark>imaginar varios futuros posibles</mark>, hacerlos tangibles con historias y objetos, y usarlos para <mark>decidir mejor hoy</mark>.</p>
   <p style="color:var(--muted);margin-top:10px">Resumen de la definición de los autores, p. 31. Lo que sigue es una selección de esta guía para orientarte; cada punto lleva su página.</p>
 
+  <section class="sec"><h2>Dos campos que se juntan</h2>
+   <p class="ctx">Design Futures nace del cruce de dos tradiciones que durante años trabajaron por separado. Los autores cuentan más de quince años en los que se fueron «chocando y mezclando» (p. 25). Entender qué aporta cada una ayuda a leer el resto del libro.</p>
+   <div class="duo">
+    <div class="box hl" style="${cv("f1")}"><span class="eyebrow">Estudios de futuros</span><h4>Pensar en futuros, en plural</h4>
+     <p>Parte de una idea central: no hay un único futuro «allá afuera» que se pueda predecir, sino muchos futuros alternativos que se pueden anticipar y, en parte, vivir por adelantado (Dator, citado en p. 123). Como el futuro no existe, no se puede estudiar como un objeto; su fuerza está en explorar, crear versiones alternativas y sembrar dudas razonables (p. 167).</p>
+     <p>Sus herramientas son el escaneo del entorno y del horizonte, las señales, los drivers de cambio y los escenarios (pp. 57, 70–71, 121). Muchas vienen de las ciencias sociales y políticas, y también del ámbito militar (p. 81).</p></div>
+    <div class="box hl" style="${cv("f5")}"><span class="eyebrow">Diseño</span><h4>Hacer cosas y darle sentido al mundo</h4>
+     <p>El diseño hace cosas en el mundo, pero también ayuda a darle sentido (Lindley, p. 12). Cada acto de diseño ya crea un futuro, aquel en el que existe ese producto o servicio (p. 35). Lo que mejor sabe hacer es imaginar visiones preferibles y mostrar cómo llegar a ellas con prototipos, pilotos y visualizaciones (p. 38).</p>
+     <p>Aporta además su manera de trabajar: investigación de campo, prototipado y participación de comunidades, que vuelven concretas las ideas abstractas y permiten probarlas con personas reales (p. 43).</p></div>
+   </div>
+   <p class="ctx" style="margin-top:12px"><b>Juntos, no uno al lado del otro.</b> Los autores insisten en que Design Futures no es poner en fila los métodos de un campo y del otro, sino fundirlos en algo nuevo: «una receta nueva» (p. 32), una mezcla en la que lo creativo y lo crítico se alimentan (p. 34). Los futuros experienciales, nacidos entre futuristas, y la ficción de diseño, nacida entre diseñadores, surgieron por separado, pero se parecen más de lo que se diferencian (Candy y Dunagan, citado en p. 100). El diseño aporta lo que a los futuros les faltaba: hacerlos tangibles, discutibles y abiertos a todos (p. 43).</p>
+  </section>
+
   <section class="sec"><h2>En tres frases ${pg(31)}</h2>
    <div class="three">
     <div class="box hl" style="${cv("f1")}"><span class="eyebrow">Qué une</span><h4>Diseño + estudios de futuros</h4><p>No como herramientas puestas en fila, sino fundidas en «una receta nueva» (p. 32).</p></div>
@@ -1281,7 +1303,7 @@ function viewConceptos(){
   const letters=[...new Set(sorted.map(c=>norm(c.t)[0].toUpperCase()))];
   return `<div class="view-h"><span class="eyebrow">Glosario</span><h1>Conceptos</h1><p>${CONCEPTS.length} términos del libro, definidos con sus propias palabras y con las páginas donde aparecen. El nombre en inglés es el que usa el libro.</p></div>
    <div class="letters">${letters.map(l=>`<a href="#conceptos" data-letter="${l}">${l}</a>`).join("")}</div>
-   <div class="gloss">${sorted.map(c=>`<article class="term" id="c-${norm(c.t)[0].toUpperCase()}" style="${cv(c.ph)}"><span class="en">${esc(c.en)} · <a href="#${SLUG_OF[c.ph]||"libro"}">${esc(PH[c.ph].t)}</a></span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p><span class="pg">p. ${c.p.join(", ")}</span></article>`).join("")}</div>`;
+   ${letters.map(L=>`<section class="lgroup" id="c-${L}"><h2 class="lhead">${L}<span>${sorted.filter(c=>norm(c.t)[0].toUpperCase()===L).length}</span></h2><div class="gloss">${sorted.filter(c=>norm(c.t)[0].toUpperCase()===L).map(c=>`<article class="term" style="${cv(c.ph)}"><span class="en">${esc(c.en)} · <a href="#${SLUG_OF[c.ph]||"libro"}">${esc(PH[c.ph].t)}</a></span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p><span class="pg">p. ${c.p.join(", ")}</span></article>`).join("")}</div></section>`).join("")}`;
 }
 
 function viewInfografias(){
