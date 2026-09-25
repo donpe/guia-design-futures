@@ -1148,7 +1148,7 @@ function routeHtml(cur){
 }
 function nextHtml(cur){
   const i=ROUTE.findIndex(x=>x[0]===cur); const nx=ROUTE[i+1]; if(!nx) return "";
-  return `<a class="nextstep" href="#${nx[0]}"><small>Siguiente en la ruta · ${i+2} de 4</small><b>${nx[1]}: ${nx[3]} →</b><span>${nx[2]}</span></a>`;
+  return `<a class="nextstep" href="#${nx[0]}"><small>Siguiente en la ruta · ${i+2} de 4 · ${nx[1]}</small><b>${nx[2]} →</b></a>`;
 }
 const act=(n,t,id)=>`<div class="act" id="${id}"><span>${n}</span>${t}</div>`;
 function procHtml(){
