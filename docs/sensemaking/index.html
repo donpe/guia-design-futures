@@ -1,4 +1,31 @@
-<title>Guía de Campo Design Futures</title>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/guia-design-futures/">
+<title>Sense-making en Design Futures: de señales a drivers · Guía de estudio Design Futures</title>
+<meta name="description" content="Cómo agrupar señales en drivers de cambio, construir un inventario y dar sentido a la investigación de futuros.">
+<link rel="canonical" href="https://donpe.github.io/guia-design-futures/sensemaking/">
+<meta name="author" content="Evelio Ramirez">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#602866">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Guía de estudio · The Field Guide to Design Futures">
+<meta property="og:title" content="Sense-making en Design Futures: de señales a drivers">
+<meta property="og:description" content="Cómo agrupar señales en drivers de cambio, construir un inventario y dar sentido a la investigación de futuros.">
+<meta property="og:url" content="https://donpe.github.io/guia-design-futures/sensemaking/">
+<meta property="og:image" content="https://donpe.github.io/guia-design-futures/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sense-making en Design Futures: de señales a drivers">
+<meta name="twitter:description" content="Cómo agrupar señales en drivers de cambio, construir un inventario y dar sentido a la investigación de futuros.">
+<meta name="twitter:image" content="https://donpe.github.io/guia-design-futures/og.png">
+<link rel="alternate" type="text/plain" title="Resumen para modelos de lenguaje" href="https://donpe.github.io/guia-design-futures/llms.txt">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23602866'/%3E%3Crect x='7' y='3' width='7' height='3' fill='%23F72411'/%3E%3Crect x='5' y='6' width='7' height='3' fill='%23F72411'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://donpe.github.io/guia-design-futures/#site", "name": "Guía de estudio de The Field Guide to Design Futures", "url": "https://donpe.github.io/guia-design-futures/", "inLanguage": "es", "author": {"@type": "Person", "name": "Evelio Ramirez", "sameAs": "https://www.linkedin.com/in/evelioramirez/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "WebPage", "@id": "https://donpe.github.io/guia-design-futures/sensemaking/", "url": "https://donpe.github.io/guia-design-futures/sensemaking/", "name": "Sense-making en Design Futures: de señales a drivers", "description": "Cómo agrupar señales en drivers de cambio, construir un inventario y dar sentido a la investigación de futuros.", "inLanguage": "es", "isPartOf": {"@id": "https://donpe.github.io/guia-design-futures/#site"}, "about": {"@type": "Book", "name": "The Field Guide to Design Futures", "isbn": "979-12-985986-2-1", "author": [{"@type": "Person", "name": "Giovanni Caruso"}, {"@type": "Person", "name": "Silvio Cioni"}], "publisher": {"@type": "Organization", "name": "Fictional"}, "datePublished": "2026-01", "numberOfPages": 231, "inLanguage": "en", "url": "https://designfutures.guide", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, "dateModified": "2026-09-24"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://donpe.github.io/guia-design-futures/"}, {"@type": "ListItem", "position": 2, "name": "Sense-making en Design Futures: de señales a drivers", "item": "https://donpe.github.io/guia-design-futures/sensemaking/"}]}]}</script>
+<script>window.__ROUTE__="sensemaking";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -471,6 +498,10 @@ a.term:hover h3{color:var(--c)}
   .chip,.sub,.voice,.nav a{transition:border-color .15s,background .15s,color .15s}
 }
 </style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
 
 <header class="top">
   <div class="wrap top-in">
@@ -480,16 +511,145 @@ a.term:hover h3{color:var(--c)}
       <input id="q" type="search" placeholder="Buscar en fichas, conceptos y fuentes" aria-label="Buscar" autocomplete="off">
     </div>
     <a class="cta" href="https://designfutures.guide" target="_blank" rel="noopener">Libro original <small>designfutures.guide</small> ↗</a>
-    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <nav class="nav" id="nav" aria-label="Secciones"><a href="" >Inicio</a><a href="empezar/" >Empezar aquí</a><a href="recorrido/" aria-current="page">Recorrido</a><a href="libro/" >Leer el libro</a><a href="conceptos/" >Conceptos</a><a href="infografias/" >Infografías</a><a href="practica/" >Práctica</a><span class="sep" aria-hidden="true"></span><a href="fuentes/" >Fuentes</a><a href="voces/" >Voces</a></nav>
   </div>
 </header>
 
-<main class="wrap" id="view"></main>
+<main class="wrap" id="view"><div style="--c:var(--f2);--cs:var(--f2s)">
+  <div class="ph-head">
+    <div>
+      <div class="ph-kick"><span class="ph-dot"></span><span class="eyebrow">Paso 2 de 5 · Escanear y dar sentido · p. 101–117</span></div>
+      <div class="substeps"><a href="scanning/" >Scanning</a><a href="sensemaking/" aria-current="page">Sense-making</a></div>
+      <h1 style="margin-top:12px">Sense-making</h1>
+      <p class="eyebrow" style="margin-top:6px">Dar sentido</p>
+      <div class="ph-def"><p>El sense-making es una práctica crucial dentro del proceso de Design Futures: es el momento en que los datos y señales recolectados se organizan e interpretan para construir una comprensión con sentido. Consiste en ordenar, agrupar y mapear la información para identificar patrones, temas y tendencias o drivers emergentes.</p><p>Este enfoque estructurado ayuda a separar la señal del ruido y a reconocer posibles desarrollos o rupturas futuras. Con distintas herramientas de diseño, quienes practican pueden explorar, priorizar y agrupar datos, descubrir conexiones ocultas y hacer aparecer interpretaciones divergentes. Así apoya a personas y organizaciones a moverse en la complejidad, convirtiendo información dispersa en direcciones concretas para pensar en futuros.</p></div><p class="ph-def-src"><span class="pg">p. <b>101</b></span> <span class="pg">· texto de los autores</span></p>
+      <h2 style="font-size:18px;margin-top:26px">Ideas clave de los autores</h2><ul class="keys"><li><span><b style="font-weight:500">La cara oculta de la Luna.</b> En el trabajo de futuros, el sense-making convierte la complejidad en claridad.</span><span class="pg">p. <b>106</b></span></li><li><span><b style="font-weight:500">De señales a drivers.</b> Identificar drivers convierte el escaneo en estrategia.</span><span class="pg">p. <b>109</b></span></li><li><span><b style="font-weight:500">Evaluar drivers.</b> Evaluar drivers consiste en entender su influencia en contexto, no por separado.</span><span class="pg">p. <b>110</b></span></li><li><span><b style="font-weight:500">Construir un inventario de drivers.</b> Un inventario de drivers da estructura y claridad al escaneo.</span><span class="pg">p. <b>111</b></span></li><li><span><b style="font-weight:500">Estar listos para el futuro.</b> Estar listos para el futuro (futures readiness) es la capacidad de personas y organizaciones de anticipar los cambios y desafíos emergentes, responder a ellos e influir activamente en ellos.</span><span class="pg">p. <b>113</b></span></li><li><span><b style="font-weight:500">Futuros transformadores.</b> Los futuros transformadores usan prácticas de diseño participativo para que comunidades y organizaciones co-creen visiones de futuros alternativos, con la fuerza suficiente para desafiar el statu quo y reimaginar sistemas.</span><span class="pg">p. <b>114</b></span></li></ul>
+    </div>
+    <figure class="ill-box"><img class="ill" src="img/p102.png" alt="Ilustración de Stefano Cardini que abre la sección Sense-making (p. 102)."><figcaption>Stefano Cardini · p. 102</figcaption></figure>
+  </div>
+  <section class="sec"><h2>Infografías</h2><div class="igs"><section class="ig " id="ig-nubes" style="--c:var(--f2);--cs:var(--f2s)"><div class="ig-h"><div><span class="ig-st">Paso 2 · Sense-making</span><h3>Señales y drivers: gotas y nubes</h3></div><span class="pg">p. <b>70–72, 109</b></span></div><p class="ig-ctx"><b>¿Cómo pasar de muchas señales sueltas a pocas fuerzas?</b> Las señales se agrupan en drivers, y los drivers alimentan después los escenarios.</p><svg viewBox="0 0 400 220" role="img" aria-label="Los drivers son nubes que precipitan señales">
+   <g transform="translate(110 62) scale(1)"><path d="M-48 14 a20 20 0 0 1 8 -32 a26 26 0 0 1 46 -6 a20 20 0 0 1 34 12 a16 16 0 0 1 -2 26 Z" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5"/></g><g transform="translate(210 50) scale(1.15)"><path d="M-48 14 a20 20 0 0 1 8 -32 a26 26 0 0 1 46 -6 a20 20 0 0 1 34 12 a16 16 0 0 1 -2 26 Z" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5"/></g><g transform="translate(300 70) scale(0.95)"><path d="M-48 14 a20 20 0 0 1 8 -32 a26 26 0 0 1 46 -6 a20 20 0 0 1 34 12 a16 16 0 0 1 -2 26 Z" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5"/></g>
+   <text x="210" y="56" text-anchor="middle" font-size="13" font-weight="600">driver</text>
+   <path d="M70 110 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M81.3 147 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M92.6 114 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M103.9 151 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M115.2 118 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M126.5 155 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M137.8 122 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M149.10000000000002 159 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M160.4 126 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M171.7 163 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M183 130 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M194.3 167 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M205.60000000000002 134 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M216.9 171 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M228.20000000000002 138 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M239.5 175 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M250.8 142 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M262.1 179 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M273.4 146 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M284.70000000000005 113 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M296 150 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M307.3 117 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M318.6 154 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M329.90000000000003 121 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M341.20000000000005 158 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/><path d="M77.5 125 q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/>
+   <text x="20" y="208" font-size="11.5" class="m">cada gota = una señal</text>
+   <text x="380" y="208" text-anchor="end" font-size="11.5" class="m">las nubes se superponen y convergen</text></svg>
+   <p class="note">«Los drivers son a las señales lo que las nubes a las gotas de lluvia» (Howard, 2021, citado en p. 72). Agrupar y mapear señales revela las fuerzas profundas (p. 109).</p></section><section class="ig " id="ig-mapa" style="--c:var(--f2);--cs:var(--f2s)"><div class="ig-h"><div><span class="ig-st">Paso 2 · Sense-making</span><h3>Primer mapa del inventario</h3></div><span class="pg">p. <b>111, 112</b></span></div><p class="ig-ctx"><b>¿Por dónde empezar a ordenar lo que encontraste?</b> Un primer mapa para ver qué falta antes de pasar a imaginar.</p><svg viewBox="0 0 400 230" role="img" aria-label="Mapa por tiempo y certeza">
+   <line x1="50" y1="195" x2="380" y2="195" stroke="var(--ink)" stroke-width="1.5"/><path d="M380 195 l-8 -4 v8z" fill="var(--ink)"/>
+   <line x1="50" y1="195" x2="50" y2="20" stroke="var(--ink)" stroke-width="1.5"/><path d="M50 20 l-4 8 h8z" fill="var(--ink)"/>
+   <line x1="215" y1="30" x2="215" y2="190" stroke="var(--line)" stroke-dasharray="4 4"/><line x1="55" y1="108" x2="375" y2="108" stroke="var(--line)" stroke-dasharray="4 4"/>
+   <text x="215" y="218" text-anchor="middle" font-size="13" font-weight="600">tiempo</text>
+   <text x="22" y="108" text-anchor="middle" font-size="13" font-weight="600" transform="rotate(-90 22 108)">certeza</text>
+   <rect x="92" y="61" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/><rect x="142" y="141" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/><rect x="242" y="51" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/><rect x="282" y="151" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/><rect x="322" y="111" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/><rect x="77" y="151" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/><rect x="232" y="121" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/></svg>
+   <p class="note">Scott Smith y Madeline Ashby sugieren empezar a mapear con dos criterios: tiempo y certeza (p. 112). El inventario por categorías muestra huecos y qué falta investigar (p. 111).</p></section></div></section>
+  <section class="sec"><h2>En la práctica <a class="pg" href="practica/">ver lista completa →</a></h2><div class="pstep" style="--c:var(--f2)"><div class="pstep-h"><div><span class="eyebrow">Paso 2</span><h3>Escanear y dar sentido</h3></div><div class="prog"><div class="bar"><i style="width:0%"></i></div>0/17</div></div>
+   <ul class="checks"><li class="grp">Escanear</li><li class=""><input type="checkbox" id="ck-2-escanear-0-sm" data-ck="2-Escanear-0" ><label for="ck-2-escanear-0-sm">Combina escaneo del entorno (tendencias establecidas) y del horizonte (señales débiles).</label><span class="pg">p. <b>57</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-1-sm" data-ck="2-Escanear-1" ><label for="ck-2-escanear-1-sm">Sal del escritorio: haz trabajo de campo y observación etnográfica.</label><span class="pg">p. <b>64</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-2-sm" data-ck="2-Escanear-2" ><label for="ck-2-escanear-2-sm">Busca en los márgenes: prácticas raras, apropiaciones de tecnología, cosas que no encajan.</label><span class="pg">p. <b>58</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-3-sm" data-ck="2-Escanear-3" ><label for="ck-2-escanear-3-sm">Mantén el giro local; no copies las visiones de las películas y series dominantes.</label><span class="pg">p. <b>60</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-4-sm" data-ck="2-Escanear-4" ><label for="ck-2-escanear-4-sm">Desfamiliariza: describe lo cotidiano como si fuera para alguien de Marte.</label><span class="pg">p. <b>63</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-5-sm" data-ck="2-Escanear-5" ><label for="ck-2-escanear-5-sm">Documenta cada señal con título, descripción, fuente y por qué importa (más imagen y pregunta reflexiva).</label><span class="pg">p. <b>74</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-6-sm" data-ck="2-Escanear-6" ><label for="ck-2-escanear-6-sm">Filtra: ¿se aparta de la norma? ¿qué cambio representa? ¿se extiende o es pasajera?</label><span class="pg">p. <b>75</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-7-sm" data-ck="2-Escanear-7" ><label for="ck-2-escanear-7-sm">Valora frecuencia, fuerza, madurez, alcance y dirección.</label><span class="pg">p. <b>75</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-8-sm" data-ck="2-Escanear-8" ><label for="ck-2-escanear-8-sm">Organiza el flujo: fuentes por dominio, etiquetas claras, formato consistente.</label><span class="pg">p. <b>73</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-9-sm" data-ck="2-Escanear-9" ><label for="ck-2-escanear-9-sm">Pregunta qué excluyen tus datos (lo no humano, saberes indígenas, lo no económico).</label><span class="pg">p. <b>76</b></span></li><li class=""><input type="checkbox" id="ck-2-escanear-10-sm" data-ck="2-Escanear-10" ><label for="ck-2-escanear-10-sm">Mira los retrofuturos y los futuros cotidianos, no solo lo espectacular.</label><span class="pg">p. <b>93</b></span></li><li class="grp">Dar sentido</li><li class=""><input type="checkbox" id="ck-2-darsentido-0-sm" data-ck="2-Dar sentido-0" ><label for="ck-2-darsentido-0-sm">Ordena, agrupa y mapea las señales para ver patrones.</label><span class="pg">p. <b>101</b></span></li><li class=""><input type="checkbox" id="ck-2-darsentido-1-sm" data-ck="2-Dar sentido-1" ><label for="ck-2-darsentido-1-sm">Agrupa señales en drivers: las fuerzas profundas detrás de ellas.</label><span class="pg">p. <b>109</b></span></li><li class=""><input type="checkbox" id="ck-2-darsentido-2-sm" data-ck="2-Dar sentido-2" ><label for="ck-2-darsentido-2-sm">Evalúa los drivers en contexto: cómo se conectan e interactúan.</label><span class="pg">p. <b>110</b></span></li><li class=""><input type="checkbox" id="ck-2-darsentido-3-sm" data-ck="2-Dar sentido-3" ><label for="ck-2-darsentido-3-sm">Mantén un inventario por categorías y busca los huecos.</label><span class="pg">p. <b>111</b></span></li><li class=""><input type="checkbox" id="ck-2-darsentido-4-sm" data-ck="2-Dar sentido-4" ><label for="ck-2-darsentido-4-sm">Empieza a mapear con dos criterios: tiempo y certeza.</label><span class="pg">p. <b>112</b></span></li><li class=""><input type="checkbox" id="ck-2-darsentido-5-sm" data-ck="2-Dar sentido-5" ><label for="ck-2-darsentido-5-sm">No uses futuros pasados para validar tus especulaciones.</label><span class="pg">p. <b>104</b></span></li></ul></div></section>
+  <section class="sec"><h2>Todas las páginas de esta sección <span class="pg">16 fichas</span></h2>
+    <div class="filters" role="toolbar" aria-label="Filtrar fichas"><button class="chip" type="button" data-phty="todos" aria-pressed="true">Todas <span class="n">16</span></button><button class="chip" type="button" data-phty="a" aria-pressed="false">Autores <span class="n">7</span></button><button class="chip" type="button" data-phty="c" aria-pressed="false">Colaboradores <span class="n">6</span></button><button class="chip" type="button" data-phty="q" aria-pressed="false">Citas <span class="n">3</span></button></div>
+    <div class="fichas"><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>101</b></span></div>
+    <h4>Sense-making</h4>
+    <p>El sense-making es una práctica crucial dentro del proceso de Design Futures: es el momento en que los datos y señales recolectados se organizan e interpretan para construir una comprensión con sentido. Consiste en ordenar, agrupar y mapear la información para identificar patrones, temas y tendencias o drivers emergentes.</p><p>Este enfoque estructurado ayuda a separar la señal del ruido y a reconocer posibles desarrollos o rupturas futuras. Con distintas herramientas de diseño, quienes practican pueden explorar, priorizar y agrupar datos, descubrir conexiones ocultas y hacer aparecer interpretaciones divergentes. Así apoya a personas y organizaciones a moverse en la complejidad, convirtiendo información dispersa en direcciones concretas para pensar en futuros.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-c">Colaborador</span><span class="pg">p. <b>103</b></span></div>
+    <h4>Empezar a dar sentido</h4>
+    <p>Reeves recuerda que experimentamos el mundo a través de los sentidos, y que esos sentidos moldean la forma en que le damos sentido. Su consejo: elegir materiales que involucren los sentidos para crear, en el presente, una experiencia de ese futuro.</p>
+    <div class="who">Amanda Reeves</div>
+    <div class="src"><button type="button" data-src="yong2022">Yong, E. (2022)</button></div>
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-c">Colaborador</span><span class="pg">p. <b>104</b></span></div>
+    <h4>El montón de ceniza de los futuros pasados</h4>
+    <p>Rosenbak recuerda que los proyectos de Design Futures también existen en el tiempo y el espacio, y que al volverse historia terminan en sótanos, basureros e incineradores. ¿Cómo relacionarse con ellos?</p><p>Propone revolver ese montón creciente de ingenuidad reluciente como un mapache curioso que busca un bocadillo antes de dormir. Pero pide contenerse: no intentar de inmediato leer hacia atrás un significado en lo que se encuentra. Respirar, tener paciencia. Resistir la tentación, consciente o inconsciente, de usar los futuros pasados para validar las especulaciones del presente. En cambio, ser radicalmente empático, tan crítico como indulgente, al cruzar los umbrales de lo que fue y de lo que pudo haber sido.</p>
+    <div class="who">Søren Rosenbak</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-c">Colaborador</span><span class="pg">p. <b>105</b></span></div>
+    <h4>Los datos como historias parciales</h4>
+    <p>Dunbar y Speed piden dejar de ver los datos como un registro completo y reconocerlos como un relato parcial y sesgado de la historia. Los datos suelen excluir sistemas naturales, perspectivas no humanas y dinámicas sociales que no encajan con los imperativos económicos de la vida a comienzos del siglo XXI. El diseño puede servir para atender esas omisiones: incluir lo descuidado o marginado y crear futuros más inclusivos y completos, que respeten tanto las narrativas humanas como las más-que-humanas.</p>
+    <div class="who">Michael Dunbar, Chris Speed · RMIT University</div>
+    <div class="src"><button type="button" data-src="smithashby2020">Smith, S., &amp; Ashby, M. (2020)</button></div>
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>106</b></span></div>
+    <h4>La cara oculta de la Luna</h4>
+    <p>En el trabajo de futuros, el sense-making convierte la complejidad en claridad. Es la contraparte indispensable del escaneo: reunir señales y drivers emergentes es solo la mitad de la tarea. Sin una interpretación que descubra posibilidades, es como investigar sin destilar ningún hallazgo. El sense-making corta el ruido, destaca lo que importa y orienta una acción más informada, de modo que quien practica pasa de la confusión a la comprensión y puede dar forma a direcciones futuras con confianza.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-c">Colaborador</span><span class="pg">p. <b>107</b></span></div>
+    <h4>Futuros que desafían sesgos de datos</h4>
+    <p>Si los datos se entienden como un producto sesgado de sistemas económicos y tecnológicos, el diseño puede trabajar de manera intencional para desafiar y transformar esos sesgos. Dunbar y Speed proponen reencuadrar los conjuntos de datos cuestionando sus supuestos de fondo y reimaginando qué debería medirse y valorarse. Así el diseño no se limita a construir sobre las historias que cuentan los datos: las critica y las reformula activamente, para crear futuros más equitativos, más atentos a la ecología e inclusivos de formas de vida diversas.</p>
+    <div class="who">Michael Dunbar, Chris Speed · RMIT University</div>
+    <div class="src"><button type="button" data-src="daly2019">Daly, A., Devitt, S. K., &amp; Mann, M. (Eds.). (2019)</button></div>
+  </article><article class="ficha q" style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-q">Cita</span><span class="pg">p. <b>108</b></span></div>
+    <h4>Sentir es integrar</h4>
+    <p>Dar sentido a las señales es mapear, priorizar y explorar su potencial; sentir es integrar el conocimiento previo con la colección de señales (paráfrasis).</p>
+    <div class="who">Bespoke</div>
+    <div class="src"><button type="button" data-src="bespoke2017">Bespoke. (2017)</button></div>
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>109</b></span></div>
+    <h4>De señales a drivers</h4>
+    <p>Identificar drivers convierte el escaneo en estrategia. Al agrupar y mapear los temas que salen de la investigación, se vuelve posible ver las fuerzas profundas que están moldeando el cambio, y no solo tendencias aisladas. Entender esos drivers y sus relaciones da estructura al trabajo de futuros: ancla la imaginación en patrones reales y lo vuelve más estratégico y aplicable.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>110</b></span></div>
+    <h4>Evaluar drivers</h4>
+    <p>Evaluar drivers consiste en entender su influencia en contexto, no por separado. Exige refinarlos, analizarlos y compararlos de forma iterativa, tanto uno por uno como parte de un sistema más amplio. Lo que más importa es descubrir cómo estas fuerzas se conectan e interactúan, porque eso revela las dinámicas de fondo. Al aclarar el peso y la dirección del cambio emergente, este proceso fortalece la exploración estratégica y ancla el trabajo de futuros en patrones con sentido.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>111</b></span></div>
+    <h4>Construir un inventario de drivers</h4>
+    <p>Un inventario de drivers da estructura y claridad al escaneo. Al organizar las tendencias emergentes y las fuerzas de cambio en categorías claras, se obtiene una visión equilibrada y se detectan huecos en la investigación. Un inventario bien mantenido sirve a la vez de referencia y de herramienta de diagnóstico, porque invita a preguntarse qué falta o qué se está pasando por alto. Así el trabajo de futuros se mantiene anclado, transparente y listo para adaptarse cuando aparecen señales nuevas.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha q" style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-q">Cita</span><span class="pg">p. <b>112</b></span></div>
+    <h4>Tiempo y certeza</h4>
+    <p>Un primer chequeo con un inventario estructurado da razones para volver y cavar más. Suele ser útil empezar a mapear con dos criterios: tiempo y certeza (paráfrasis).</p>
+    <div class="who">Scott Smith y Madeline Ashby</div>
+    <div class="src"><button type="button" data-src="smithashby2020">Smith, S., &amp; Ashby, M. (2020)</button></div>
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>113</b></span></div>
+    <h4>Estar listos para el futuro</h4>
+    <p>Estar listos para el futuro (futures readiness) es la capacidad de personas y organizaciones de anticipar los cambios y desafíos emergentes, responder a ellos e influir activamente en ellos. Implica cultivar una mentalidad que acepta la incertidumbre, fomenta el aprendizaje continuo y aplica pensamiento imaginativo y crítico para explorar y dar forma a posibilidades.</p><p>Significa desarrollar la confianza y las herramientas para moverse en la complejidad, adaptarse con creatividad y participar en la construcción de resultados alineados con valores y aspiraciones que también cambian. Permite a personas y organizaciones convertirse en agentes activos del cambio y avanzar hacia futuros más justos, transformadores y sostenibles.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-a">Autores</span><span class="pg">p. <b>114</b></span></div>
+    <h4>Futuros transformadores</h4>
+    <p>Los futuros transformadores usan prácticas de diseño participativo para que comunidades y organizaciones co-creen visiones de futuros alternativos, con la fuerza suficiente para desafiar el statu quo y reimaginar sistemas. Este enfoque democratiza la exploración de futuros: incorpora perspectivas diversas, promueve la indagación colaborativa desde el diseño y da a las personas herramientas para pensar críticamente y tener un papel activo frente a los cambios sociales y los desafíos sistémicos.</p>
+    <div class="who">Caruso y Cioni</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-c">Colaborador</span><span class="pg">p. <b>115</b></span></div>
+    <h4>Especulación y compromiso</h4>
+    <p>Design Futures no es solo especulación sino compromiso: involucrar a los actores en co-diseño permite construir colectivamente futuros deseables y capacidad compartida de transformación.</p>
+    <div class="who">Margherita Paleari</div>
+    
+  </article><article class="ficha " style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-c">Colaborador</span><span class="pg">p. <b>116</b></span></div>
+    <h4>Un acto de esperanza</h4>
+    <p>Para Irvine, cuando diseñamos juntos exploramos tanto el lado oscuro como el lado luminoso de lo posible, y decidimos en conjunto qué futuro queremos crear. En última instancia, eso es lo que convierte el diseño de futuros en un acto de esperanza, de comunidad y de hermosa rebeldía contra las narrativas limitadas y limitantes.</p>
+    <div class="who">Marite P. Irvine · Ateneo RIFE, Forge Futures</div>
+    
+  </article><article class="ficha q" style="--c:var(--f2);--cs:var(--f2s)">
+    <div class="ficha-h"><span class="tag t-q">Cita</span><span class="pg">p. <b>117</b></span></div>
+    <h4>El futuro es un verbo</h4>
+    <p>La gente necesita una visión motivadora de lo que viene y la conciencia de que después vendrá más: el futuro es un proceso, no un destino; un verbo, no un sustantivo (paráfrasis).</p>
+    <div class="who">Bruce Sterling</div>
+    <div class="src"><button type="button" data-src="sterling2004">Sterling, B. (2004)</button></div>
+  </article></div>
+  </section>
+  <nav class="phnav"><a href="scanning/"><span>← Anterior</span>Scanning</a><a href="visioning/"><span>Siguiente →</span>Visioning</a></nav>
+  </div></main>
 
 <footer class="wrap foot">
   <span>Adaptación de estudio de <i>The Field Guide to Design Futures</i> (Giovanni Caruso y Silvio Cioni, Fictional, 2026, 1.ª ed.), licencia CC BY-NC-SA 4.0. Ilustraciones de Stefano Cardini, del mismo libro. Esta guía se comparte bajo la misma licencia, sin uso comercial.</span>
   <span>Los números de página corresponden a la paginación impresa del libro. Los resúmenes en español son paráfrasis; para citar, ve al original: <a href="https://designfutures.guide" target="_blank" rel="noopener">designfutures.guide</a>.</span>
-  <span><a href="#sobre">Sobre este sitio</a> · cómo está hecho, para curiosos técnicos.</span>
+  <span><a href="sobre/">Sobre este sitio</a> · cómo está hecho, para curiosos técnicos.</span>
 </footer>
 
 <script>
@@ -1582,3 +1742,6 @@ route = h0 || window.__ROUTE__ || "inicio";
 render();
 })();
 </script>
+
+</body>
+</html>

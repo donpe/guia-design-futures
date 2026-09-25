@@ -1,0 +1,39 @@
+# Guía de estudio de The Field Guide to Design Futures
+
+> Guía de estudio en español, no oficial, de *The Field Guide to Design Futures* de Giovanni Caruso y Silvio Cioni (Fictional, 1.ª edición, enero de 2026, 231 páginas, ISBN 979-12-985986-2-1). Todo el contenido sale del libro y lleva su número de página impresa; los textos en español son paráfrasis, no traducciones literales. Libro original: https://designfutures.guide. Licencia CC BY-NC-SA 4.0. Editada por Evelio Ramirez (https://www.linkedin.com/in/evelioramirez/).
+
+Design Futures es una práctica que une el diseño con los estudios de futuros para explorar y dar forma a presentes alternativos y futuros posibles, haciéndolos tangibles con narrativas, prototipos y artefactos; no predice, sino que ayuda a cuestionar supuestos y a decidir mejor en el presente (p. 31).
+
+## Proceso (Futuring by Design, p. 42)
+
+1. **Framing** (Encuadrar): Establecer contexto, propósito y foco aclarando el alcance de la exploración.
+2. **Scanning y Sense-making** (Escanear y dar sentido): Investigar para sacar a la luz pistas y cambios; sintetizar patrones, tensiones y perspectivas.
+3. **Visioning** (Visionar): Co-crear narrativas y escenarios de futuro que den vida a las posibilidades.
+4. **Dissemination y Assessment** (Diseminar y evaluar): Usar relatos y artefactos para involucrar audiencias; evaluar, ajustar o descartar visiones.
+5. **Taking Action** (Tomar acción): Iniciar esfuerzos estratégicos hoy para incrustar visiones de largo plazo en sistemas reales.
+
+## Páginas
+
+- [Guía de estudio de The Field Guide to Design Futures, en español](https://donpe.github.io/guia-design-futures/): Guía en español, no oficial, para leer, entender y aplicar The Field Guide to Design Futures de Giovanni Caruso y Silvio Cioni: el proceso, 175 fichas por página, 52 conceptos, infografías y práctica.
+- [Qué es Design Futures: empezar aquí](https://donpe.github.io/guia-design-futures/empezar/): Introducción a Design Futures para quien empieza: la diferencia entre diseño y estudios de futuros, lo que no es, cinco ideas clave y por dónde leer el libro de Caruso y Cioni.
+- [El proceso de Design Futures en 5 pasos](https://donpe.github.io/guia-design-futures/recorrido/): Futuring by Design, el proceso del libro: Framing, Scanning y Sense-making, Visioning, Dissemination y Assessment, y Taking Action, con sus páginas.
+- [The Field Guide to Design Futures, página por página](https://donpe.github.io/guia-design-futures/libro/): 175 fichas en español que resumen cada página con texto del libro de Caruso y Cioni: textos de los autores, de más de treinta colaboradores y citas.
+- [Glosario de Design Futures: 52 conceptos](https://donpe.github.io/guia-design-futures/conceptos/): Glosario de Design Futures en español: señales, drivers, escenarios, artefactos del futuro, framing, futuros experienciales y más, con las páginas del libro.
+- [Infografías de Design Futures](https://donpe.github.io/guia-design-futures/infografias/): 18 infografías que ordenan ideas del libro: el proceso, el cono de futuros, señales y drivers, escenarios, disonancia discursiva y futuros experienciales.
+- [Cómo hacer un proyecto de Design Futures: lista práctica](https://donpe.github.io/guia-design-futures/practica/): Lista de práctica paso a paso para aplicar Design Futures en un proyecto, basada en The Field Guide to Design Futures, con la página de cada punto.
+- [Fuentes y bibliografía de The Field Guide to Design Futures](https://donpe.github.io/guia-design-futures/fuentes/): Las 171 fuentes que cita el libro, con las páginas donde aparecen y el enlace impreso o encontrado.
+- [Autores y colaboradores de The Field Guide to Design Futures](https://donpe.github.io/guia-design-futures/voces/): Las voces del libro: Caruso y Cioni y más de treinta colaboradores de la academia y la práctica, con sus textos.
+- [Sobre esta guía: cómo está hecha](https://donpe.github.io/guia-design-futures/sobre/): Detalles técnicos de la guía: herramientas, cómo se construyó, cómo está organizado el código y licencia.
+- [Framing en Design Futures: cómo encuadrar un proyecto](https://donpe.github.io/guia-design-futures/framing/): Paso 1 de Design Futures: definir alcance, propósito, preguntas, actores y supuestos. Resumen del libro con páginas.
+- [Scanning en Design Futures: señales y escaneo del horizonte](https://donpe.github.io/guia-design-futures/scanning/): Paso 2 de Design Futures: escaneo del entorno y del horizonte, señales débiles, etnografía periférica y trabajo de campo.
+- [Sense-making en Design Futures: de señales a drivers](https://donpe.github.io/guia-design-futures/sensemaking/): Cómo agrupar señales en drivers de cambio, construir un inventario y dar sentido a la investigación de futuros.
+- [Visioning en Design Futures: escenarios y artefactos del futuro](https://donpe.github.io/guia-design-futures/visioning/): Paso 3 de Design Futures: escenarios de futuro, artefactos del futuro, arquetipos de ficción de diseño y disonancia discursiva.
+- [Dissemination en Design Futures: futuros experienciales](https://donpe.github.io/guia-design-futures/dissemination/): Paso 4 de Design Futures: compartir escenarios y artefactos, futuros experienciales, juegos de futuros y contextualización.
+- [Assessment en Design Futures: evaluar visiones de futuro](https://donpe.github.io/guia-design-futures/assessment/): Cómo evaluar críticamente escenarios y visiones de futuro con audiencias y actores, según el libro.
+- [Taking Action en Design Futures: del futuro a la acción](https://donpe.github.io/guia-design-futures/action/): Paso 5 de Design Futures: llevar visiones de largo plazo a acciones de hoy; platforming y plataformas de futuros.
+- [Qué es Design Futures (pp. 27–48)](https://donpe.github.io/guia-design-futures/marco/): Definición de Design Futures según Caruso y Cioni: práctica híbrida entre diseño y estudios de futuros, mentalidad y práctica, y el proceso.
+- [Design Futures es plural y está vivo (pp. 196–207)](https://donpe.github.io/guia-design-futures/vivo/): Cierre del libro: una práctica plural e indisciplinada, co-creación de futuros y futuros regenerativos.
+
+## Texto completo
+
+- [llms-full.txt](https://donpe.github.io/guia-design-futures/llms-full.txt): todas las fichas por página, los conceptos, la práctica y las fuentes, en Markdown.

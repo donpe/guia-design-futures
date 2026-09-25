@@ -1,4 +1,31 @@
-<title>Guía de Campo Design Futures</title>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/guia-design-futures/">
+<title>Sobre esta guía: cómo está hecha · Guía de estudio Design Futures</title>
+<meta name="description" content="Detalles técnicos de la guía: herramientas, cómo se construyó, cómo está organizado el código y licencia.">
+<link rel="canonical" href="https://donpe.github.io/guia-design-futures/sobre/">
+<meta name="author" content="Evelio Ramirez">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#602866">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Guía de estudio · The Field Guide to Design Futures">
+<meta property="og:title" content="Sobre esta guía: cómo está hecha">
+<meta property="og:description" content="Detalles técnicos de la guía: herramientas, cómo se construyó, cómo está organizado el código y licencia.">
+<meta property="og:url" content="https://donpe.github.io/guia-design-futures/sobre/">
+<meta property="og:image" content="https://donpe.github.io/guia-design-futures/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sobre esta guía: cómo está hecha">
+<meta name="twitter:description" content="Detalles técnicos de la guía: herramientas, cómo se construyó, cómo está organizado el código y licencia.">
+<meta name="twitter:image" content="https://donpe.github.io/guia-design-futures/og.png">
+<link rel="alternate" type="text/plain" title="Resumen para modelos de lenguaje" href="https://donpe.github.io/guia-design-futures/llms.txt">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23602866'/%3E%3Crect x='7' y='3' width='7' height='3' fill='%23F72411'/%3E%3Crect x='5' y='6' width='7' height='3' fill='%23F72411'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://donpe.github.io/guia-design-futures/#site", "name": "Guía de estudio de The Field Guide to Design Futures", "url": "https://donpe.github.io/guia-design-futures/", "inLanguage": "es", "author": {"@type": "Person", "name": "Evelio Ramirez", "sameAs": "https://www.linkedin.com/in/evelioramirez/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "WebPage", "@id": "https://donpe.github.io/guia-design-futures/sobre/", "url": "https://donpe.github.io/guia-design-futures/sobre/", "name": "Sobre esta guía: cómo está hecha", "description": "Detalles técnicos de la guía: herramientas, cómo se construyó, cómo está organizado el código y licencia.", "inLanguage": "es", "isPartOf": {"@id": "https://donpe.github.io/guia-design-futures/#site"}, "about": {"@type": "Book", "name": "The Field Guide to Design Futures", "isbn": "979-12-985986-2-1", "author": [{"@type": "Person", "name": "Giovanni Caruso"}, {"@type": "Person", "name": "Silvio Cioni"}], "publisher": {"@type": "Organization", "name": "Fictional"}, "datePublished": "2026-01", "numberOfPages": 231, "inLanguage": "en", "url": "https://designfutures.guide", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, "dateModified": "2026-09-24"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://donpe.github.io/guia-design-futures/"}, {"@type": "ListItem", "position": 2, "name": "Sobre esta guía: cómo está hecha", "item": "https://donpe.github.io/guia-design-futures/sobre/"}]}]}</script>
+<script>window.__ROUTE__="sobre";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -471,6 +498,10 @@ a.term:hover h3{color:var(--c)}
   .chip,.sub,.voice,.nav a{transition:border-color .15s,background .15s,color .15s}
 }
 </style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
 
 <header class="top">
   <div class="wrap top-in">
@@ -480,16 +511,66 @@ a.term:hover h3{color:var(--c)}
       <input id="q" type="search" placeholder="Buscar en fichas, conceptos y fuentes" aria-label="Buscar" autocomplete="off">
     </div>
     <a class="cta" href="https://designfutures.guide" target="_blank" rel="noopener">Libro original <small>designfutures.guide</small> ↗</a>
-    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <nav class="nav" id="nav" aria-label="Secciones"><a href="" >Inicio</a><a href="empezar/" >Empezar aquí</a><a href="recorrido/" >Recorrido</a><a href="libro/" >Leer el libro</a><a href="conceptos/" >Conceptos</a><a href="infografias/" >Infografías</a><a href="practica/" >Práctica</a><span class="sep" aria-hidden="true"></span><a href="fuentes/" >Fuentes</a><a href="voces/" >Voces</a></nav>
   </div>
 </header>
 
-<main class="wrap" id="view"></main>
+<main class="wrap" id="view"><div class="view-h"><span class="eyebrow">Para curiosos técnicos</span><h1>Sobre este sitio</h1></div>
+  <div class="tech">
+   <p>Esta guía es una sola página HTML, sin frameworks ni base de datos. Todo el contenido vive dentro del archivo como datos de JavaScript y se dibuja en el navegador. Pesa unos 261 KB, más diez ilustraciones.</p>
+
+   <section class="sec"><h2>Con qué está hecho</h2>
+    <div class="stack">
+     <div><b>HTML, CSS y JavaScript</b>Sin librerías ni pasos de compilación. Plantillas con <i>template literals</i>.</div>
+     <div><b>Claude Code</b>El agente de Anthropic escribió el código y los resúmenes, en conversación con Evelio Ramirez, que editó la guía.</div>
+     <div><b>Poppler</b><code>pdftotext</code> y <code>pdftoppm</code> para sacar el texto página por página y muestrear colores del PDF.</div>
+     <div><b>Google Fonts</b>Bricolage Grotesque (títulos), IBM Plex Sans (texto) e IBM Plex Mono (datos y páginas).</div>
+     <div><b>GitHub Pages</b>Hospeda la versión pública, generada con un script de Python que crea una página estática por sección.</div>
+     <div><b>Claude Artifacts</b>La misma página publicada también como artifact de Claude, donde se fue revisando.</div>
+    </div></section>
+
+   <section class="sec"><h2>Cómo se construyó</h2>
+    <ol class="flow">
+     <li><span><b>Extracción.</b> Se sacó el texto de cada página del PDF y se relacionó la página del archivo con la página impresa, que es la que se cita en todo el sitio.</span></li>
+     <li><span><b>Fichas.</b> Cada página con texto se convirtió en una ficha: página, fase, tipo de texto (autores, colaborador o cita), título, autoría, resumen y fuentes. Los resúmenes son paráfrasis en español escritas leyendo cada página; las citas se parafrasean y se marcan así.</span></li>
+     <li><span><b>Fuentes.</b> Se inventariaron las referencias que el libro imprime. Para cada una se distingue el enlace impreso en el libro del enlace encontrado después, que se marca aparte.</span></li>
+     <li><span><b>Capas de lectura.</b> Sobre las fichas se armaron el recorrido por fases, los conceptos, las infografías, la lista de práctica y la página «Empezar aquí».</span></li>
+     <li><span><b>Diseño.</b> Los colores salen de la portada: rojo <code>#F72411</code> y morado <code>#602866</code>. Las cinco fases van del morado al rojo; las formas escalonadas imitan las de la portada.</span></li>
+     <li><span><b>Revisión.</b> Se revisó en un navegador a 375 px de ancho, sección por sección, midiendo que nada se saliera de la pantalla.</span></li>
+    </ol></section>
+
+   <section class="sec"><h2>Cómo está organizado el código</h2>
+    <p>Todo el contenido está en constantes al comienzo del script:</p>
+<pre>PH        fases del recorrido y sus colores
+FI        175 fichas: [página, fase, tipo, título, autoría, texto, fuentes]
+SRC       171 fuentes citadas, con el enlace impreso y el encontrado
+CONCEPTS  52 conceptos con sus páginas
+PRAC      la lista de práctica por fase
+IG        18 infografías, dibujadas con HTML, CSS y SVG</pre>
+    <ul>
+     <li><b>Rutas.</b> La navegación usa el <code>#</code> de la dirección (<code>#inicio</code>, <code>#framing</code>, <code>#sobre</code>…). Una función <code>render()</code> elige la vista y reescribe el contenido principal; no se recarga la página.</li>
+     <li><b>Búsqueda.</b> Compara el texto sin tildes ni mayúsculas en fichas, conceptos y fuentes, así que «senal» encuentra «señal».</li>
+     <li><b>Tu avance.</b> Las casillas de la práctica se guardan solo en tu navegador (<code>localStorage</code>). No hay cuentas, servidor ni analítica.</li>
+     <li><b>Temas.</b> Los colores son variables CSS con una versión clara y otra oscura, que sigue la preferencia del sistema.</li>
+     <li><b>Responsive.</b> Las infografías usan <i>container queries</i>: se reacomodan según el ancho de su caja, no el de la pantalla.</li>
+     <li><b>Buscadores y modelos de lenguaje.</b> En la versión pública, cada sección tiene su propia dirección (<code>/conceptos/</code>, <code>/framing/</code>…) con el contenido ya escrito en el HTML, título, descripción y datos estructurados de schema.org. Hay <code>sitemap.xml</code>, <code>llms.txt</code> y <code>llms-full.txt</code>, un texto en Markdown con todas las fichas, conceptos y fuentes para que un modelo de lenguaje pueda leer la guía completa.</li>
+     <li><b>Ilustraciones.</b> Diez dibujos de Stefano Cardini recortados del PDF y nombrados por su página impresa (<code>img/p41.png</code>).</li>
+    </ul></section>
+
+   <section class="sec"><h2>Código y licencia</h2>
+    <p>El código y el contenido están en <a href="https://github.com/donpe/guia-design-futures" target="_blank" rel="noopener">github.com/donpe/guia-design-futures</a>. El archivo fuente es <code>index.html</code>; el script <code>build.py</code> genera la carpeta <code>docs/</code> que publica GitHub Pages; para dibujar cada sección sin navegador usa <code>prerender.js</code>, que ejecuta el mismo código de la página en Node.</p>
+    <p>El libro se publica bajo CC BY-NC-SA 4.0 y esta guía se comparte bajo la misma licencia, sin uso comercial. Es una adaptación no oficial: para citar, usa el <a href="https://designfutures.guide" target="_blank" rel="noopener">libro original</a>.</p>
+   </section>
+
+   <section class="sec"><h2>Quién está detrás</h2>
+    <p><a href="https://www.linkedin.com/in/evelioramirez/" target="_blank" rel="noopener"><b>Evelio Ramirez</b></a> ideó, curó y editó esta guía. Vive en Colombia. Máster en Innovation Management de la Universidad EAFIT. <a href="https://www.linkedin.com/in/evelioramirez/" target="_blank" rel="noopener">LinkedIn ↗</a></p>
+   </section>
+  </div></main>
 
 <footer class="wrap foot">
   <span>Adaptación de estudio de <i>The Field Guide to Design Futures</i> (Giovanni Caruso y Silvio Cioni, Fictional, 2026, 1.ª ed.), licencia CC BY-NC-SA 4.0. Ilustraciones de Stefano Cardini, del mismo libro. Esta guía se comparte bajo la misma licencia, sin uso comercial.</span>
   <span>Los números de página corresponden a la paginación impresa del libro. Los resúmenes en español son paráfrasis; para citar, ve al original: <a href="https://designfutures.guide" target="_blank" rel="noopener">designfutures.guide</a>.</span>
-  <span><a href="#sobre">Sobre este sitio</a> · cómo está hecho, para curiosos técnicos.</span>
+  <span><a href="sobre/">Sobre este sitio</a> · cómo está hecho, para curiosos técnicos.</span>
 </footer>
 
 <script>
@@ -1582,3 +1663,6 @@ route = h0 || window.__ROUTE__ || "inicio";
 render();
 })();
 </script>
+
+</body>
+</html>
