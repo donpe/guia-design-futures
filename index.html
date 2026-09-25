@@ -222,6 +222,23 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .ig-h .pg,.ig-h .pg b{color:var(--c)}
 .ig-h h3{font-size:19px}
 .ig .note{font-size:13px;color:var(--muted)}
+.ig-st{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);opacity:.85;margin-bottom:3px}
+.ig-ctx{font-size:14px;color:var(--muted);max-width:70ch;margin:0}
+.ig-ctx b{color:var(--ink);font-weight:600}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:8px}
+.steps li{position:relative;display:grid;grid-template-columns:28px 1fr auto;column-gap:10px;row-gap:2px;align-items:baseline;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface)}
+.steps li.hi{background:var(--cs);border-color:var(--c)}
+.steps .n{grid-row:1/3;font-family:var(--mono);font-size:12px;color:#fff;background:var(--c);border-radius:50%;width:22px;height:22px;display:grid;place-items:center}
+.steps b{font-family:var(--display);font-weight:500;font-size:15.5px}
+.steps .d{grid-column:2/4;font-size:13.5px;color:var(--muted)}
+.steps .pg{grid-column:3;grid-row:1}
+@container (min-width:820px){
+  .steps{grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+  .steps li{display:flex;flex-direction:column;gap:6px;padding:12px}
+  .steps .n{margin-bottom:2px}
+  .steps .pg{margin-top:auto}
+  .steps li:not(:last-child)::after{content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px}
+}
 .ig svg{width:100%;height:auto;display:block}
 .ig svg text{font-family:var(--body);fill:var(--ink)}
 .ig svg .m{font-family:var(--mono);fill:var(--muted);font-size:11px}
@@ -977,28 +994,28 @@ function fichaHtml(f, opts={}){
 
 // ================= INFOGRAFÍAS =================
 const IG = {
- proceso:{t:"Futuring by Design",p:"42",ph:"df",c:"f1",wide:1,h:()=>procHtml()},
- mente:{t:"Mentalidad y práctica",p:"40",ph:"df",c:"f1",h:()=>`<div class="pair">
+ proceso:{st:"Mapa general",q:"¿Qué pasos sigue un proyecto de Design Futures?",w:"Es el mapa del libro: cada infografía siguiente se ubica en uno de estos pasos.",t:"Futuring by Design",p:"42",ph:"df",c:"f1",wide:1,h:()=>procHtml()},
+ mente:{st:"Antes de empezar",q:"¿Pensar en futuros y diseñar futuros son lo mismo?",w:"Separa la actitud, que se cultiva siempre, del oficio, que se ejerce en un proyecto.",t:"Mentalidad y práctica",p:"40",ph:"df",c:"f1",h:()=>`<div class="pair">
    <div class="box hl" style="${cv("f1")}"><span class="eyebrow">Futures Thinking</span><h4>Una mentalidad</h4><p>Cultivar una perspectiva flexible ante la incertidumbre, la complejidad y el cambio. Ver posibilidades e implicaciones dondequiera que mires.</p><p class="note">No se empaqueta como el Design Thinking.</p></div>
    <div class="box hl" style="${cv("f5")}"><span class="eyebrow">Design Futures</span><h4>Una práctica</h4><p>Une diseño y futuros para explorar y dar forma a presentes alternativos y futuros posibles, con narrativas, prototipos y artefactos.</p></div></div>
    <p class="note">«Deja que el Futures Thinking dé forma a tu mirada y que Design Futures guíe tu práctica».</p>`},
- textos:{t:"Cómo está hecho el libro",p:"21",ph:"pre",c:"f1",h:()=>`<div class="trio">
+ textos:{st:"Antes de leer",q:"¿Cómo está armado el libro?",w:"Hay tres tipos de texto y cada uno pesa distinto; saberlo ayuda a leer cualquier página.",t:"Cómo está hecho el libro",p:"21",ph:"pre",c:"f1",h:()=>`<div class="trio">
    <div class="card-ig" style="${cv("f1")}"><span class="tag t-a" style="align-self:flex-start">Autores</span><b>Columna vertebral</b><span>Textos de Caruso y Cioni que definen cada momento.</span></div>
    <div class="card-ig" style="${cv("f3")}"><span class="tag t-c" style="align-self:flex-start">Colaboradores</span><b>Conversación</b><span>Más de 30 voces, sin dirección de los autores, ubicadas para dialogar.</span></div>
    <div class="card-ig" style="${cv("f5")}"><span class="tag t-q" style="align-self:flex-start">Citas</span><b>Andamiaje</b><span>Fragmentos de la literatura existente que sostienen la conversación.</span></div></div>
    <p class="note">Sin capítulos ni métodos. La secuencia sigue más o menos el recorrido de un proyecto, pero se puede leer en cualquier orden.</p>`},
- cono:{t:"El libro y el cono de futuros",p:"23, 52, 122, 202, 230",ph:"df",c:"f5",wide:1,h:()=>`<div class="cones">
+ cono:{st:"Marco",q:"¿Por qué el libro insiste en que no hay conos?",w:"El cono de futuros es el diagrama más conocido del campo; aquí se ve cómo el libro lo cuestiona y qué imágenes propone en su lugar.",t:"El libro y el cono de futuros",p:"23, 52, 122, 202, 230",ph:"df",c:"f5",wide:1,h:()=>`<div class="cones">
    <div class="cone"><svg viewBox="0 0 120 70"><path d="M10 35 L110 8 L110 62 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" style="color:var(--muted)"/><line x1="10" y1="35" x2="110" y2="35" stroke="var(--muted)" stroke-width="1"/><circle cx="10" cy="35" r="3.5" fill="var(--ink)"/></svg><b>«No hay conos»</b><span>Los autores lo repiten al inicio y al final del libro.</span><span class="pg">p. 23 · 230</span></div>
    <div class="cone"><svg viewBox="0 0 120 70"><rect x="14" y="10" width="36" height="50" rx="4" fill="none" stroke="var(--f1)" stroke-width="1.5"/><rect x="62" y="10" width="44" height="50" rx="4" fill="none" stroke="var(--f1)" stroke-width="1.5"/><line x1="50" y1="35" x2="62" y2="35" stroke="var(--f1)" stroke-width="1.5"/></svg><b>Prismas, no prisiones</b><span>Willshire: no hay cono ni Assemblage Space; son formas de mirar.</span><span class="pg">p. 52</span></div>
    <div class="cone"><svg viewBox="0 0 120 70"><path d="M60 35 m0 0 a4 4 0 1 1 8 0 a10 10 0 1 1 -20 0 a16 16 0 1 1 32 0 a22 22 0 1 1 -44 0 a28 28 0 1 1 56 0" fill="none" stroke="var(--f3)" stroke-width="1.5"/></svg><b>El cono como espiral</b><span>Coe Douglas: una espiral que desciende hacia lo absurdo (preposterous).</span><span class="pg">p. 122</span></div>
    <div class="cone"><svg viewBox="0 0 120 70"><ellipse cx="60" cy="35" rx="48" ry="24" fill="none" stroke="var(--f4)" stroke-width="1.5"/><path d="M20 35 L52 22 L52 48Z M44 35 L76 24 L76 46Z M68 35 L100 22 L100 48Z" fill="none" stroke="var(--f4)" stroke-width="1"/></svg><b>El cono como burrito</b><span>Rebaudengo: muchos presentes, muchos conos, bordes difusos.</span><span class="pg">p. 202</span></div></div>`},
- assemblage:{t:"Las cuatro reglas del Assemblage Space",p:"52",ph:"fr",wide:1,h:()=>`<div class="asd"><b>¿Qué es el Assemblage Space?</b> Un marco de John V. Willshire (Smithery) para pensar el tiempo. Toma las categorías del cono de futuros (lo probable, lo plausible, lo posible y lo absurdo) y las refleja hacia el pasado: lo tangible, lo intangible, lo recordado y lo olvidado. El libro no lo describe más allá de estas reglas; lo amplía la fuente que cita.</div>
+ assemblage:{st:"Paso 1 · Framing",q:"¿Cómo evitar que el presente deforme lo que imaginamos?",w:"Cuatro advertencias para revisar tus supuestos mientras encuadras.",t:"Las cuatro reglas del Assemblage Space",p:"52",ph:"fr",wide:1,h:()=>`<div class="asd"><b>¿Qué es el Assemblage Space?</b> Un marco de John V. Willshire (Smithery) para pensar el tiempo. Toma las categorías del cono de futuros (lo probable, lo plausible, lo posible y lo absurdo) y las refleja hacia el pasado: lo tangible, lo intangible, lo recordado y lo olvidado. El libro no lo describe más allá de estas reglas; lo amplía la fuente que cita.</div>
   <ol class="olist o4" style="${cv("fr")}">
    <li><b>Curiosidad por el pasado</b>Ten tanta curiosidad por el pasado como por el futuro.</li>
    <li><b>Cuidado con el presente</b>Lo reciente deforma la mirada: como en el retrovisor, se ve más grande.</li>
    <li><b>Conoce tu estrechez</b>Lo que te parece absurdo puede ser muy probable para otros.</li>
    <li><b>No hay cono</b>Ni Assemblage Space: son prismas para mirar, no prisiones.</li></ol><p class="note">John V. Willshire, Smithery · <button class="linkish" type="button" data-src="willshire">ver fuente</button></p>`},
- encuadre:{t:"Qué se define al encuadrar",p:"49, 51, 53, 54",ph:"fr",wide:1,h:()=>`<div class="fz">
+ encuadre:{st:"Paso 1 · Framing",q:"¿Qué hay que tener claro antes de investigar?",w:"Es lo primero del proyecto: sin encuadre, el escaneo no sabe qué buscar.",t:"Qué se define al encuadrar",p:"49, 51, 53, 54",ph:"fr",wide:1,h:()=>`<div class="fz">
    <div class="fz-q"><div><small>Punto de partida</small><b>Una pregunta que expresa una incertidumbre o una necesidad</b></div>${pg(53)}</div>
    <div class="fz-g">
     <div class="fz-b"><div class="fz-h"><span>Lo que se define</span><span>p. 49</span></div><ul><li>Temas, áreas de indagación y dominios</li><li>Preguntas críticas</li><li>Actores involucrados</li><li>Límites del sistema</li><li>Supuestos y factores de contexto</li></ul></div>
@@ -1006,7 +1023,7 @@ const IG = {
     <div class="fz-b"><div class="fz-h"><span>Lo que importa</span><span>p. 54</span></div><ul><li>Valores, esperanzas y prioridades</li><li>Conocimiento actual</li><li>Dónde hay apertura a aprender</li></ul></div>
    </div>
    <div class="fz-r"><span>Resultado: una exploración anclada, con propósito y alineada con la intención estratégica.</span>${pg(49)}</div></div>`},
- lentes:{t:"Dos lentes para escanear",p:"57",ph:"sc",h:()=>`<svg viewBox="0 0 400 200" role="img" aria-label="Escaneo del entorno y del horizonte">
+ lentes:{st:"Paso 2 · Scanning",q:"¿Dónde buscar señales de cambio?",w:"Al escanear, mira a la vez lo que ya está actuando y lo que apenas asoma.",t:"Dos lentes para escanear",p:"57",ph:"sc",h:()=>`<svg viewBox="0 0 400 200" role="img" aria-label="Escaneo del entorno y del horizonte">
    <circle cx="150" cy="100" r="82" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5" fill-opacity=".7"/>
    <circle cx="250" cy="100" r="82" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5" fill-opacity=".7"/>
    <text x="118" y="88" text-anchor="middle" font-size="14" font-weight="600">Entorno</text>
@@ -1015,7 +1032,7 @@ const IG = {
    <text x="282" y="108" text-anchor="middle" font-size="11.5">señales débiles,</text><text x="282" y="123" text-anchor="middle" font-size="11.5">indicadores</text><text x="282" y="138" text-anchor="middle" font-size="11.5">tempranos</text>
    <text x="200" y="104" text-anchor="middle" font-size="12" font-weight="600">juntos</text></svg>
    <p class="note">Usar solo uno limita la vista. Se complementan con observación situada y trabajo de campo (p. 55, 64).</p>`},
- senal:{t:"Anatomía de una señal",p:"74, 75",ph:"sc",h:()=>`<div class="sigcard">
+ senal:{st:"Paso 2 · Scanning",q:"¿Qué registrar de cada señal y cómo saber si importa?",w:"Una ficha para documentar lo que encuentras mientras escaneas.",t:"Anatomía de una señal",p:"74, 75",ph:"sc",h:()=>`<div class="sigcard">
    <div class="row"><div class="k">Título</div><div class="v">Nombre breve y claro</div></div>
    <div class="row"><div class="k">Descripción</div><div class="v">Qué está pasando</div></div>
    <div class="row"><div class="k">Fuente</div><div class="v">De dónde viene</div></div>
@@ -1026,14 +1043,14 @@ const IG = {
    <span class="eyebrow">Para saber si importa (p. 75)</span>
    <div class="factors"><span class="factor">Frecuencia</span><span class="factor">Fuerza</span><span class="factor">Madurez</span><span class="factor">Alcance</span><span class="factor">Dirección</span></div>
    <ul class="qs"><li>¿Se aparta realmente de la norma?</li><li>¿Qué tipo de cambio representa?</li><li>¿Se está extendiendo o es una moda pasajera?</li></ul>`},
- nubes:{t:"Señales y drivers: gotas y nubes",p:"70–72, 109",ph:"sm",h:()=>`<svg viewBox="0 0 400 220" role="img" aria-label="Los drivers son nubes que precipitan señales">
+ nubes:{st:"Paso 2 · Sense-making",q:"¿Cómo pasar de muchas señales sueltas a pocas fuerzas?",w:"Las señales se agrupan en drivers, y los drivers alimentan después los escenarios.",t:"Señales y drivers: gotas y nubes",p:"70–72, 109",ph:"sm",h:()=>`<svg viewBox="0 0 400 220" role="img" aria-label="Los drivers son nubes que precipitan señales">
    ${[[110,62,1],[210,50,1.15],[300,70,.95]].map(([x,y,s])=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-48 14 a20 20 0 0 1 8 -32 a26 26 0 0 1 46 -6 a20 20 0 0 1 34 12 a16 16 0 0 1 -2 26 Z" fill="var(--f2s)" stroke="var(--f2)" stroke-width="1.5"/></g>`).join("")}
    <text x="210" y="56" text-anchor="middle" font-size="13" font-weight="600">driver</text>
    ${Array.from({length:26},(_,i)=>{const x=70+(i*11.3)%275, y=110+((i*37)%70); return `<path d="M${x} ${y} q-4 7 0 10 q4 -3 0 -10z" fill="var(--f3)"/>`;}).join("")}
    <text x="20" y="208" font-size="11.5" class="m">cada gota = una señal</text>
    <text x="380" y="208" text-anchor="end" font-size="11.5" class="m">las nubes se superponen y convergen</text></svg>
    <p class="note">«Los drivers son a las señales lo que las nubes a las gotas de lluvia» (Howard, 2021, citado en p. 72). Agrupar y mapear señales revela las fuerzas profundas (p. 109).</p>`},
- mapa:{t:"Primer mapa del inventario",p:"111, 112",ph:"sm",h:()=>`<svg viewBox="0 0 400 230" role="img" aria-label="Mapa por tiempo y certeza">
+ mapa:{st:"Paso 2 · Sense-making",q:"¿Por dónde empezar a ordenar lo que encontraste?",w:"Un primer mapa para ver qué falta antes de pasar a imaginar.",t:"Primer mapa del inventario",p:"111, 112",ph:"sm",h:()=>`<svg viewBox="0 0 400 230" role="img" aria-label="Mapa por tiempo y certeza">
    <line x1="50" y1="195" x2="380" y2="195" stroke="var(--ink)" stroke-width="1.5"/><path d="M380 195 l-8 -4 v8z" fill="var(--ink)"/>
    <line x1="50" y1="195" x2="50" y2="20" stroke="var(--ink)" stroke-width="1.5"/><path d="M50 20 l-4 8 h8z" fill="var(--ink)"/>
    <line x1="215" y1="30" x2="215" y2="190" stroke="var(--line)" stroke-dasharray="4 4"/><line x1="55" y1="108" x2="375" y2="108" stroke="var(--line)" stroke-dasharray="4 4"/>
@@ -1041,33 +1058,33 @@ const IG = {
    <text x="22" y="108" text-anchor="middle" font-size="13" font-weight="600" transform="rotate(-90 22 108)">certeza</text>
    ${[[110,70],[160,150],[260,60],[300,160],[340,120],[95,160],[250,130]].map(([x,y])=>`<rect x="${x-18}" y="${y-9}" width="36" height="18" rx="4" fill="var(--f2s)" stroke="var(--f2)"/>`).join("")}</svg>
    <p class="note">Scott Smith y Madeline Ashby sugieren empezar a mapear con dos criterios: tiempo y certeza (p. 112). El inventario por categorías muestra huecos y qué falta investigar (p. 111).</p>`},
- roles:{t:"Para qué sirven los escenarios al decidir",p:"139, 142–144",ph:"vi",h:()=>`<div class="trio" style="${cv("vi")}">
+ roles:{st:"Paso 3 · Visioning",q:"¿Para qué le sirven los escenarios a una organización?",w:"Útil para explicar a otros por qué vale la pena hacer escenarios.",t:"Para qué sirven los escenarios al decidir",p:"139, 142–144",ph:"vi",h:()=>`<div class="trio" style="${cv("vi")}">
    <div class="card-ig"><b>Mapear horizontes</b><span>Ampliar la mirada a mediano y largo plazo; anticipar riesgos y oportunidades.</span><span class="pg">p. 142</span></div>
    <div class="card-ig"><b>Crear propósito</b><span>Descubrir valores, necesidades y aspiraciones; cuestionar supuestos.</span><span class="pg">p. 143</span></div>
    <div class="card-ig"><b>Actuar juntos</b><span>Marco compartido para alinear esfuerzos y liderar el cambio.</span><span class="pg">p. 144</span></div></div>`},
- escenario:{t:"De historias a escenarios",p:"121, 146, 149–152",ph:"vi",wide:1,h:()=>`<svg viewBox="0 0 760 170" role="img" aria-label="Flujo de construcción de escenarios">
-   ${[["Señales y drivers","de la investigación","149"],["Historias cotidianas","1.ª persona, presente, titulares","149"],["Voces diversas","también chequean coherencia","149"],["Síntesis","compacta, estructurada, accesible","150"],["Conjunto de escenarios","continuidad y ruptura","121"],["Evaluación","frente al futuro preferido","152"]].map(([a,b,p],i)=>{const x=10+i*125; return `<rect x="${x}" y="40" width="112" height="84" rx="8" fill="${i===4?"var(--f3s)":"var(--surface)"}" stroke="${i===4?"var(--f3)":"var(--line)"}"/><text x="${x+56}" y="70" text-anchor="middle" font-size="12.5" font-weight="600">${a.split(" ").slice(0,2).join(" ")}</text>${a.split(" ").length>2?`<text x="${x+56}" y="86" text-anchor="middle" font-size="12.5" font-weight="600">${a.split(" ").slice(2).join(" ")}</text>`:""}<text x="${x+56}" y="108" text-anchor="middle" font-size="10.5" class="m">p. ${p}</text>${i<5?`<path d="M${x+114} 82 h8" stroke="var(--muted)" stroke-width="1.5"/><path d="M${x+124} 82 l-5 -3 v6z" fill="var(--muted)"/>`:""}<text x="${x+56}" y="148" text-anchor="middle" font-size="10.5" class="m">${b.length>22?b.slice(0,22)+"…":b}</text>`;}).join("")}</svg>
+ escenario:{st:"Paso 3 · Visioning",q:"¿Cómo se construye un escenario?",w:"El camino desde la investigación hasta un conjunto de escenarios listo para evaluar.",t:"De historias a escenarios",p:"121, 146, 149–152",ph:"vi",wide:1,h:()=>`<ol class="steps">
+   ${[["Señales y drivers","Lo que dejó la investigación es la materia prima.","149"],["Historias cotidianas","Relatos breves en primera persona y presente, con un titular que se recuerde.","149"],["Voces diversas","Otras personas amplían los relatos y chequean que sean coherentes.","149"],["Síntesis","Las historias se tejen en un todo compacto, estructurado y accesible.","150"],["Conjunto de escenarios","Siempre varios, con continuidades y rupturas.","121"],["Evaluación","¿Qué tan lejos estamos del futuro preferido?","152"]].map(([a,b,p],i)=>`<li class="${i===4?"hi":""}"><span class="n">${i+1}</span><b>${a}</b><span class="d">${b}</span><span class="pg">p. ${p}</span></li>`).join("")}</ol>
    <p class="note">Un buen escenario es familiar y está anclado en la evidencia, no en el sesgo personal; no es una predicción (p. 121, 146).</p>`},
- polifonia:{t:"Polifonía de visiones",p:"151",ph:"vi",h:()=>`<svg viewBox="0 0 400 210" role="img" aria-label="Un escenario, tres voces">
+ polifonia:{st:"Paso 3 · Visioning",q:"¿Cómo no contar un futuro con una sola voz?",w:"Al escribir un escenario, cuenta el mismo futuro desde varios personajes.",t:"Polifonía de visiones",p:"151",ph:"vi",h:()=>`<svg viewBox="0 0 400 210" role="img" aria-label="Un escenario, tres voces">
    <rect x="140" y="80" width="120" height="50" rx="8" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="110" text-anchor="middle" font-size="14" font-weight="600">Un escenario</text>
    ${[["Impulsa el cambio",70,30],["Se opone",330,30],["Indiferente",200,190]].map(([t,x,y])=>`<line x1="200" y1="105" x2="${x}" y2="${y}" stroke="var(--line)" stroke-width="1.2"/><rect x="${x-65}" y="${y-16}" width="130" height="32" rx="16" fill="var(--surface)" stroke="var(--ink)"/><text x="${x}" y="${y+5}" text-anchor="middle" font-size="13">${t}</text>`).join("")}
    <rect x="140" y="80" width="120" height="50" rx="8" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="110" text-anchor="middle" font-size="14" font-weight="600">Un escenario</text></svg>
    <p class="note">El mismo futuro contado desde tres perspectivas deja que la audiencia forme su propia opinión (Design Friction).</p>`},
- confronta:{t:"Diseñar la confrontación",p:"148",ph:"vi",h:()=>`<div class="trio" style="${cv("vi")}">
+ confronta:{st:"Paso 3 → 4",q:"¿Cómo preparar el encuentro del futuro con su público?",w:"Antes de mostrar un escenario, decide quién lo verá, dónde y para qué.",t:"Diseñar la confrontación",p:"148",ph:"vi",h:()=>`<div class="trio" style="${cv("vi")}">
    <div class="card-ig"><b>Audiencia</b><span>Quién participa: su perfil y experiencias previas.</span></div>
    <div class="card-ig"><b>Contexto</b><span>Dinámicas de poder, actualidad, momento y lugar.</span></div>
    <div class="card-ig"><b>Objetivos</b><span>Para qué se produce el encuentro.</span></div></div>
    <p class="note">Junto al escenario, diseña un marco de diálogo o acción: debate, exposición, taller o juego (Design Friction).</p>`},
- disonancia:{t:"Disonancia discursiva: cinco dimensiones",p:"166",ph:"vi",h:()=>`<div style="display:flex;flex-direction:column;gap:8px">${["Claridad","Realidad","Familiaridad","Veracidad","Deseabilidad"].map(d=>`<div style="display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;font-size:14px"><b style="font-weight:500">${d}</b><svg viewBox="0 0 200 14" preserveAspectRatio="none" style="height:14px"><line x1="4" y1="7" x2="196" y2="7" stroke="var(--line)" stroke-width="2"/><circle cx="4" cy="7" r="3" fill="var(--muted)"/><circle cx="196" cy="7" r="3" fill="var(--muted)"/></svg></div>`).join("")}</div>
+ disonancia:{st:"Paso 3 → 4",q:"¿Qué tan extraño debe ser un escenario o un artefacto?",w:"Cinco perillas para dosificar la extrañeza: ni tan obvio que aburra ni tan raro que aleje.",t:"Disonancia discursiva: cinco dimensiones",p:"166",ph:"vi",h:()=>`<div style="display:flex;flex-direction:column;gap:8px">${["Claridad","Realidad","Familiaridad","Veracidad","Deseabilidad"].map(d=>`<div style="display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;font-size:14px"><b style="font-weight:500">${d}</b><svg viewBox="0 0 200 14" preserveAspectRatio="none" style="height:14px"><line x1="4" y1="7" x2="196" y2="7" stroke="var(--line)" stroke-width="2"/><circle cx="4" cy="7" r="3" fill="var(--muted)"/><circle cx="196" cy="7" r="3" fill="var(--muted)"/></svg></div>`).join("")}</div>
    <p class="note">Ajustar ambigüedad, contradicción o lo «extrañamente familiar» lo justo para provocar curiosidad sin alejar a la audiencia (Tharp y Tharp, 2019). El libro no fija valores: cada proyecto decide la dosis.</p>`},
- iceberg:{t:"Tres principios de los futuros experienciales",p:"174",ph:"di",h:()=>`<ol class="olist" style="${cv("di")}">
+ iceberg:{st:"Paso 4 · Dissemination",q:"¿Cómo hacer creíble una experiencia del futuro?",w:"Tres reglas para los artefactos y experiencias que se muestran al público.",t:"Tres principios de los futuros experienciales",p:"174",ph:"di",h:()=>`<ol class="olist" style="${cv("di")}">
    <li><b>No rompas el universo</b>Todo debe sentirse parte de un futuro coherente.</li>
    <li><b>La punta del iceberg</b>Fragmentos ricos que sugieren un mundo mayor, sin sobreexplicar.</li>
    <li><b>La doble mirada</b>Parece ordinario o absurdo y revela capas al mirarlo más.</li></ol><p class="note">Stuart Candy (2010), citado por los autores.</p>`},
- paraguas:{t:"Una práctica paraguas",p:"31, 95",ph:"sc",c:"f3",h:()=>`<svg viewBox="0 0 400 90" role="img" aria-label="Paraguas"><path d="M40 80 Q200 -40 360 80 Q320 60 280 80 Q240 60 200 80 Q160 60 120 80 Q80 60 40 80Z" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="58" text-anchor="middle" font-size="15" font-weight="600">Design Futures</text></svg>
+ paraguas:{st:"Marco",q:"¿Qué prácticas caben dentro de Design Futures?",w:"Sirve para ubicar los nombres que irán apareciendo a lo largo del libro.",t:"Una práctica paraguas",p:"31, 95",ph:"sc",c:"f3",h:()=>`<svg viewBox="0 0 400 90" role="img" aria-label="Paraguas"><path d="M40 80 Q200 -40 360 80 Q320 60 280 80 Q240 60 200 80 Q160 60 120 80 Q80 60 40 80Z" fill="var(--f3s)" stroke="var(--f3)" stroke-width="1.5"/><text x="200" y="58" text-anchor="middle" font-size="15" font-weight="600">Design Futures</text></svg>
    <div class="umb">${["Speculative Design","Design Fiction","Experiential Futures"].map(x=>`<span class="core">${x}</span>`).join("")}${["Critical Design","Discursive Design","Speculative Futures","Adversarial Design","Interrogative Design","Speculative Fiction","Participatory Futures","Science Fiction Prototyping","Peripheral Ethnography","Transition Design"].map(x=>`<span>${x}</span>`).join("")}</div>
    <p class="note">Resaltadas: las tres que la p. 31 nombra como principales.</p>`},
- regen:{t:"Cómo imaginar futuros regenerativos",p:"200",ph:"viva",c:"f5",h:()=>`<ul class="ulist">${["Escuchar a lo más-que-humano","Aprender con la naturaleza","Nombrar lo innombrado, hacer visible lo invisible","Viajar entre lo micro y lo macro","Invitar a generaciones futuras y pasadas","Soñar de lo plausible a lo absurdo","Conectar mente, cuerpo y corazón","Dar lugar al juego"].map(x=>`<li>${x}</li>`).join("")}</ul><p class="note">Savannah Vize y Andrea Gilly Márquez, Falay Transition Design.</p>`}
+ regen:{st:"Cierre",q:"¿Cómo imaginar futuros que regeneren en lugar de agotar?",w:"Una lista para ampliar quién y qué cuenta cuando imaginamos.",t:"Cómo imaginar futuros regenerativos",p:"200",ph:"viva",c:"f5",h:()=>`<ul class="ulist">${["Escuchar a lo más-que-humano","Aprender con la naturaleza","Nombrar lo innombrado, hacer visible lo invisible","Viajar entre lo micro y lo macro","Invitar a generaciones futuras y pasadas","Soñar de lo plausible a lo absurdo","Conectar mente, cuerpo y corazón","Dar lugar al juego"].map(x=>`<li>${x}</li>`).join("")}</ul><p class="note">Savannah Vize y Andrea Gilly Márquez, Falay Transition Design.</p>`}
 };
 const IG_BY_PHASE = {pre:["textos"],df:["proceso","mente","cono","paraguas"],fr:["encuadre","assemblage"],sc:["lentes","senal","paraguas"],sm:["nubes","mapa"],vi:["escenario","roles","polifonia","confronta","disonancia"],di:["iceberg"],as:[],ta:[],viva:["regen","cono"]};
 
@@ -1076,7 +1093,7 @@ function pix(color, rows, cls){
   for(let i=0;i<rows;i++){ const x=(rows-1-i)*st*0.9; r+=`<rect x="${x.toFixed(1)}" y="${i*st}" width="${(w-x-(i*st*0.35)).toFixed(1)}" height="${st+0.4}" fill="${color}"/>`; }
   return `<svg class="px ${cls}" viewBox="0 0 ${w} ${h}" aria-hidden="true">${r}</svg>`;
 }
-function igHtml(k){ const g=IG[k]; return `<section class="ig ${g.wide?"wide":""}" id="ig-${k}" style="${cv(g.c||g.ph)}"><div class="ig-h"><h3>${esc(g.t)}</h3>${pg(g.p)}</div>${g.h()}</section>`; }
+function igHtml(k){ const g=IG[k]; return `<section class="ig ${g.wide?"wide":""}" id="ig-${k}" style="${cv(g.c||g.ph)}"><div class="ig-h"><div><span class="ig-st">${esc(g.st||"")}</span><h3>${esc(g.t)}</h3></div>${pg(g.p)}</div>${g.q?`<p class="ig-ctx"><b>${esc(g.q)}</b> ${esc(g.w)}</p>`:""}${g.h()}</section>`; }
 
 function procHtml(){
   return `<div class="proc">${STEPS.map(s=>`<div class="step" style="--c:var(--${s.c})"><span class="n">PASO ${s.n}</span><h3>${esc(s.es)}</h3><p>${esc(s.d)}</p>
