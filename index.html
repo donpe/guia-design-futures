@@ -354,7 +354,9 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .intro-lead{font-size:clamp(19px,2.4vw,23px);line-height:1.45;max-width:40ch;font-family:var(--display);font-weight:500;letter-spacing:-.01em}
 .intro-lead mark{background:none;color:var(--red-ink)}
 .ctx{max-width:72ch;font-size:15.5px}
-.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.duo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.duo-j{position:relative}
+@media (max-width:1100px){.duo{grid-template-columns:repeat(2,minmax(0,1fr))}.duo-j{grid-column:1/-1}}
 .duo .box p{font-size:14.5px}
 .duo .box p + p{margin-top:8px}
 .duo h4{font-size:18px;margin:4px 0 8px}
@@ -1224,8 +1226,8 @@ function viewEmpezar(){
     <div class="box hl" style="${cv("f5")}"><span class="eyebrow">Diseño</span><h4>Hacer cosas y darle sentido al mundo</h4>
      <p>El diseño hace cosas en el mundo, pero también ayuda a darle sentido (Lindley, p. 12). Cada acto de diseño ya crea un futuro, aquel en el que existe ese producto o servicio (p. 35). Lo que mejor sabe hacer es imaginar visiones preferibles y mostrar cómo llegar a ellas con prototipos, pilotos y visualizaciones (p. 38).</p>
      <p>Aporta además su manera de trabajar: investigación de campo, prototipado y participación de comunidades, que vuelven concretas las ideas abstractas y permiten probarlas con personas reales (p. 43).</p></div>
+    <div class="box hl duo-j" style="${cv("f3")}"><span class="eyebrow">Juntos, no uno al lado del otro</span><h4>Design Futures</h4><p>Los autores insisten en que Design Futures no es poner en fila los métodos de un campo y del otro, sino fundirlos en algo nuevo: «una receta nueva» (p. 32), una mezcla en la que lo creativo y lo crítico se alimentan (p. 34). Los futuros experienciales, nacidos entre futuristas, y la ficción de diseño, nacida entre diseñadores, surgieron por separado, pero se parecen más de lo que se diferencian (Candy y Dunagan, citado en p. 100). El diseño aporta lo que a los futuros les faltaba: hacerlos tangibles, discutibles y abiertos a todos (p. 43).</p></div>
    </div>
-   <p class="ctx" style="margin-top:12px"><b>Juntos, no uno al lado del otro.</b> Los autores insisten en que Design Futures no es poner en fila los métodos de un campo y del otro, sino fundirlos en algo nuevo: «una receta nueva» (p. 32), una mezcla en la que lo creativo y lo crítico se alimentan (p. 34). Los futuros experienciales, nacidos entre futuristas, y la ficción de diseño, nacida entre diseñadores, surgieron por separado, pero se parecen más de lo que se diferencian (Candy y Dunagan, citado en p. 100). El diseño aporta lo que a los futuros les faltaba: hacerlos tangibles, discutibles y abiertos a todos (p. 43).</p>
   </section>
 
   <section class="sec"><h2>En tres frases ${pg(31)}</h2>
