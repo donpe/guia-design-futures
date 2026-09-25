@@ -27,13 +27,13 @@ TODAY = datetime.date.today().isoformat()
 # Título y descripción de cada sección (lo que muestran Google y las redes al compartir).
 META = {
     "inicio": ("Guía de estudio de The Field Guide to Design Futures, en español",
-               "Guía en español, no oficial, para leer, entender y aplicar The Field Guide to Design Futures de Giovanni Caruso y Silvio Cioni: el proceso, 175 fichas por página, 52 conceptos, infografías y práctica."),
+               "Guía en español, no oficial, para leer, entender y aplicar The Field Guide to Design Futures de Giovanni Caruso y Silvio Cioni: el proceso, 175 fichas texto por texto, 52 conceptos, infografías y práctica."),
     "empezar": ("Qué es Design Futures: empezar aquí",
                 "Introducción a Design Futures para quien empieza: la diferencia entre diseño y estudios de futuros, lo que no es, cinco ideas clave y por dónde leer el libro de Caruso y Cioni."),
     "recorrido": ("El proceso de Design Futures en 5 pasos",
                   "Futuring by Design, el proceso del libro: Framing, Scanning y Sense-making, Visioning, Dissemination y Assessment, y Taking Action, con sus páginas."),
-    "libro": ("The Field Guide to Design Futures, página por página",
-              "175 fichas en español que resumen cada página con texto del libro de Caruso y Cioni: textos de los autores, de más de treinta colaboradores y citas."),
+    "libro": ("The Field Guide to Design Futures, texto por texto",
+              "175 fichas en español que resumen cada texto del libro de Caruso y Cioni, con su página: textos de los autores, de más de treinta colaboradores y citas."),
     "conceptos": ("Glosario de Design Futures: 52 conceptos",
                   "Glosario de Design Futures en español: señales, drivers, escenarios, artefactos del futuro, framing, futuros experienciales y más, con las páginas del libro."),
     "infografias": ("Infografías de Design Futures",
@@ -191,14 +191,14 @@ llms = [f"# Guía de estudio de The Field Guide to Design Futures", "", f"> {int
         "## Proceso (Futuring by Design, p. 42)", ""]
 llms += [f"{s['n']}. **{s['t']}** ({s['es']}): {s['d']}" for s in STEPS] + ["", "## Páginas", ""]
 llms += [f"- [{META[r][0]}]({SITE}{path_of(r)}): {META[r][1]}" for r in pages]
-llms += ["", "## Texto completo", "", f"- [llms-full.txt]({SITE}llms-full.txt): todas las fichas por página, los conceptos, la práctica y las fuentes, en Markdown.", ""]
+llms += ["", "## Texto completo", "", f"- [llms-full.txt]({SITE}llms-full.txt): las 175 fichas texto por texto, con su página, los conceptos, la práctica y las fuentes, en Markdown.", ""]
 (out / "llms.txt").write_text("\n".join(llms), encoding="utf-8")
 
 full = [f"# Guía de estudio de The Field Guide to Design Futures (texto completo)", "", f"> {intro}", "",
         "Cómo citar: usa el libro original y su número de página. Esta guía es una paráfrasis en español.", "",
         "## Proceso: Futuring by Design (p. 42)", ""]
 full += [f"{s['n']}. **{s['t']}** ({s['es']}): {s['d']}" for s in STEPS]
-full += ["", "## Fichas, página por página", ""]
+full += ["", "## Fichas, texto por texto", ""]
 order = ["pre", "df", "fr", "sc", "sm", "vi", "di", "as", "ta", "viva", "post"]
 for k in order:
     fs = [f for f in FI if f["ph"] == k]
@@ -233,7 +233,7 @@ if not (root / "og.png").exists():
     y = 120
     for line in ["The Field Guide", "to Design Futures"]:
         dr.text((60, y), line, font=ImageFont.truetype(bold, 84), fill="#602866"); y += 96
-    dr.text((60, 330), "El proceso, 175 fichas por página, 52 conceptos,", font=ImageFont.truetype(reg, 34), fill="#1D1320")
+    dr.text((60, 330), "El proceso, 175 fichas, 52 conceptos,", font=ImageFont.truetype(reg, 34), fill="#1D1320")
     dr.text((60, 374), "infografías y práctica. Caruso y Cioni, 2026.", font=ImageFont.truetype(reg, 34), fill="#1D1320")
     ill = Image.open(root / "img" / "p41.png").convert("RGBA"); ill.thumbnail((380, 380))
     im.paste(ill, (W - ill.width - 60, H - ill.height - 40), ill)

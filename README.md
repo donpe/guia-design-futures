@@ -11,7 +11,7 @@ Micrositio en español, **no oficial**, para leer, estudiar y aplicar
 
 - **Empezar aquí:** resumen para quien no conoce Design Futures.
 - **Recorrido:** los 5 pasos que propone el libro (Framing, Scanning y Sense-making, Visioning, Dissemination y Assessment, Taking Action).
-- **Leer el libro:** una ficha por cada página con texto, resumida en español.
+- **Leer el libro:** una ficha por cada texto del libro, resumida en español y con su página.
 - **Conceptos, infografías, práctica paso a paso y voces.**
 - **Fuentes:** todo lo que el libro cita, con las páginas donde aparece.
   Se distingue el enlace impreso en el libro del enlace encontrado después.

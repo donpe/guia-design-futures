@@ -1521,7 +1521,7 @@ function pix(color, rows, cls){
 }
 function igHtml(k){ const g=IG[k]; return `<section class="ig ${g.wide?"wide":""}" id="ig-${k}" style="${cv(g.c||g.ph)}"><div class="ig-h"><div><span class="ig-st">${esc(g.st||"")}</span><h3>${esc(g.t)}</h3></div>${pg(g.p)}</div>${g.q?`<p class="ig-ctx"><b>${esc(g.q)}</b> ${esc(g.w)}</p>`:""}${g.h()}</section>`; }
 
-const ROUTE=[["empezar","Entender","Qué es y de dónde viene","Empezar aquí"],["recorrido","Recorrer","Los 5 pasos de un proyecto","Recorrido"],["libro","Profundizar","Cada página, cada concepto","Leer el libro"],["practica","Aplicar","Llevarlo a tu proyecto","Práctica"]];
+const ROUTE=[["empezar","Entender","Qué es y de dónde viene","Empezar aquí"],["recorrido","Recorrer","Los 5 pasos de un proyecto","Recorrido"],["libro","Profundizar","Cada texto, cada concepto","Leer el libro"],["practica","Aplicar","Llevarlo a tu proyecto","Práctica"]];
 function routeHtml(cur){
   return `<nav class="route4" aria-label="Ruta sugerida">${ROUTE.map(([r,v,d,n],i)=>`<a href="#${r}" class="${r===cur?"on":""}"><span class="n">${i+1}</span><b>${v}</b><span>${d}</span><small>${n}</small></a>`).join("")}</nav>`;
 }
@@ -1566,7 +1566,7 @@ function viewInicio(){
     <div class="igs">${igHtml("textos")}${igHtml("mente")}</div>
   </section>
   <section class="sec"><h2>Cómo leer este sitio</h2>
-    <p class="howto">Todo lo que ves aquí sale del libro y lleva su página. Puedes seguir el recorrido de un proyecto, leer cada página resumida, repasar conceptos, ver infografías, marcar tu avance en la práctica y consultar todas las fuentes que el libro cita.</p>
+    <p class="howto">Todo lo que ves aquí sale del libro y lleva su página. Puedes seguir el recorrido de un proyecto, leer cada texto resumido, repasar conceptos, ver infografías, marcar tu avance en la práctica y consultar todas las fuentes que el libro cita.</p>
     <div class="rules">
       <div class="rule"><h3>Todo tiene página</h3><p>Cada ficha, concepto o paso lleva la página impresa del libro para que puedas ir al original.</p></div>
       <div class="rule"><h3>Resumen, no reemplazo</h3><p>Los textos en español son paráfrasis breves. Las citas de otros autores también: para citar, ve al original.</p></div>
@@ -1742,7 +1742,7 @@ function voicesList(){
 function viewLibro(){
   const vf = state.libroVoz;
   const list = FICHAS.filter(f=>(state.libroPh==="todas"||f.ph===state.libroPh)&&(state.libroTy==="todos"||f.ty===state.libroTy)&&(!vf||f.a.includes(vf)));
-  return `<div class="view-h"><span class="eyebrow">Página por página</span><h1>Leer el libro</h1><p>Cada página con texto del libro, resumida en español y en su orden original. Filtra por sección, por tipo de texto o por voz.</p></div>
+  return `<div class="view-h"><span class="eyebrow">175 fichas</span><h1>Leer el libro</h1><p>Cada texto del libro, sea de los autores, de un colaborador o una cita, resumido en una ficha con su página y en el mismo orden del libro. Filtra por sección, por tipo de texto o por voz.</p></div>
    <div class="filters">
     <select class="sel" id="fPh" aria-label="Sección"><option value="todas">Todas las secciones</option>${PHASE_ORDER.map(k=>`<option value="${k}" ${state.libroPh===k?"selected":""}>${esc(PH[k].t)} · p. ${PH[k].pp}</option>`).join("")}</select>
     ${[["todos","Todo"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-lty="${t}" aria-pressed="${state.libroTy===t}">${l}</button>`).join("")}
@@ -1871,7 +1871,7 @@ function viewSobre(){
    <section class="sec"><h2>Cómo se construyó</h2>
     <ol class="flow">
      <li><span><b>Extracción.</b> Se sacó el texto de cada página del PDF y se relacionó la página del archivo con la página impresa, que es la que se cita en todo el sitio.</span></li>
-     <li><span><b>Fichas.</b> Cada página con texto se convirtió en una ficha: página, fase, tipo de texto (autores, colaborador o cita), título, autoría, resumen y fuentes. Los resúmenes son paráfrasis en español escritas leyendo cada página; las citas se parafrasean y se marcan así.</span></li>
+     <li><span><b>Fichas.</b> Cada texto del libro se convirtió en una ficha: página, fase, tipo de texto (autores, colaborador o cita), título, autoría, resumen y fuentes. Los resúmenes son paráfrasis en español escritas leyendo cada página; las citas se parafrasean y se marcan así.</span></li>
      <li><span><b>Fuentes.</b> Se inventariaron las referencias que el libro imprime. Para cada una se distingue el enlace impreso en el libro del enlace encontrado después, que se marca aparte.</span></li>
      <li><span><b>Capas de lectura.</b> Sobre las fichas se armaron el recorrido por fases, los conceptos, las infografías, la lista de práctica y la página «Empezar aquí».</span></li>
      <li><span><b>Diseño.</b> Los colores salen de la portada: rojo <code>#F72411</code> y morado <code>#602866</code>. Las cinco fases van del morado al rojo; las formas escalonadas imitan las de la portada.</span></li>

@@ -14,10 +14,10 @@ Design Futures es una práctica que une el diseño con los estudios de futuros p
 
 ## Páginas
 
-- [Guía de estudio de The Field Guide to Design Futures, en español](https://donpe.github.io/guia-design-futures/): Guía en español, no oficial, para leer, entender y aplicar The Field Guide to Design Futures de Giovanni Caruso y Silvio Cioni: el proceso, 175 fichas por página, 52 conceptos, infografías y práctica.
+- [Guía de estudio de The Field Guide to Design Futures, en español](https://donpe.github.io/guia-design-futures/): Guía en español, no oficial, para leer, entender y aplicar The Field Guide to Design Futures de Giovanni Caruso y Silvio Cioni: el proceso, 175 fichas texto por texto, 52 conceptos, infografías y práctica.
 - [Qué es Design Futures: empezar aquí](https://donpe.github.io/guia-design-futures/empezar/): Introducción a Design Futures para quien empieza: la diferencia entre diseño y estudios de futuros, lo que no es, cinco ideas clave y por dónde leer el libro de Caruso y Cioni.
 - [El proceso de Design Futures en 5 pasos](https://donpe.github.io/guia-design-futures/recorrido/): Futuring by Design, el proceso del libro: Framing, Scanning y Sense-making, Visioning, Dissemination y Assessment, y Taking Action, con sus páginas.
-- [The Field Guide to Design Futures, página por página](https://donpe.github.io/guia-design-futures/libro/): 175 fichas en español que resumen cada página con texto del libro de Caruso y Cioni: textos de los autores, de más de treinta colaboradores y citas.
+- [The Field Guide to Design Futures, texto por texto](https://donpe.github.io/guia-design-futures/libro/): 175 fichas en español que resumen cada texto del libro de Caruso y Cioni, con su página: textos de los autores, de más de treinta colaboradores y citas.
 - [Glosario de Design Futures: 52 conceptos](https://donpe.github.io/guia-design-futures/conceptos/): Glosario de Design Futures en español: señales, drivers, escenarios, artefactos del futuro, framing, futuros experienciales y más, con las páginas del libro.
 - [Infografías de Design Futures](https://donpe.github.io/guia-design-futures/infografias/): 18 infografías que ordenan ideas del libro: el proceso, el cono de futuros, señales y drivers, escenarios, disonancia discursiva y futuros experienciales.
 - [Cómo hacer un proyecto de Design Futures: lista práctica](https://donpe.github.io/guia-design-futures/practica/): Lista de práctica paso a paso para aplicar Design Futures en un proyecto, basada en The Field Guide to Design Futures, con la página de cada punto.
@@ -36,4 +36,4 @@ Design Futures es una práctica que une el diseño con los estudios de futuros p
 
 ## Texto completo
 
-- [llms-full.txt](https://donpe.github.io/guia-design-futures/llms-full.txt): todas las fichas por página, los conceptos, la práctica y las fuentes, en Markdown.
+- [llms-full.txt](https://donpe.github.io/guia-design-futures/llms-full.txt): las 175 fichas texto por texto, con su página, los conceptos, la práctica y las fuentes, en Markdown.
