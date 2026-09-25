@@ -214,7 +214,7 @@ full += ["", "## Fuentes citadas en el libro", ""]
 for sid, s in sorted(SRC.items(), key=lambda kv: kv[1]["r"].lower()):
     pp = ", ".join(str(u[0]) for u in s.get("use", []))
     link = s.get("u") or s.get("f") or ""
-    tag = " (enlace impreso en el libro)" if s.get("u") else " (enlace encontrado, no está en el libro)" if s.get("f") else ""
+    tag = " (enlace impreso en el libro)" if s.get("u") else " (enlace añadido por la guía, no impreso en el libro)" if s.get("f") else ""
     full += [f"- {s['r']} Páginas: {pp}.{(' ' + link + tag) if link else ''}"]
 (out / "llms-full.txt").write_text("\n".join(full) + "\n", encoding="utf-8")
 

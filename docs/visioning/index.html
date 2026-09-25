@@ -1782,7 +1782,7 @@ function viewPractica(){
 function srcStatus(s){
   if(s.u && s.st==="ok") return ["t-book","Enlace del libro, funciona"];
   if(s.u && s.st==="bloq") return ["t-book","Enlace del libro"];
-  if(s.f) return ["t-found","Encontrado, no está en el libro"];
+  if(s.f) return ["t-found","Enlace añadido, no del libro"];
   return ["t-none","Sin enlace"];
 }
 function viewFuentes(){
@@ -1791,7 +1791,7 @@ function viewFuentes(){
   const F = {
     todas:[ "Todas", ()=>true ],
     libro:[ "Con enlace del libro", s=>!!s.u && s.st!=="caido" ],
-    encontrado:[ "Enlace encontrado", s=>!!s.f && !(s.u && s.st!=="caido") ],
+    encontrado:[ "Enlace añadido", s=>!!s.f && !(s.u && s.st!=="caido") ],
     sin:[ "Sin enlace", s=>!linkOf(s.id) ],
     oa:[ "Acceso abierto", s=>!!s.oa ],
     fuera:[ "Fuera de la bibliografía", s=>!inBib(s) ],
@@ -1805,12 +1805,12 @@ function viewFuentes(){
     <div class="stat"><b>${all.length}</b><span>fuentes y menciones</span></div>
     <div class="stat"><b>${all.filter(inBib).length}</b><span>en la bibliografía (p. 217–225)</span></div>
     <div class="stat"><b>${cnt("libro")}</b><span>con enlace impreso</span></div>
-    <div class="stat"><b>${cnt("encontrado")}</b><span>con enlace encontrado</span></div>
+    <div class="stat"><b>${cnt("encontrado")}</b><span>con enlace añadido</span></div>
     <div class="stat"><b>${cnt("oa")}</b><span>de acceso abierto</span></div>
    </div>
    <div class="legend">
     <div><span class="tag t-book">Del libro</span>Enlace o DOI impreso en el libro. Se comprobó el 24 sep 2026; todos los DOI están registrados. Algunos sitios (Medium, ACM, editoriales) bloquean la comprobación automática, pero el enlace es el del libro.</div>
-    <div><span class="tag t-found">Encontrado</span>El libro no trae enlace. Se buscó en catálogos (Open Library, Crossref) y en la web. Puede llevar a otra edición o año.</div>
+    <div><span class="tag t-found">Enlace añadido</span>El libro cita la fuente pero no trae enlace. Se buscó en catálogos (Open Library, Crossref) y en la web. Puede llevar a otra edición o año.</div>
     <div><span class="tag t-oa">Abierto</span>El texto completo se puede leer gratis en el enlace.</div>
     <div><span class="tag t-none">Sin enlace</span>No se encontró o el libro no da datos suficientes para buscar.</div>
    </div>
