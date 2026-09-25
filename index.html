@@ -260,6 +260,10 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .olist li{counter-increment:o;border:1px solid var(--line);border-radius:8px;padding:10px 12px 10px 38px;position:relative;font-size:14px;background:var(--surface)}
 .olist li::before{content:counter(o);position:absolute;left:12px;top:10px;font-family:var(--mono);font-size:12px;color:var(--c);font-weight:500}
 .olist li b{display:block;font-family:var(--display);font-weight:500;font-size:15.5px;margin-bottom:2px}
+.asd{background:var(--cs);border-radius:8px;padding:12px 14px;font-size:14.5px;max-width:80ch}
+.asd b{font-family:var(--display);font-weight:500;color:var(--c)}
+@container (min-width:640px){.olist.o4{grid-template-columns:repeat(4,minmax(0,1fr))}.olist.o4 li{padding:36px 14px 14px}.olist.o4 li::before{top:12px;left:14px;font-size:13px}}
+.linkish{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;font:inherit;cursor:pointer}
 .ulist{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
 .ulist li{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface)}
 .ulist li b{display:block;font-family:var(--display);font-weight:500;font-size:15.5px;margin-bottom:2px}
@@ -979,11 +983,12 @@ const IG = {
    <div class="cone"><svg viewBox="0 0 120 70"><rect x="14" y="10" width="36" height="50" rx="4" fill="none" stroke="var(--f1)" stroke-width="1.5"/><rect x="62" y="10" width="44" height="50" rx="4" fill="none" stroke="var(--f1)" stroke-width="1.5"/><line x1="50" y1="35" x2="62" y2="35" stroke="var(--f1)" stroke-width="1.5"/></svg><b>Prismas, no prisiones</b><span>Willshire: no hay cono ni Assemblage Space; son formas de mirar.</span><span class="pg">p. 52</span></div>
    <div class="cone"><svg viewBox="0 0 120 70"><path d="M60 35 m0 0 a4 4 0 1 1 8 0 a10 10 0 1 1 -20 0 a16 16 0 1 1 32 0 a22 22 0 1 1 -44 0 a28 28 0 1 1 56 0" fill="none" stroke="var(--f3)" stroke-width="1.5"/></svg><b>El cono como espiral</b><span>Coe Douglas: una espiral que desciende hacia lo absurdo (preposterous).</span><span class="pg">p. 122</span></div>
    <div class="cone"><svg viewBox="0 0 120 70"><ellipse cx="60" cy="35" rx="48" ry="24" fill="none" stroke="var(--f4)" stroke-width="1.5"/><path d="M20 35 L52 22 L52 48Z M44 35 L76 24 L76 46Z M68 35 L100 22 L100 48Z" fill="none" stroke="var(--f4)" stroke-width="1"/></svg><b>El cono como burrito</b><span>Rebaudengo: muchos presentes, muchos conos, bordes difusos.</span><span class="pg">p. 202</span></div></div>`},
- assemblage:{t:"Las cuatro reglas del Assemblage Space",p:"52",ph:"fr",h:()=>`<ol class="olist" style="${cv("fr")}">
-   <li><b>Curiosidad por el pasado</b>Tanta como por el futuro.</li>
-   <li><b>Cuidado con el presente</b>Lo reciente distorsiona y se ve más grande.</li>
-   <li><b>Conoce tu estrechez</b>Lo absurdo para ti es probable para otros.</li>
-   <li><b>No hay cono</b>Prismas para mirar, no prisiones.</li></ol><p class="note">John V. Willshire, Smithery.</p>`},
+ assemblage:{t:"Las cuatro reglas del Assemblage Space",p:"52",ph:"fr",wide:1,h:()=>`<div class="asd"><b>¿Qué es el Assemblage Space?</b> Un marco de John V. Willshire (Smithery) para pensar el tiempo. Toma las categorías del cono de futuros (lo probable, lo plausible, lo posible y lo absurdo) y las refleja hacia el pasado: lo tangible, lo intangible, lo recordado y lo olvidado. El libro no lo describe más allá de estas reglas; lo amplía la fuente que cita.</div>
+  <ol class="olist o4" style="${cv("fr")}">
+   <li><b>Curiosidad por el pasado</b>Ten tanta curiosidad por el pasado como por el futuro.</li>
+   <li><b>Cuidado con el presente</b>Lo reciente deforma la mirada: como en el retrovisor, se ve más grande.</li>
+   <li><b>Conoce tu estrechez</b>Lo que te parece absurdo puede ser muy probable para otros.</li>
+   <li><b>No hay cono</b>Ni Assemblage Space: son prismas para mirar, no prisiones.</li></ol><p class="note">John V. Willshire, Smithery · <button class="linkish" type="button" data-src="willshire">ver fuente</button></p>`},
  encuadre:{t:"Qué se define al encuadrar",p:"49, 51, 53, 54",ph:"fr",wide:1,h:()=>`<div class="fz">
    <div class="fz-q"><div><small>Punto de partida</small><b>Una pregunta que expresa una incertidumbre o una necesidad</b></div>${pg(53)}</div>
    <div class="fz-g">
