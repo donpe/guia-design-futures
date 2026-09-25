@@ -426,7 +426,9 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .toc button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px}
 .toc button b{font-family:var(--mono);font-weight:500;color:var(--accent);margin-right:6px}
 .toc button:hover{border-color:var(--accent)}
-.nextstep{display:flex;flex-direction:column;gap:2px;margin-top:40px;padding:16px 18px;border-radius:12px;background:var(--accent);color:var(--accent-ink);text-decoration:none;max-width:520px}
+.sec > .nextstep{margin-top:14px}
+.also{margin-top:14px;font-size:14.5px;color:var(--muted)}
+.nextstep{display:flex;flex-direction:column;gap:4px;margin-top:40px;padding:16px 18px;border-radius:12px;background:var(--accent);color:var(--accent-ink);text-decoration:none;max-width:520px}
 .nextstep small{font-family:var(--mono);font-size:11px;opacity:.8;text-transform:uppercase;letter-spacing:.06em}
 .nextstep b{font-family:var(--display);font-weight:600;font-size:20px}
 .nextstep span{font-size:14px;opacity:.9}
@@ -1307,7 +1309,7 @@ function viewEmpezar(){
     ${r("f5","Taking action","Del futuro imaginado a la acción.",192)}
    </div></section>
 
-  <section class="sec"><h2>Y ahora</h2>${nextHtml("empezar")}<div class="next" style="margin-top:12px"><a class="cta big ghost" href="#practica">Probarlo en un proyecto<small>lista paso a paso</small></a><a class="cta big ghost" href="https://designfutures.guide" target="_blank" rel="noopener">Ir al libro original ↗<small>designfutures.guide</small></a></div></section>`;
+  <section class="sec"><h2>Y ahora</h2>${nextHtml("empezar")}<p class="also">O también: <a href="#practica">probarlo en un proyecto</a> · <a href="https://designfutures.guide" target="_blank" rel="noopener">ir al libro original ↗</a></p></section>`;
 }
 
 function viewRecorrido(){
