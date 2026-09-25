@@ -107,9 +107,13 @@ p{margin:0}
 .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted)}
 .nav{display:flex;gap:2px;overflow-x:auto;width:100%;scrollbar-width:none;margin-bottom:-11px}
 .nav::-webkit-scrollbar{display:none}
-.nav a{padding:8px 12px 10px;font-size:14px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
-.nav a:hover{color:var(--ink)}
-.nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:500}
+.nav a{position:relative;padding:8px 12px 12px;font-size:14px;color:var(--muted);text-decoration:none;white-space:nowrap;border-radius:8px 8px 0 0;transition:color .18s,background .18s}
+.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
+.nav a:hover{color:var(--ink);background:var(--surface-2)}
+.nav a:hover::after{transform:scaleX(.35)}
+.nav a[aria-current="page"]{color:var(--accent);font-weight:600}
+.nav a[aria-current="page"]::after{transform:scaleX(1)}
+.nav .sep{flex:0 0 1px;background:var(--line);margin:8px 6px 14px}
 
 main{padding-block:28px 72px}
 .view-h{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;max-width:72ch}
@@ -397,6 +401,49 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .flow{counter-reset:f;list-style:none;padding:0!important}
 .flow li{counter-increment:f;display:grid;grid-template-columns:30px 1fr;gap:10px}
 .flow li::before{content:counter(f);font-family:var(--mono);font-size:12px;color:#fff;background:var(--purple);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;margin-top:2px}
+
+/* storytelling */
+.route4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.route4 a{position:relative;display:flex;flex-direction:column;gap:2px;padding:12px 14px 12px;text-decoration:none;color:var(--ink);border-left:1px solid var(--line)}
+.route4 a:first-child{border-left:0}
+.route4 a:hover{background:var(--surface-2)}
+.route4 a.on{background:var(--accent-soft)}
+.route4 .n{font-family:var(--mono);font-size:11px;color:var(--accent)}
+.route4 b{font-family:var(--display);font-weight:600;font-size:17px}
+.route4 span:not(.n){font-size:13px;color:var(--muted)}
+.route4 small{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+.route-h{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.act{display:flex;align-items:center;gap:10px;margin:48px 0 -6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);scroll-margin-top:150px}
+.act span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:11px;letter-spacing:0}
+.act::after{content:"";flex:1;height:1px;background:var(--line)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:18px}
+.toc button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px}
+.toc button b{font-family:var(--mono);font-weight:500;color:var(--accent);margin-right:6px}
+.toc button:hover{border-color:var(--accent)}
+.nextstep{display:flex;flex-direction:column;gap:2px;margin-top:40px;padding:16px 18px;border-radius:12px;background:var(--accent);color:var(--accent-ink);text-decoration:none;max-width:520px}
+.nextstep small{font-family:var(--mono);font-size:11px;opacity:.8;text-transform:uppercase;letter-spacing:.06em}
+.nextstep b{font-family:var(--display);font-weight:600;font-size:20px}
+.nextstep span{font-size:14px;opacity:.9}
+@media (max-width:760px){.route4{grid-template-columns:1fr 1fr}.route4 a:nth-child(3){border-left:0}.route4 a:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* hover y transiciones */
+.sub,.route a,.route4 a,a.term,.voice,.toc button,.cta,.nextstep,.chip,.letters a,.agent-row .pg,.lhead{transition:background .18s,border-color .18s,color .18s,transform .18s,box-shadow .18s}
+.sub:hover{border-color:var(--c);background:var(--cs);color:var(--c)}
+.sub:hover .pg{color:var(--c)}
+.step{transition:background .2s}
+.step:hover{background:linear-gradient(180deg,var(--cs,transparent),transparent 70%)}
+.step:hover h3{color:var(--c)}
+a.term:hover,.route a:hover{transform:translateY(-2px);box-shadow:0 6px 18px -10px var(--c,var(--accent));border-color:var(--c)}
+a.term:hover h3{color:var(--c)}
+.route4 a:hover{background:var(--accent-soft)}
+.route4 a:hover b{color:var(--accent)}
+.cta:hover,.nextstep:hover{transform:translateY(-1px);box-shadow:0 8px 20px -12px var(--ink)}
+.nextstep:hover b{text-decoration:underline;text-underline-offset:3px}
+.toc button:hover{background:var(--accent-soft)}
+.voice:hover{transform:translateY(-1px)}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.letters a:hover{background:var(--accent);color:var(--accent-ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}a.term:hover,.route a:hover,.cta:hover,.nextstep:hover,.voice:hover{transform:none}}
 @media (max-width:900px){
   .proc{grid-template-columns:1fr}
   .step{border-left:none;border-top:1px solid var(--line)}
@@ -1095,8 +1142,17 @@ function pix(color, rows, cls){
 }
 function igHtml(k){ const g=IG[k]; return `<section class="ig ${g.wide?"wide":""}" id="ig-${k}" style="${cv(g.c||g.ph)}"><div class="ig-h"><div><span class="ig-st">${esc(g.st||"")}</span><h3>${esc(g.t)}</h3></div>${pg(g.p)}</div>${g.q?`<p class="ig-ctx"><b>${esc(g.q)}</b> ${esc(g.w)}</p>`:""}${g.h()}</section>`; }
 
+const ROUTE=[["empezar","Entender","Qué es y de dónde viene","Empezar aquí"],["recorrido","Recorrer","Los 5 pasos de un proyecto","Recorrido"],["libro","Profundizar","Cada página, cada concepto","Leer el libro"],["practica","Aplicar","Llevarlo a tu proyecto","Práctica"]];
+function routeHtml(cur){
+  return `<nav class="route4" aria-label="Ruta sugerida">${ROUTE.map(([r,v,d,n],i)=>`<a href="#${r}" class="${r===cur?"on":""}"><span class="n">${i+1}</span><b>${v}</b><span>${d}</span><small>${n}</small></a>`).join("")}</nav>`;
+}
+function nextHtml(cur){
+  const i=ROUTE.findIndex(x=>x[0]===cur); const nx=ROUTE[i+1]; if(!nx) return "";
+  return `<a class="nextstep" href="#${nx[0]}"><small>Siguiente en la ruta · ${i+2} de 4</small><b>${nx[1]}: ${nx[3]} →</b><span>${nx[2]}</span></a>`;
+}
+const act=(n,t,id)=>`<div class="act" id="${id}"><span>${n}</span>${t}</div>`;
 function procHtml(){
-  return `<div class="proc">${STEPS.map(s=>`<div class="step" style="--c:var(--${s.c})"><span class="n">PASO ${s.n}</span><h3>${esc(s.es)}</h3><p>${esc(s.d)}</p>
+  return `<div class="proc">${STEPS.map(s=>`<div class="step" style="--c:var(--${s.c});--cs:var(--${s.c}s)"><span class="n">PASO ${s.n}</span><h3>${esc(s.es)}</h3><p>${esc(s.d)}</p>
     <div class="subs">${s.phases.map(k=>`<a class="sub" href="#${SLUG_OF[k]}"><span>${esc(PH[k].t)}</span><span class="pg">p. ${PH[k].pp}</span></a>`).join("")}</div></div>`).join("")}</div>
     <div class="proc-foot"><span>Antes del proceso: <a href="#marco">Design Futures</a> (p. 27–48).</span><span>Después: <a href="#vivo">Está vivo</a> (p. 196–207).</span><span>Los autores aclaran que es una propuesta: puedes no seguirla, criticarla o reemplazarla (p. 22).</span></div>`;
 }
@@ -1108,7 +1164,7 @@ const state = { libroPh:"todas", libroTy:"todos", libroVoz:"", srcFilter:"todas"
 
 function renderNav(){
   const phaseRoute = SLUG[route] ? "recorrido" : route;
-  $("#nav").innerHTML = NAV.map(([k,t])=>`<a href="#${k}" ${phaseRoute===k&&!q?'aria-current="page"':""}>${t}</a>`).join("");
+  $("#nav").innerHTML = NAV.map(([k,t])=>`${k==="fuentes"?'<span class="sep" aria-hidden="true"></span>':""}<a href="#${k}" ${phaseRoute===k&&!q?'aria-current="page"':""}>${t}</a>`).join("");
 }
 
 function viewInicio(){
@@ -1121,11 +1177,15 @@ function viewInicio(){
       <p class="lead"><b>The Field Guide to Design Futures</b> cuenta cómo se diseñan futuros hoy. Es una práctica que une el diseño con los estudios de futuros para imaginar alternativas, volverlas tangibles con historias, prototipos y artefactos, y usarlas para cuestionar supuestos y decidir mejor en el presente (p. 31).</p>
       <p class="lead2">No es un manual de métodos: es una guía de campo de Giovanni Caruso y Silvio Cioni con más de treinta voces de la academia y la práctica. Sirve a quien diseña, investiga, hace estrategia o activismo, o simplemente quiere pensar qué hacer después (pp. 14, 21). Esta guía en español te ayuda a leerlo, entenderlo y llevarlo a un proyecto.</p>
       <div class="meta">${pg("11–231")}<span class="pg"><b>${nF}</b> fichas</span><span class="pg"><b>${nC}</b> conceptos</span><span class="pg"><b>${nS}</b> fuentes</span><span class="pg"><b>${nV}</b> voces</span></div>
-      <div class="hero-cta"><a class="cta big ghost" href="#empezar">¿Nuevo en esto? Empieza aquí<small>resumen en 5 minutos</small></a></div>
+      <div class="hero-cta"><a class="cta big" href="#empezar">¿Nuevo en esto? Empieza aquí<small>resumen en 5 minutos</small></a><a class="cta big ghost" href="#recorrido">Ver el recorrido<small>los 5 pasos · p. 42</small></a></div>
     </div>
     <figure class="ill-box" style="${cv("f1")}">${pix("var(--red)",6,"a")}${pix("var(--purple)",5,"b")}<img class="ill" src="img/p41.png" alt="Ilustración de Stefano Cardini: un ojo dentro de una cabeza, atravesado por un haz de luz que viene de una nube sonriente."><figcaption>Stefano Cardini · p. 41</figcaption></figure>
   </section>
+  <p class="route-h">Una ruta sugerida para recorrer esta guía</p>${routeHtml("")}
   <section class="sec"><h2>El recorrido ${pg("42")}</h2>${procHtml()}</section>
+  <section class="sec"><h2>El libro, en sus propias palabras</h2>
+    <div class="igs">${igHtml("textos")}${igHtml("mente")}</div>
+  </section>
   <section class="sec"><h2>Cómo leer este sitio</h2>
     <p class="howto">Todo lo que ves aquí sale del libro y lleva su página. Puedes seguir el recorrido de un proyecto, leer cada página resumida, repasar conceptos, ver infografías, marcar tu avance en la práctica y consultar todas las fuentes que el libro cita.</p>
     <div class="rules">
@@ -1134,9 +1194,6 @@ function viewInicio(){
       <div class="rule"><h3>Nada inventado</h3><p>Las infografías solo ordenan lo que el libro dice. Si el libro no da un dato (por ejemplo, valores para la disonancia), el sitio lo aclara.</p></div>
       <div class="rule"><h3>Enlaces con etiqueta</h3><p>En Fuentes se distingue el enlace que imprime el libro del que se encontró después y que el libro no trae.</p></div>
     </div>
-  </section>
-  <section class="sec"><h2>El libro, en sus propias palabras</h2>
-    <div class="igs">${igHtml("textos")}${igHtml("mente")}</div>
   </section>
   <section class="sec"><h2>Relación con Campo de Futuros ${`<span class="eyebrow">tu agente</span>`}</h2>
     <p style="color:var(--muted);max-width:70ch;margin-bottom:12px">Cada módulo del agente se apoya en una parte del libro. Úsalo para ir a la teoría que hay detrás de lo que hace.</p>
@@ -1153,6 +1210,9 @@ function viewEmpezar(){
   <p class="intro-lead">Design Futures es usar el diseño para <mark>imaginar varios futuros posibles</mark>, hacerlos tangibles con historias y objetos, y usarlos para <mark>decidir mejor hoy</mark>.</p>
   <p style="color:var(--muted);margin-top:10px">Resumen de la definición de los autores, p. 31. Lo que sigue es una selección de esta guía para orientarte; cada punto lleva su página.</p>
 
+  <div class="toc"><button type="button" data-jump="a1"><b>1</b>Qué es</button><button type="button" data-jump="a2"><b>2</b>Cómo se piensa</button><button type="button" data-jump="a3"><b>3</b>Cómo se hace</button><button type="button" data-jump="a4"><b>4</b>Antes de abrir el libro</button></div>
+
+  ${act("1","Qué es","a1")}
   <section class="sec"><h2>Dos campos que se juntan</h2>
    <p class="ctx">Design Futures nace del cruce de dos tradiciones que durante años trabajaron por separado. Los autores cuentan más de quince años en los que se fueron «chocando y mezclando» (p. 25). Entender qué aporta cada una ayuda a leer el resto del libro.</p>
    <div class="duo">
@@ -1180,6 +1240,7 @@ function viewEmpezar(){
     <li><b>otro Design Thinking</b><span>Futures Thinking es una mentalidad; Design Futures es una práctica. No se empaquetan igual.</span>${pg(40)}</li>
    </ul></section>
 
+  ${act("2","Cómo se piensa","a2")}
   <section class="sec"><h2>Cinco ideas para entender el resto</h2>
    <ol class="ideas">
     ${idea("f1","Es plural: futuros","No hay un solo futuro por adivinar sino muchos posibles. Por eso el libro dice «futures», en plural.","30, 123")}
@@ -1189,23 +1250,21 @@ function viewEmpezar(){
     ${idea("f5","El objetivo es la conversación","No se mide si el artefacto es usable: se busca provocar debate, dudas y decisiones distintas en el presente.","45, 191")}
    </ol></section>
 
+  <section class="sec"><h2>Seis palabras para no perderse</h2>
+   <div class="words">
+    <div><b>Señal</b>Indicio pequeño de que algo podría cambiar. p. 70</div>
+    <div><b>Driver</b>Fuerza de cambio que agrupa muchas señales. p. 71</div>
+    <div><b>Escenario</b>Historia con evidencia sobre un futuro posible. p. 121</div>
+    <div><b>Artefacto del futuro</b>Objeto ficticio y plausible para conversar. p. 156</div>
+    <div><b>Framing</b>Definir la pregunta, el alcance y lo que importa. p. 49</div>
+    <div><b>Más-que-humano</b>Incluir a lo no humano en el diseño de futuros. p. 134–137</div>
+   </div>
+   <p style="margin-top:10px"><a href="#conceptos">Ver los ${CONCEPTS.length} conceptos →</a></p></section>
+
+  ${act("3","Cómo se hace","a3")}
   <section class="sec"><h2>El camino de un proyecto ${pg(42)}</h2>${procHtml()}</section>
 
-  <section class="sec"><h2>Una primera lectura: diez páginas</h2>
-   <p style="color:var(--muted);margin-bottom:12px;max-width:70ch">Selección de esta guía, no del libro. Tócalas para leer su ficha. El libro se puede leer en cualquier orden (p. 21).</p>
-   <div class="route">
-    ${r("f1","Design Futures","La definición.",31)}
-    ${r("f1","Mentalidad, no práctica","Futures Thinking vs. Design Futures.",40)}
-    ${r("f1","Futuring by Design","El proceso en cinco pasos.",42)}
-    ${r("f1","Framing","Cómo se encuadra un proyecto.",49)}
-    ${r("f2","Señales","Qué son y para qué sirven.",70)}
-    ${r("f2","Qué hace que una señal importe","Cómo filtrar.",75)}
-    ${r("f3","Escenarios","Historias con evidencia, en conjuntos.",121)}
-    ${r("f4","Artefactos del futuro","Objetos para conversar.",156)}
-    ${r("f4","Principios experienciales","El iceberg y la doble mirada.",174)}
-    ${r("f5","Taking action","Del futuro imaginado a la acción.",192)}
-   </div></section>
-
+  ${act("4","Antes de abrir el libro","a4")}
   <section class="sec"><h2>Las gracias del libro</h2>
    <p style="color:var(--muted);margin-bottom:12px;max-width:70ch">Es un libro serio que no se toma demasiado en serio. Algunas de sus salidas, contadas brevemente.</p>
    <div class="gracias">
@@ -1223,26 +1282,35 @@ function viewEmpezar(){
     ${g("Las partidas de Uno","En la dedicatoria, Giovanni se declara decidido a ganar todas las partidas de Uno que le quedan por jugar con Alice y Leone… aunque está listo para dejar ir algunas.","dedicatoria")}
    </div></section>
 
-  <section class="sec"><h2>Seis palabras para no perderse</h2>
-   <div class="words">
-    <div><b>Señal</b>Indicio pequeño de que algo podría cambiar. p. 70</div>
-    <div><b>Driver</b>Fuerza de cambio que agrupa muchas señales. p. 71</div>
-    <div><b>Escenario</b>Historia con evidencia sobre un futuro posible. p. 121</div>
-    <div><b>Artefacto del futuro</b>Objeto ficticio y plausible para conversar. p. 156</div>
-    <div><b>Framing</b>Definir la pregunta, el alcance y lo que importa. p. 49</div>
-    <div><b>Más-que-humano</b>Incluir a lo no humano en el diseño de futuros. p. 134–137</div>
-   </div>
-   <p style="margin-top:10px"><a href="#conceptos">Ver los ${CONCEPTS.length} conceptos →</a></p></section>
+  <section class="sec"><h2>Una primera lectura: diez páginas</h2>
+   <p style="color:var(--muted);margin-bottom:12px;max-width:70ch">Selección de esta guía, no del libro. Tócalas para leer su ficha. El libro se puede leer en cualquier orden (p. 21).</p>
+   <div class="route">
+    ${r("f1","Design Futures","La definición.",31)}
+    ${r("f1","Mentalidad, no práctica","Futures Thinking vs. Design Futures.",40)}
+    ${r("f1","Futuring by Design","El proceso en cinco pasos.",42)}
+    ${r("f1","Framing","Cómo se encuadra un proyecto.",49)}
+    ${r("f2","Señales","Qué son y para qué sirven.",70)}
+    ${r("f2","Qué hace que una señal importe","Cómo filtrar.",75)}
+    ${r("f3","Escenarios","Historias con evidencia, en conjuntos.",121)}
+    ${r("f4","Artefactos del futuro","Objetos para conversar.",156)}
+    ${r("f4","Principios experienciales","El iceberg y la doble mirada.",174)}
+    ${r("f5","Taking action","Del futuro imaginado a la acción.",192)}
+   </div></section>
 
-  <section class="sec"><h2>Y ahora</h2>
-   <div class="next"><a class="cta big" href="#recorrido">Seguir el recorrido<small>los 5 pasos, con teoría y práctica</small></a><a class="cta big ghost" href="#practica">Probarlo en un proyecto<small>lista paso a paso</small></a><a class="cta big ghost" href="https://designfutures.guide" target="_blank" rel="noopener">Ir al libro original ↗<small>designfutures.guide</small></a></div></section>`;
+  <section class="sec"><h2>Y ahora</h2>${nextHtml("empezar")}<div class="next" style="margin-top:12px"><a class="cta big ghost" href="#practica">Probarlo en un proyecto<small>lista paso a paso</small></a><a class="cta big ghost" href="https://designfutures.guide" target="_blank" rel="noopener">Ir al libro original ↗<small>designfutures.guide</small></a></div></section>`;
 }
+
 function viewRecorrido(){
   return `<div class="view-h"><span class="eyebrow">Paso a paso</span><h1>El recorrido de un proyecto</h1><p>El libro ordena sus páginas siguiendo, más o menos, el camino de un proyecto de Design Futures. Entra a cada momento para ver su definición, sus ideas clave, las voces que lo discuten y las infografías.</p></div>
-  ${procHtml()}
+  ${routeHtml("recorrido")}
+  ${act("1","El mapa: cinco pasos","r1")}
+  <div style="margin-top:18px">${procHtml()}</div>
+  ${act("2","Las secciones del libro, en orden","r2")}
   <section class="sec"><h2>Todas las secciones</h2>
    <div class="gloss">${["df","fr","sc","sm","vi","di","as","ta","viva"].map(k=>{const n=FICHAS.filter(f=>f.ph===k).length; const def=FICHAS.find(f=>f.ph===k&&f.ty==="a"); return `<a class="term" href="#${SLUG_OF[k]}" style="${cv(k)};text-decoration:none;color:inherit"><span class="pg">p. ${PH[k].pp} · ${n} fichas</span><h3>${esc(phName(k))}</h3><p style="color:var(--muted)">${esc((def?.x||"").split(". ")[0])}.</p></a>`;}).join("")}</div></section>
-  <section class="sec">${igHtml("cono")}</section>`;
+  ${act("3","Un aviso: el camino no es una línea","r3")}
+  <section class="sec">${igHtml("cono")}</section>
+  ${nextHtml("recorrido")}`;
 }
 
 function viewFase(k){
@@ -1477,6 +1545,7 @@ window.addEventListener("hashchange", ()=>{ const h=location.hash.slice(1); if(h
 document.addEventListener("click", e=>{
   const a = e.target.closest('a[href^="#"]');
   if (a && !a.dataset.letter && !a.dataset.goto){ e.preventDefault(); const r=a.getAttribute("href").slice(1); state.phTy="todos"; go(r); return; }
+  const jp = e.target.closest("[data-jump]"); if (jp){ const el=document.getElementById(jp.dataset.jump); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); return; }
   const lt = e.target.closest("[data-letter]"); if (lt){ e.preventDefault(); const el=document.getElementById("c-"+lt.dataset.letter); if(el) el.scrollIntoView({block:"start"}); return; }
   const sb = e.target.closest("[data-src]"); if (sb){ state.srcFilter="todas"; state.srcHi=sb.dataset.src; go("fuentes",{scrollTo:"s-"+sb.dataset.src}); return; }
   const gt = e.target.closest("[data-goto]"); if (gt){ e.preventDefault(); const p=+gt.dataset.goto; const f=FICHAS.find(x=>x.p===p); if(f){ state.libroPh=f.ph; state.libroTy="todos"; state.libroVoz=""; go("libro"); } return; }
