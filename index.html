@@ -399,6 +399,8 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--c,var(--muted));pa
 .tech pre{font-family:var(--mono);font-size:12.5px;line-height:1.5;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:0}
 .stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;max-width:none}
 .stack div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px}
+.who-card{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:10px;padding:14px 16px}
+.who-card b{font-family:var(--display);font-weight:600;font-size:17px}
 .stack b{display:block;font-family:var(--display);font-weight:500;font-size:16px;color:var(--accent);margin-bottom:2px}
 .flow{counter-reset:f;list-style:none;padding:0!important}
 .flow li{counter-increment:f;display:grid;grid-template-columns:30px 1fr;gap:10px}
@@ -1486,7 +1488,7 @@ function viewSobre(){
    <section class="sec"><h2>Con qué está hecho</h2>
     <div class="stack">
      <div><b>HTML, CSS y JavaScript</b>Sin librerías ni pasos de compilación. Plantillas con <i>template literals</i>.</div>
-     <div><b>Claude Code</b>El agente de Anthropic escribió el código y los resúmenes, en conversación con la persona que editó la guía.</div>
+     <div><b>Claude Code</b>El agente de Anthropic escribió el código y los resúmenes, en conversación con Evelio Ramírez, que editó la guía.</div>
      <div><b>Poppler</b><code>pdftotext</code> y <code>pdftoppm</code> para sacar el texto página por página y muestrear colores del PDF.</div>
      <div><b>Google Fonts</b>Bricolage Grotesque (títulos), IBM Plex Sans (texto) e IBM Plex Mono (datos y páginas).</div>
      <div><b>GitHub Pages</b>Hospeda la versión pública, generada con un script de Python de 40 líneas.</div>
@@ -1519,6 +1521,10 @@ IG        ${nI} infografías, dibujadas con HTML, CSS y SVG</pre>
      <li><b>Responsive.</b> Las infografías usan <i>container queries</i>: se reacomodan según el ancho de su caja, no el de la pantalla.</li>
      <li><b>Ilustraciones.</b> Diez dibujos de Stefano Cardini recortados del PDF y nombrados por su página impresa (<code>img/p41.png</code>).</li>
     </ul></section>
+
+   <section class="sec"><h2>Quién está detrás</h2>
+    <p class="who-card"><b>Evelio Ramírez</b> ideó, curó y editó esta guía. Máster en Innovation Management de la Universidad EAFIT.</p>
+   </section>
 
    <section class="sec"><h2>Código y licencia</h2>
     <p>El código y el contenido están en <a href="https://github.com/donpe/guia-design-futures" target="_blank" rel="noopener">github.com/donpe/guia-design-futures</a>. El archivo fuente es <code>index.html</code>; el script <code>build.py</code> le agrega la cabecera HTML completa y genera la carpeta <code>docs/</code> que publica GitHub Pages.</p>
