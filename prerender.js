@@ -25,7 +25,7 @@ globalThis.addEventListener = () => {};
 globalThis.scrollTo = () => {};
 globalThis.requestAnimationFrame = f => f();
 globalThis.location = { hash: "" };
-globalThis.history = { pushState(){} };
+globalThis.history = { pushState(){}, replaceState(){} };
 globalThis.localStorage = { getItem(){ return null; }, setItem(){} };
 
 new Function(js)();

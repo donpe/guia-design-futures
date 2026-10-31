@@ -125,7 +125,7 @@ def page_html(r):
 <link rel="canonical" href="{url}">
 <meta name="author" content="Evelio Ramirez">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#602866">
+<meta name="theme-color" content="#FBF9FB" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#151016" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="Guía de estudio · The Field Guide to Design Futures">
