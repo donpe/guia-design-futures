@@ -714,13 +714,13 @@ html,body{overflow-x:clip}
 /* pie: la contraportada */
 .foot{display:block;border-top:0;margin-top:clamp(56px,7vw,96px);background:var(--purple);color:#fff;position:relative;overflow:hidden;padding:0;font-size:16px}
 .foot .wrap{padding-block:clamp(40px,5vw,64px) 32px}
-.foot-big{font-family:var(--display);font-weight:700;font-size:clamp(38px,7.4vw,108px);letter-spacing:-.045em;line-height:.95;margin:0}
+.foot-big{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4vw,46px);letter-spacing:-.035em;line-height:1;margin:0}
 .foot-cols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;margin-top:32px}
 .foot-cols p{opacity:.86;margin:0;max-width:62ch}
 .foot-cols p + p{margin-top:10px}
 .foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .foot a{color:#fff}
-.foot-px{position:absolute;right:0;top:0;width:min(300px,38%)}
+.foot-px{position:absolute;right:0;top:0;width:min(200px,30%)}
 
 @media (max-width:980px){
   .hero,.ph-head{grid-template-columns:1fr}
@@ -784,8 +784,12 @@ span.pg b::before{content:none!important}
 .hero2 h1{grid-area:t;max-width:none;font-size:clamp(38px,5.2vw,76px)}
 .hero2 .hero-text{grid-area:x}
 .hero2 .hero-text .lead{margin-top:0}
-.hero2 > figure{grid-area:f;max-width:none;width:100%}
+.hero2{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
+.hero2 > figure{grid-area:f;width:100%;max-width:440px;justify-self:end}
+.hero2 > figure .ill{aspect-ratio:1/1;object-position:50% 38%}
 @media (max-width:980px){.hero2{grid-template-columns:1fr;grid-template-areas:"t" "x" "f"}.hero2 > figure{max-width:420px}}
+.crop{display:block;overflow:hidden}
+.crop .ill{display:block}
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -1527,7 +1531,7 @@ function viewInicio(){
       <p class="lead2">No es un manual de métodos: es una guía de campo de Giovanni Caruso y Silvio Cioni con más de treinta voces de la academia y la práctica. Sirve a quien diseña, investiga, hace estrategia o activismo, o simplemente quiere pensar qué hacer después (pp. 14, 21). Esta guía en español te ayuda a leerlo, entenderlo y llevarlo a un proyecto.</p>
       <div class="hero-cta"><a class="cta" href="#empezar">¿Nuevo en esto? Empieza aquí</a><a class="tlink" href="#recorrido">Ver los 5 pasos →</a></div>
     </div>
-    <figure class="ill-box" style="${cv("f1")}">${pix("var(--red)",6,"a")}${pix("var(--purple)",5,"b")}<img class="ill" src="img/p41.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini: un ojo dentro de una cabeza, atravesado por un haz de luz que viene de una nube sonriente."><figcaption>Stefano Cardini · p. 41</figcaption></figure>
+    <figure class="ill-box" style="${cv("f1")}">${pix("var(--red)",6,"a")}${pix("var(--purple)",5,"b")}<span class="crop"><img class="ill" src="img/p41.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini: un ojo dentro de una cabeza, atravesado por un haz de luz que viene de una nube sonriente."></span><figcaption>Stefano Cardini · p. 41</figcaption></figure>
   </section>
   <section class="sec"><h2>Por dónde recorrer esta guía</h2><p class="intro">Cuatro momentos, en el mismo orden del menú. Puedes entrar por cualquiera.</p>${routeHtml("")}</section>
   <section class="sec"><h2>El recorrido de un proyecto, en cinco pasos</h2><p class="intro">Los autores lo llaman Futuring by Design ${pg(42)}.</p>${procHtml(true)}</section>
@@ -1700,7 +1704,7 @@ function viewFase(k){
       ${def?`<div class="ph-def"><p>${esc(first)}</p></div><p class="ph-def-src">Texto de los autores, ${pg(def.p)}${def.x.includes("\n\n")?` · <button type="button" class="tbtn" data-jump="f-${def.p}">seguir leyendo ↓</button>`:""}</p>`:""}
       ${keys.map(f=>`<div class="key"><b>${esc(f.t)}</b><p>${esc(f.x.split(/\n|\. /)[0].replace(/\.$/,""))}.</p>${pg(f.p)}</div>`).join("")}
     </div>
-    ${ph.img?`<figure class="ill-box"><img class="ill" src="img/p${ph.img}.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini que abre la sección ${esc(ph.t)} (p. ${ph.img})."><figcaption>Stefano Cardini · ${pg(ph.img)}</figcaption></figure>`:""}
+    ${ph.img?`<figure class="ill-box"><span class="crop"><img class="ill" src="img/p${ph.img}.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini que abre la sección ${esc(ph.t)} (p. ${ph.img})."></span><figcaption>Stefano Cardini · ${pg(ph.img)}</figcaption></figure>`:""}
   </div>
   ${igs.length?`<div class="band tinted"><section class="sec"><h2>Infografías</h2><div class="igs one">${igs.map(igHtml).join("")}</div></section></div>`:""}
   ${prac?`<section class="sec"><h2>En la práctica</h2><p class="intro">Lo que el libro propone hacer en este paso. <a href="#practica">Ver la lista completa →</a></p>${pstepHtml(step, k)}</section>`:""}
