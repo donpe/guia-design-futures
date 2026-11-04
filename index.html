@@ -776,6 +776,11 @@ span.pg b::before{content:none!important}
   .hero2 > figure{max-width:320px}
   .hero2 > figure .crop{aspect-ratio:1/1;flex:none;min-height:0}
 }
+
+/* ideas clave a todo el ancho; cada una lleva a su texto */
+.keys2{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:16px}
+.keys2 .key{max-width:none;margin:0;border:0;font:inherit;color:inherit;text-align:left;cursor:pointer;align-content:start;transition:background .15s}
+.keys2 .key:hover{background:var(--cs)}
 </style>
 
 <a class="skip" href="#view" data-skip>Saltar al contenido</a>
@@ -1684,10 +1689,10 @@ function viewFase(k){
       <h1 translate="no">${esc(ph.t)}</h1>
       <p class="ph-sub">${ph.es?`${esc(ph.es)} · `:""}${step?`paso ${step.n} de 5 · `:""}${ppg(ph.pp)}</p>
       ${def?`<div class="ph-def"><p>${esc(first)}</p></div><p class="ph-def-src">Texto de los autores, ${pg(def.p)}${def.x.includes("\n\n")?` · <button type="button" class="tbtn" data-jump="f-${def.p}">seguir leyendo ↓</button>`:""}</p>`:""}
-      ${keys.map(f=>`<div class="key"><b>${esc(f.t)}</b><p>${esc(f.x.split(/\n|\. /)[0].replace(/\.$/,""))}.</p>${pg(f.p)}</div>`).join("")}
     </div>
     ${ph.img?`<figure class="ill-box"><span class="crop"><img class="ill" src="img/p${ph.img}.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini que abre la sección ${esc(ph.t)} (p. ${ph.img})."></span><figcaption>Stefano Cardini · ${pg(ph.img)}</figcaption></figure>`:""}
   </div>
+  ${keys.length?`<section class="sec"><h2>Ideas clave de los autores</h2><div class="keys2">${keys.map(f=>`<button type="button" class="key" data-jump="f-${f.p}"><b>${esc(f.t)}</b><p>${esc(f.x.split(/\n|\. /)[0].replace(/\.$/,""))}.</p>${pg(f.p)}</button>`).join("")}</div></section>`:""}
   ${igs.length?`<div class="band tinted"><section class="sec"><h2>Infografías</h2><div class="igs one">${igs.map(igHtml).join("")}</div></section></div>`:""}
   ${prac?`<section class="sec"><h2>En la práctica</h2><p class="intro">Lo que el libro propone hacer en este paso. <a href="#practica">Ver la lista completa →</a></p>${pstepHtml(step, k)}</section>`:""}
   <section class="sec"><h2>Los textos de esta sección</h2>
