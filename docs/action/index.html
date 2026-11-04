@@ -790,6 +790,19 @@ span.pg b::before{content:none!important}
 @media (max-width:980px){.hero2{grid-template-columns:1fr;grid-template-areas:"t" "x" "f"}.hero2 > figure{max-width:420px}}
 .crop{display:block;overflow:hidden}
 .crop .ill{display:block}
+
+/* v2.2: la ilustración ocupa el alto exacto del bloque de texto */
+.hero2{grid-template-columns:minmax(0,1.7fr) minmax(0,.72fr);grid-template-areas:"t f" "x f";column-gap:clamp(28px,4vw,56px);row-gap:clamp(16px,2vw,24px);align-items:stretch}
+.hero2 h1{font-size:clamp(36px,4.1vw,58px)}
+.hero2 > figure{grid-area:f;max-width:none;justify-self:stretch;align-self:stretch;display:flex;flex-direction:column;margin:0}
+.hero2 > figure .crop{flex:1 1 auto;min-height:260px;position:relative}
+.hero2 > figure .ill{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 40%}
+.hero2 .hero-text{align-self:end}
+@media (max-width:980px){
+  .hero2{grid-template-columns:1fr;grid-template-areas:"t" "x" "f"}
+  .hero2 > figure{max-width:320px}
+  .hero2 > figure .crop{aspect-ratio:1/1;flex:none;min-height:0}
+}
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
