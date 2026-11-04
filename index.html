@@ -568,8 +568,9 @@ ol.proc .subs{display:flex;flex-direction:column;gap:0;margin-top:10px}
 .proc-note{margin-top:18px;font-size:16px;color:var(--muted)}
 
 /* la hoja impresa sobre un campo de color (y la franja de color en las fases) */
-.band{background:var(--accent-soft);box-shadow:0 0 0 100vmax var(--accent-soft);clip-path:inset(0 -100vmax);margin-top:clamp(40px,5vw,64px);padding-block:clamp(32px,4vw,56px)}
-.band.tinted{background:var(--cs);box-shadow:0 0 0 100vmax var(--cs)}
+html,body{overflow-x:clip}
+.band{background:var(--accent-soft);margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - 50%);margin-top:clamp(40px,5vw,64px);padding-block:clamp(32px,4vw,56px)}
+.band.tinted{background:var(--cs)}
 .band > .sec:first-child{margin-top:0}
 .sheet{background:var(--surface);max-width:760px;margin:0 auto;padding:clamp(24px,4.5vw,56px)}
 .sheet h2{font-size:clamp(26px,2.8vw,36px);text-align:center}
@@ -735,6 +736,29 @@ ol.proc .subs{display:flex;flex-direction:column;gap:0;margin-top:10px}
 .t-c{background:var(--surface-2)}
 span.pg b{font-family:var(--mono)!important;font-size:inherit!important;font-weight:500!important;letter-spacing:0!important;line-height:inherit!important;display:inline!important;margin:0!important}
 span.pg b::before{content:none!important}
+
+/* v2.1: filtros con rótulo, inicio con la ilustración protagonista, restos */
+.fgroups{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px 28px;margin-bottom:6px}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fl{font-size:14px;font-weight:600;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.sel{appearance:none;-webkit-appearance:none;font:inherit;font-size:16px;color:var(--ink);background-color:var(--surface-2);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23602866' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding:8px 38px 8px 14px;min-height:40px;border:0;cursor:pointer;max-width:100%}
+.sel:hover{background-color:var(--accent-soft)}
+.sel:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip{min-height:40px}
+.count{flex-basis:100%;margin:2px 0 0;font-family:var(--body);font-size:14px;color:var(--muted)}
+.nextstep small{text-transform:none;letter-spacing:0;font-family:var(--body);font-size:14px}
+.toc button{border:0;background:var(--surface-2)}
+.toc button:hover{background:var(--accent-soft)}
+.agent,.agent-row{border:0!important}
+.agent{background:none;display:flex;flex-direction:column;gap:4px}
+.agent-row{background:var(--surface)}
+.hero2{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-areas:"t t" "x f";align-items:start;row-gap:clamp(18px,2.4vw,30px)}
+.hero2 h1{grid-area:t;max-width:none;font-size:clamp(38px,5.2vw,76px)}
+.hero2 .hero-text{grid-area:x}
+.hero2 .hero-text .lead{margin-top:0}
+.hero2 > figure{grid-area:f;max-width:none;width:100%}
+@media (max-width:980px){.hero2{grid-template-columns:1fr;grid-template-areas:"t" "x" "f"}.hero2 > figure{max-width:420px}}
 </style>
 
 <a class="skip" href="#view" data-skip>Saltar al contenido</a>
@@ -1465,9 +1489,9 @@ const AZAR = () => FICHAS.filter(f=>(f.ty==="a"||f.ty==="c") && (()=>{const w=f.
 function azarFicha(){ const pool=AZAR(); if(!pool.length) return null; if(state.azar==null || state.azar>=pool.length) state.azar=Math.floor(Math.random()*pool.length); return pool[state.azar]; }
 function viewInicio(){
   const f = azarFicha();
-  return `<section class="hero">
-    <div>
-      <h1>Una guía para leer, estudiar y <em>usar</em> la guía de campo.</h1>
+  return `<section class="hero hero2">
+    <h1>Una guía para leer, estudiar y <em>usar</em> la guía de campo.</h1>
+    <div class="hero-text">
       <p class="lead"><b>The Field Guide to Design Futures</b> cuenta cómo se diseñan futuros hoy. Es una práctica que une el diseño con los estudios de futuros para imaginar alternativas, volverlas tangibles con historias, prototipos y artefactos, y usarlas para cuestionar supuestos y decidir mejor en el presente ${pg(31)}.</p>
       <p class="lead2">No es un manual de métodos: es una guía de campo de Giovanni Caruso y Silvio Cioni con más de treinta voces de la academia y la práctica. Sirve a quien diseña, investiga, hace estrategia o activismo, o simplemente quiere pensar qué hacer después (pp. 14, 21). Esta guía en español te ayuda a leerlo, entenderlo y llevarlo a un proyecto.</p>
       <div class="hero-cta"><a class="cta" href="#empezar">¿Nuevo en esto? Empieza aquí</a><a class="tlink" href="#recorrido">Ver los 5 pasos →</a></div>
@@ -1650,7 +1674,7 @@ function viewFase(k){
   ${igs.length?`<div class="band tinted"><section class="sec"><h2>Infografías</h2><div class="igs one">${igs.map(igHtml).join("")}</div></section></div>`:""}
   ${prac?`<section class="sec"><h2>En la práctica</h2><p class="intro">Lo que el libro propone hacer en este paso. <a href="#practica">Ver la lista completa →</a></p>${pstepHtml(step, k)}</section>`:""}
   <section class="sec"><h2>Los textos de esta sección</h2>
-    <div class="filters" role="toolbar" aria-label="Filtrar fichas">${[["todos","Todos"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-phty="${t}" aria-pressed="${state.phTy===t}">${l} · ${counts[t]}</button>`).join("")}</div>
+    <div class="filters fgroups"><div class="fg" role="group" aria-labelledby="fl-pty"><span class="fl" id="fl-pty">Mostrar</span><div class="chips">${[["todos","Todos"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-phty="${t}" aria-pressed="${state.phTy===t}">${l} · ${counts[t]}</button>`).join("")}</div></div></div>
     <div class="reading">${shown.map(f=>fichaHtml(f)).join("")}</div>
   </section>
   <nav class="phnav">${prev?`<a href="#${SLUG_OF[prev]}"><span>← Anterior</span>${esc(PH[prev].t)}</a>`:"<span></span>"}${next?`<a href="#${SLUG_OF[next]}"><span>Siguiente →</span>${esc(PH[next].t)}</a>`:""}</nav>
@@ -1675,11 +1699,11 @@ function viewLibro(){
   const vf = state.libroVoz;
   const list = FICHAS.filter(f=>(state.libroPh==="todas"||f.ph===state.libroPh)&&(state.libroTy==="todos"||f.ty===state.libroTy)&&(!vf||f.a.includes(vf)));
   return `<div class="view-h"><span class="eyebrow">175 fichas</span><h1>Leer el libro</h1><p>Cada texto del libro, sea de los autores, de un colaborador o una cita, resumido en una ficha con su página y en el mismo orden del libro. Filtra por sección, por tipo de texto o por voz.</p></div>
-   <div class="filters">
-    <select class="sel" id="fPh" aria-label="Sección"><option value="todas">Todas las secciones</option>${PHASE_ORDER.map(k=>`<option value="${k}" ${state.libroPh===k?"selected":""}>${esc(PH[k].t)} · p. ${PH[k].pp}</option>`).join("")}</select>
-    ${[["todos","Todo"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-lty="${t}" aria-pressed="${state.libroTy===t}">${l}</button>`).join("")}
-    ${vf?`<button class="chip" type="button" data-clearvoz="1" aria-pressed="true">${esc(vf)} <span aria-hidden="true">✕</span></button>`:""}
-    <span class="count">${list.length} de ${FICHAS.length}</span>
+   <div class="filters fgroups">
+    <div class="fg"><label class="fl" for="fPh">Sección</label><select class="sel" id="fPh"><option value="todas">Todas las secciones</option>${PHASE_ORDER.map(k=>`<option value="${k}" ${state.libroPh===k?"selected":""}>${esc(PH[k].t)} · pp. ${PH[k].pp}</option>`).join("")}</select></div>
+    <div class="fg" role="group" aria-labelledby="fl-ty"><span class="fl" id="fl-ty">Tipo de texto</span><div class="chips">${[["todos","Todos"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-lty="${t}" aria-pressed="${state.libroTy===t}">${l}</button>`).join("")}</div></div>
+    ${vf?`<div class="fg"><span class="fl">Voz</span><div class="chips"><button class="chip" type="button" data-clearvoz="1" aria-pressed="true" aria-label="Quitar el filtro de voz ${esc(vf)}">${esc(vf)} <span aria-hidden="true">✕</span></button></div></div>`:""}
+    <p class="count" aria-live="polite">Mostrando ${list.length} de ${FICHAS.length} fichas</p>
    </div>
    <div class="reading">${list.map(f=>fichaHtml(f,{showPhase:true})).join("")||`<p class="empty">No hay fichas con estos filtros.</p>`}</div>`;
 }
