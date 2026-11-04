@@ -487,17 +487,264 @@ a.term:hover h3{color:var(--c)}
 @media (prefers-reduced-motion:no-preference){
   .chip,.sub,.voice,.nav a{transition:border-color .15s,background .15s,color .15s}
 }
+
+/* ================= v2: más ligero =================
+   El sitio como el libro impreso a dos tintas: superficies separadas por tono, no por líneas;
+   esquinas rectas como los escalones de la portada; la monoespaciada solo para los números de página;
+   y la página al margen donde se lee texto corrido. */
+*,*::before,*::after{border-radius:0!important}
+.fdot,.ph-dot,.act span,.flow li::before,.steps .n,.lg-drop,.lg-cloud{border-radius:50%!important}
+.lg-cloud{border-radius:6px!important}
+
+/* etiquetas en letra normal, no en mayúsculas espaciadas */
+.eyebrow,.tag,.ig-st,.route4 small,.route4 .n,.act,.chip .n,.term .en,.lhead span,.checks .grp,.phnav a span,.cta small,.stat span,.legend,figcaption,.ty{font-family:var(--body);text-transform:none;letter-spacing:0}
+.eyebrow{font-size:15px;font-weight:600;color:var(--c,var(--accent))}
+.pg{word-spacing:-.35em}
+
+/* barra de tintas y encabezado sin bordes ni transparencias */
+.top::before{display:none}
+.inks{display:grid;grid-template-columns:repeat(5,1fr);height:6px}
+.inks i{background:var(--f1)} .inks i:nth-child(2){background:var(--f2)} .inks i:nth-child(3){background:var(--f3)} .inks i:nth-child(4){background:var(--f4)} .inks i:nth-child(5){background:var(--red)}
+.top{background:var(--ground);backdrop-filter:none;border-bottom:0;box-shadow:0 2px 0 var(--surface-2)}
+.top-in{padding-block:16px 8px;gap:10px 24px}
+.brand b{font-size:clamp(20px,2.2vw,24px)}
+.brand i{font-size:14px;margin-top:2px}
+.beta{border:0!important;padding:0!important;color:var(--cta)!important;font-family:var(--body)!important;text-transform:none!important;letter-spacing:0!important;font-size:14px!important;top:-6px!important}
+.search input{border:0;background:var(--surface-2);padding:10px 12px 10px 34px}
+.nav{gap:4px 20px;margin-bottom:0;padding-bottom:4px}
+.nav a{padding:6px 0 10px;background:none!important;border-radius:0}
+.nav a::after{left:0;right:0}
+.nav .sep{margin:6px 4px 12px;background:var(--surface-2);flex-basis:2px}
+
+/* botones planos y rectos; un enlace de texto como acción secundaria */
+.cta{border-radius:0;font-size:16px;padding:11px 18px}
+.cta.ghost{background:var(--surface-2);color:var(--accent);border-color:var(--surface-2)}
+.cta.ghost:hover{background:var(--accent-soft);border-color:var(--accent-soft)}
+.cta:hover,.nextstep:hover{box-shadow:none}
+.tlink{font-weight:600;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:2px;align-self:center}
+.tlink:hover{color:var(--cta)}
+.tbtn{border:0;background:none;padding:0;font:inherit;font-weight:600;color:var(--c,var(--accent));cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* espacios: que respire sin huecos */
+main{padding-block:20px 0}
+.sec{margin-top:clamp(40px,5vw,64px)}
+.sec > h2{font-size:clamp(26px,2.8vw,36px);line-height:1.1}
+.intro{margin-top:8px;color:var(--muted)}
+.view-h{margin-bottom:18px}
+.view-h h1::after,.ph-head h1::after{display:none}
+
+/* inicio */
+.hero{grid-template-columns:minmax(0,1.9fr) minmax(0,.7fr);gap:clamp(24px,4vw,56px);padding-block:clamp(16px,2.5vw,32px) 0}
+.hero h1{font-size:clamp(38px,4.4vw,64px);letter-spacing:-.04em}
+.hero h1 em{color:var(--cta)}
+.hero .lead{font-size:clamp(18px,1.5vw,20px);margin-top:22px;max-width:52ch}
+.hero .lead2{margin-top:12px;max-width:60ch}
+.hero-cta{margin-top:26px;gap:14px 26px;align-items:center}
+.ill-box{border:0;background:var(--cs,var(--f1s))}
+.ill-box .ill{transform:scale(1.18)}
+.ill-box figcaption,.hero figcaption{background:var(--ground);color:var(--muted);padding:8px 0 0;border:0}
+.px{z-index:1}
+
+.route4{border:0;background:var(--surface-2);margin-top:20px;gap:0}
+.route4 a{border-left:0!important;border-top:0!important;padding:20px 20px 22px}
+.route4 a:hover,.route4 a.on{background:var(--accent-soft)}
+.route4 .n{font-family:var(--display);font-weight:700;font-size:15px}
+.route4 b{font-size:22px}
+.route4 small{font-size:14px;font-weight:600;margin-top:auto;padding-top:10px}
+
+/* el proceso: cinco columnas con su tinta; ilustraciones donde corresponde */
+ol.proc{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;border:0;background:none;overflow:visible}
+ol.proc li{display:flex;flex-direction:column;border-top:6px solid var(--c);min-width:0}
+ol.proc h3{font-size:22px;line-height:1.15;margin-top:14px}
+ol.proc .en{font-size:14px;color:var(--c);font-weight:600;margin-top:4px}
+ol.proc p{font-size:16px;color:var(--muted);margin-top:8px}
+ol.proc .sp{flex:0 0 calc(var(--sp) * .5)}
+ol.proc figure{margin:16px 0 0;background:var(--cs);overflow:hidden;transition:transform .25s}
+ol.proc figure .ill{aspect-ratio:4/5;object-fit:cover;object-position:50% 42%;transform:scale(1.18)}
+ol.proc li:hover figure{transform:translateY(-4px)}
+ol.proc .subs{display:flex;flex-direction:column;gap:0;margin-top:10px}
+.sub{border:0;background:none;padding:6px 0;font-size:16px}
+.sub:hover{background:none;color:var(--c)}
+.proc-note{margin-top:18px;font-size:16px;color:var(--muted)}
+
+/* la hoja impresa sobre un campo de color (y la franja de color en las fases) */
+.band{background:var(--accent-soft);box-shadow:0 0 0 100vmax var(--accent-soft);clip-path:inset(0 -100vmax);margin-top:clamp(40px,5vw,64px);padding-block:clamp(32px,4vw,56px)}
+.band.tinted{background:var(--cs);box-shadow:0 0 0 100vmax var(--cs)}
+.band > .sec:first-child{margin-top:0}
+.sheet{background:var(--surface);max-width:760px;margin:0 auto;padding:clamp(24px,4.5vw,56px)}
+.sheet h2{font-size:clamp(26px,2.8vw,36px);text-align:center}
+.sheet > p{text-align:center;color:var(--muted);margin:10px auto 0;max-width:48ch}
+.sheet h3{font-size:22px;margin-top:28px;text-align:center}
+.sheet dl{margin:16px 0 0;display:flex;flex-direction:column;gap:16px}
+.sheet .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 20px}
+.sheet dt{font-weight:600}
+.sheet dd{margin:0;grid-column:1;color:var(--muted);font-size:16px}
+.sheet .row .pg{grid-column:2;grid-row:1}
+.sheet .q{margin-top:28px;text-align:center;font-family:var(--display);font-size:22px;line-height:1.3;color:var(--accent);text-wrap:balance}
+
+/* abrir una página al azar */
+.random{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:clamp(20px,3vw,40px);align-items:start;margin-top:18px}
+.random > div > p{color:var(--muted)}
+.random .cta{margin-top:18px;border:0;cursor:pointer;font:inherit;font-weight:600}
+.azar{background:var(--cs);padding:clamp(20px,3vw,32px)}
+.azar .az-top{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--c);font-weight:600}
+.azar h3{font-size:22px;line-height:1.2;margin-top:12px}
+.azar .who{font-size:14px;color:var(--muted);margin-top:4px}
+.azar p{margin-top:12px;max-width:64ch}
+.azar a{display:inline-block;margin-top:14px;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:2px solid currentColor}
+
+/* reglas en texto, sin cajas */
+.rules.plain{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 48px;max-width:920px}
+.rule{background:none;border:0;padding:0}
+.howto{max-width:none}
+
+/* superficies: tono en vez de borde */
+.box,.term,.card-ig,.voice,.gracia,.nots li,.fz-b,.fz-q,.sigcard,.words,.ideas,.srclist,.pstep,.callout,.stack div,.who-card,.tech pre,.route a,.ig,.fichas .ficha{border:0!important}
+.box{background:var(--surface-2)}
+.box.hl{background:var(--cs)}
+.term{background:var(--surface);border-top:4px solid var(--c)!important}
+.voice,.route a,.stack div{background:var(--surface)}
+.voice:hover,.route a:hover{background:var(--cs,var(--accent-soft));box-shadow:none;transform:none}
+.gracia:nth-child(3n){background:var(--surface-2)}
+.nots li{background:var(--surface-2)}
+.ideas{background:none;gap:12px}
+.ideas li{border-top:0;background:var(--surface);padding:16px 18px}
+.words{background:none;gap:12px}
+.words div{background:var(--surface-2)}
+.srclist{background:none;gap:6px}
+.src-i{border-top:0;background:var(--surface)}
+.callout{background:var(--red-soft);border-left:0!important}
+.chip{border:0;background:var(--surface-2);padding:7px 14px}
+.chip:hover{background:var(--accent-soft);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.sel{border:0;background:var(--surface-2);padding:8px 12px}
+.letters a{border:0;background:var(--surface-2);font-family:var(--body)}
+.lhead{border-bottom:0;padding-bottom:0}
+.substeps a{border:0;background:var(--surface-2)}
+.substeps a[aria-current="page"]{background:var(--c);color:var(--accent-ink)}
+.tech code{border-radius:0}
+
+/* infografías: tarjeta de papel, cabecera de tono sin línea */
+.ig{background:var(--surface)}
+.ig-h{border-bottom:0}
+.igs.one{grid-template-columns:1fr}
+
+/* práctica */
+.pstep{background:var(--surface)}
+.pstep-h{border-bottom:0;border-left:0;box-shadow:inset 0 6px 0 var(--c);padding-top:20px}
+.checks li{padding:9px 16px}
+.checks li + li:not(.grp){box-shadow:0 -2px 0 var(--surface-2)}
+.checks .grp{font-size:15px;font-weight:600;color:var(--ink);padding-top:16px}
+.prog .bar{border-radius:0}
+
+/* fichas: lectura corrida con la página al margen */
+.reading{display:flex;flex-direction:column;gap:30px;margin-top:20px;max-width:960px}
+.fi{display:grid;grid-template-columns:140px minmax(0,1fr);gap:0 24px;scroll-margin-top:160px}
+.fi .fm{display:flex;flex-direction:column;gap:4px;padding-top:4px}
+.fi .fm .pg b{color:var(--c)}
+.ty{font-size:14px;color:var(--muted)}
+.ty-a{color:var(--c);font-weight:600}
+.fph{font-size:14px;color:var(--muted);text-decoration:none}
+.fph:hover{color:var(--c)}
+.fi h3.ft{font-size:22px;line-height:1.2}
+.fi .who{font-size:14px;color:var(--muted);margin-top:2px}
+.fi .fb > p,.fi blockquote p{margin-top:10px;max-width:68ch}
+.fi blockquote{margin:0;padding-left:18px;border-left:3px solid var(--red)}
+.fi blockquote p{font-family:var(--display);font-size:20px;line-height:1.4}
+.fi .src{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;color:var(--muted)}
+.fi .src button{background:none;border:0;padding:0;font:inherit;color:var(--accent);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+
+/* página de fase */
+.stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:4px 0 20px}
+.stepper a{display:flex;flex-direction:column;gap:6px;text-decoration:none;font-size:14px;color:var(--muted)}
+.stepper a::before{content:"";height:6px;background:var(--surface-2);transition:background .15s}
+.stepper a.on{color:var(--ink);font-weight:600}
+.stepper a.on::before{background:var(--c)}
+.stepper a:hover::before{background:var(--cs)}
+.stepper a.on:hover::before{background:var(--c)}
+.ph-head{grid-template-columns:minmax(0,1.6fr) minmax(0,.62fr);gap:clamp(24px,4vw,56px)}
+.ph-head h1{font-size:clamp(38px,4.4vw,64px);letter-spacing:-.04em;line-height:.98}
+.ph-sub{margin-top:10px;font-size:20px;color:var(--c);font-weight:500}
+.ph-def{font-size:clamp(18px,1.5vw,20px);margin-top:20px}
+.ph-def-src{font-size:14px;color:var(--muted)}
+.key{margin-top:16px;background:var(--surface-2);padding:16px 20px;max-width:62ch;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
+.key b{font-family:var(--display);font-weight:500;font-size:20px}
+.key p{grid-column:1;color:var(--muted);font-size:16px}
+.key .pg{grid-column:2;grid-row:1}
+.phnav{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:0;padding-top:0;margin-top:clamp(36px,4.5vw,56px)}
+.phnav a{background:var(--surface-2);padding:16px 20px;font-size:22px;transition:background .15s}
+.phnav a:hover{background:var(--cs)}
+.phnav a span{font-size:14px}
+.phnav > span{display:none}
+
+/* sobre: cifras como la línea de un programa impreso */
+.facts{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px 40px;margin:8px 0 28px}
+.facts div{display:flex;flex-direction:column;gap:2px}
+.facts b{font-family:var(--display);font-weight:400;font-size:clamp(30px,3vw,40px);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.facts span{font-size:14px;color:var(--muted)}
+
+/* pie: la contraportada */
+.foot{display:block;border-top:0;margin-top:clamp(56px,7vw,96px);background:var(--purple);color:#fff;position:relative;overflow:hidden;padding:0;font-size:16px}
+.foot .wrap{padding-block:clamp(40px,5vw,64px) 32px}
+.foot-big{font-family:var(--display);font-weight:700;font-size:clamp(38px,7.4vw,108px);letter-spacing:-.045em;line-height:.95;margin:0}
+.foot-cols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;margin-top:32px}
+.foot-cols p{opacity:.86;margin:0;max-width:62ch}
+.foot-cols p + p{margin-top:10px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.foot a{color:#fff}
+.foot-px{position:absolute;right:0;top:0;width:min(300px,38%)}
+
+@media (max-width:980px){
+  .hero,.ph-head{grid-template-columns:1fr}
+  .hero figure,.ph-head figure{max-width:320px}
+  ol.proc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .random{grid-template-columns:1fr}
+  .fi{grid-template-columns:1fr}
+  .fi .fm{flex-direction:row;flex-wrap:wrap;gap:4px 12px;padding:0 0 4px}
+}
+@media (max-width:620px){
+  ol.proc{grid-template-columns:1fr}
+  ol.proc figure{max-width:200px}
+  .rules.plain,.foot-cols{grid-template-columns:1fr}
+  .stepper a span{display:none}
+  .phnav{grid-template-columns:1fr}
+  .phnav a:last-child{text-align:left}
+  .facts{display:grid;grid-template-columns:1fr 1fr}
+}
+
+/* v2: interior de las infografías, sin cajas con borde */
+.olist li,.ulist li,.cone,.steps li,.umb span{border:0!important;background:var(--surface-2)}
+.steps li.hi{background:var(--cs)}
+.umb span.core{background:var(--f3s)}
+.factor{border:0;background:var(--f2s)}
+.sigcard{border:0}
+.sigcard .row{border-top:0;box-shadow:0 -2px 0 var(--surface)}
+.sigcard .k{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:14px;font-weight:600}
+.sigcard .row.opt .k{border-right:0;background:var(--surface-2)}
+.sigcard .v{background:var(--surface-2)}
+.fz-h{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:14px;font-weight:600}
+.fz-q,.fz-b{background:var(--surface-2)}
+.fz-q{background:var(--f1s)}
+.asd{background:var(--cs)}
+.fi .src button{text-align:left}
+.fi{content-visibility:auto;contain-intrinsic-size:auto 320px}
+.stepper a:focus-visible,.tlink:focus-visible,.tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.fz-b .fz-h,.fz-q small{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:14px;font-weight:600}
+.tag{border:0!important}
+.t-q{background:var(--red-soft);color:var(--red-ink)}
+.t-c{background:var(--surface-2)}
 </style>
 
 <a class="skip" href="#view" data-skip>Saltar al contenido</a>
+<div class="inks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="#inicio"><span>Guía de estudio · no oficial</span><b>The Field Guide to Design Futures<em class="beta">beta</em></b><i>Giovanni Caruso y Silvio Cioni · 2026</i></a>
+    <a class="brand" href="#inicio"><b>The Field Guide to Design Futures<em class="beta">beta</em></b><i>Guía de estudio no oficial · Caruso y Cioni, 2026</i></a>
     <div class="search">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      <input id="q" name="q" type="search" placeholder="Buscar en fichas, conceptos y fuentes…" aria-label="Buscar en la guía" autocomplete="off" spellcheck="false">
+      <input id="q" name="q" type="search" placeholder="Buscar en la guía…" aria-label="Buscar en la guía" autocomplete="off" spellcheck="false">
     </div>
-    <a class="cta" href="https://designfutures.guide" target="_blank" rel="noopener">Libro original <small>designfutures.guide</small> ↗</a>
+    <a class="cta" href="https://designfutures.guide" target="_blank" rel="noopener">Libro original <span aria-hidden="true">↗</span></a>
     <nav class="nav" id="nav" aria-label="Secciones"></nav>
   </div>
 </header>
@@ -505,10 +752,22 @@ a.term:hover h3{color:var(--c)}
 <main class="wrap" id="view" tabindex="-1"></main>
 <div id="live" class="sr" aria-live="polite"></div>
 
-<footer class="wrap foot">
-  <span>Adaptación de estudio de <i>The Field Guide to Design Futures</i> (Giovanni Caruso y Silvio Cioni, Fictional, 2026, 1.ª ed.), licencia CC BY-NC-SA 4.0. Ilustraciones de Stefano Cardini, del mismo libro. Esta guía se comparte bajo la misma licencia, sin uso comercial.</span>
-  <span>Los números de página corresponden a la paginación impresa del libro. Los resúmenes en español son paráfrasis; para citar, ve al original: <a href="https://designfutures.guide" target="_blank" rel="noopener">designfutures.guide</a>.</span>
-  <span><a href="#sobre">Sobre este sitio</a> · cómo está hecho, para curiosos técnicos.</span>
+<footer class="foot">
+  <svg class="foot-px" viewBox="0 0 100 50" aria-hidden="true"><rect x="30" y="0" width="70" height="10" fill="var(--red)"/><rect x="20" y="10" width="80" height="10" fill="var(--red)"/><rect x="12" y="20" width="88" height="10" fill="var(--red)"/><rect x="40" y="30" width="60" height="10" fill="var(--red)"/></svg>
+  <div class="wrap">
+    <p class="foot-big">The Field Guide<br>to Design Futures</p>
+    <div class="foot-cols">
+      <div>
+        <p>Adaptación de estudio de <i>The Field Guide to Design Futures</i> (Giovanni Caruso y Silvio Cioni, Fictional, 2026, 1.ª ed.), licencia CC BY-NC-SA 4.0. Ilustraciones de Stefano Cardini, del mismo libro. Esta guía se comparte bajo la misma licencia, sin uso comercial.</p>
+        <p>Los números de página corresponden a la paginación impresa del libro. Los resúmenes en español son paráfrasis; para citar, usa el original.</p>
+      </div>
+      <ul>
+        <li><a href="https://designfutures.guide" target="_blank" rel="noopener">Libro original ↗</a></li>
+        <li><a href="#sobre">Sobre este sitio</a></li>
+        <li><a href="https://github.com/donpe/guia-design-futures" target="_blank" rel="noopener">Código en GitHub ↗</a></li>
+      </ul>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -1041,6 +1300,7 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt
 const norm = s => String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
 const cv = k => `--c:var(--${PH[k]?.c||k});--cs:var(--${PH[k]?.c||k}s)`;
 const pg = p => `<span class="pg">p. <b>${p}</b></span>`;
+const ppg = p => `<span class="pg">pp. <b>${p}</b></span>`;
 const phName = k => PH[k].es ? `${PH[k].t} · ${PH[k].es}` : PH[k].t;
 function toast(m){ const t=document.createElement("div"); t.className="toast"; t.setAttribute("aria-hidden","true"); t.textContent=m; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); const l=document.getElementById("live"); if(l) l.textContent=m; }
 const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch{ return d; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} } };
@@ -1055,12 +1315,15 @@ function shortRef(id){ const s=SRC[id]; if(!s) return id; const m=s.r.match(/^(.
 const paras = x => String(x||"").split(/\n\n+/).map(t=>`<p>${esc(t)}</p>`).join("");
 function fichaHtml(f, opts={}){
   const src = (f.s||[]).filter(id=>SRC[id]);
-  return `<article class="ficha ${f.ty==="q"?"q":""}" style="${cv(f.ph)}">
-    <div class="ficha-h"><span class="tag t-${f.ty}">${TYL[f.ty]}</span>${pg(f.p)}</div>
-    <h3 class="ft">${esc(f.t)}</h3>
-    ${paras(f.x)}
-    <div class="who">${opts.showPhase?`<span class="fdot"></span>${esc(PH[f.ph].t)} · `:""}${esc(f.a)}</div>
-    ${src.length?`<div class="src">${src.map(id=>`<button type="button" data-src="${id}">${esc(shortRef(id))}</button>`).join("")}</div>`:""}
+  const body = f.ty==="q" ? `<blockquote>${paras(f.x)}</blockquote>` : paras(f.x);
+  return `<article class="fi" id="f-${f.p}" style="${cv(f.ph)}">
+    <div class="fm">${pg(f.p)}<span class="ty ty-${f.ty}">${TYL[f.ty]}</span>${opts.showPhase?`<a class="fph" href="#${SLUG_OF[f.ph]||"libro"}" translate="no">${esc(PH[f.ph].t)}</a>`:""}</div>
+    <div class="fb">
+      <h3 class="ft">${esc(f.t)}</h3>
+      <div class="who">${esc(f.a)}</div>
+      ${body}
+      ${src.length?`<div class="src"><span>Fuentes:</span>${src.map(id=>`<button type="button" data-src="${id}">${esc(shortRef(id))}</button>`).join("")}</div>`:""}
+    </div>
   </article>`;
 }
 
@@ -1176,44 +1439,66 @@ function nextHtml(cur){
   return `<a class="nextstep" href="#${nx[0]}"><small>Siguiente en la ruta · ${i+2} de 4 · ${nx[1]}</small><b>${nx[2]} →</b></a>`;
 }
 const act=(n,t,id)=>`<div class="act" id="${id}"><span>${n}</span>${t}</div>`;
-function procHtml(){
-  return `<div class="proc">${STEPS.map(s=>`<div class="step" style="--c:var(--${s.c});--cs:var(--${s.c}s)"><span class="n">PASO ${s.n}</span><h3>${esc(s.es)}</h3><p>${esc(s.d)}</p>
-    <div class="subs">${s.phases.map(k=>`<a class="sub" href="#${SLUG_OF[k]}"><span translate="no">${esc(PH[k].t)}</span><span class="pg">p. ${PH[k].pp}</span></a>`).join("")}</div></div>`).join("")}</div>
-    <div class="proc-foot"><span>Antes del proceso: <a href="#marco">Design Futures</a> (p. 27–48).</span><span>Después: <a href="#vivo">Está vivo</a> (p. 196–207).</span><span>Los autores aclaran que es una propuesta: puedes no seguirla, criticarla o reemplazarla (p. 22).</span></div>`;
+function procHtml(ill){
+  const sp=[16,48,28,64,20];
+  return `<ol class="proc">${STEPS.map((s,i)=>{ const im=PH[s.phases[0]].img; return `<li style="--c:var(--${s.c});--cs:var(--${s.c}s);--sp:${ill?sp[i]:0}px">
+      <h3>${esc(s.es)}</h3><span class="en" translate="no">${esc(s.t)}</span><p>${esc(s.d)}</p>
+      ${ill&&im?`<span class="sp"></span><figure><img class="ill" src="img/p${im}.png" width="550" height="880" loading="lazy" alt="Ilustración de Stefano Cardini que abre la sección ${esc(PH[s.phases[0]].t)} (p. ${im})."></figure>`:""}
+      <div class="subs">${s.phases.map(k=>`<a class="sub" href="#${SLUG_OF[k]}"><span translate="no">${esc(PH[k].t)}</span>${ppg(PH[k].pp)}</a>`).join("")}</div>
+    </li>`;}).join("")}</ol>
+    <p class="proc-note">Antes del proceso, el libro define <a href="#marco">qué es Design Futures</a> ${ppg("27–48")}; después, cierra con <a href="#vivo">es plural y está vivo</a> ${ppg("196–207")}. Los autores aclaran que es una propuesta: puedes no seguirla, criticarla o reemplazarla ${pg(22)}.</p>`;
 }
 
 // ================= VISTAS =================
 const NAV = [["inicio","Inicio"],["empezar","Empezar aquí"],["recorrido","Recorrido"],["libro","Leer el libro"],["conceptos","Conceptos"],["infografias","Infografías"],["practica","Práctica"],["fuentes","Fuentes"],["voces","Voces"]];
 let route = "inicio", q = "";
-const state = { libroPh:"todas", libroTy:"todos", libroVoz:"", srcFilter:"todas", srcHi:"", phTy:"todos" };
+const state = { azar:null, libroPh:"todas", libroTy:"todos", libroVoz:"", srcFilter:"todas", srcHi:"", phTy:"todos" };
 
 function renderNav(){
   const phaseRoute = SLUG[route] ? "recorrido" : route;
   $("#nav").innerHTML = NAV.map(([k,t])=>`${k==="fuentes"?'<span class="sep" aria-hidden="true"></span>':""}<a href="#${k}" ${phaseRoute===k&&!q?'aria-current="page"':""}>${t}</a>`).join("");
 }
 
+const AZAR = () => FICHAS.filter(f=>(f.ty==="a"||f.ty==="c") && (()=>{const w=f.x.split(/\n\n/)[0].split(/\s+/).length; return w>=55 && w<=120;})());
+function azarFicha(){ const pool=AZAR(); if(!pool.length) return null; if(state.azar==null || state.azar>=pool.length) state.azar=Math.floor(Math.random()*pool.length); return pool[state.azar]; }
 function viewInicio(){
-  const nF=FICHAS.length, nS=Object.keys(SRC).length, nC=CONCEPTS.length;
-  const nV=new Set(FICHAS.filter(f=>f.ty==="c").map(f=>f.a.split(" · ")[0])).size;
+  const f = azarFicha();
   return `<section class="hero">
     <div>
-      <span class="eyebrow">Caruso y Cioni · Fictional · 1.ª edición, enero 2026 · 231 páginas</span>
-      <h1 style="margin-top:10px">Una guía para leer, estudiar y <em>usar</em> la guía de campo.</h1>
-      <p class="lead"><b>The Field Guide to Design Futures</b> cuenta cómo se diseñan futuros hoy. Es una práctica que une el diseño con los estudios de futuros para imaginar alternativas, volverlas tangibles con historias, prototipos y artefactos, y usarlas para cuestionar supuestos y decidir mejor en el presente (p. 31).</p>
+      <h1>Una guía para leer, estudiar y <em>usar</em> la guía de campo.</h1>
+      <p class="lead"><b>The Field Guide to Design Futures</b> cuenta cómo se diseñan futuros hoy. Es una práctica que une el diseño con los estudios de futuros para imaginar alternativas, volverlas tangibles con historias, prototipos y artefactos, y usarlas para cuestionar supuestos y decidir mejor en el presente ${pg(31)}.</p>
       <p class="lead2">No es un manual de métodos: es una guía de campo de Giovanni Caruso y Silvio Cioni con más de treinta voces de la academia y la práctica. Sirve a quien diseña, investiga, hace estrategia o activismo, o simplemente quiere pensar qué hacer después (pp. 14, 21). Esta guía en español te ayuda a leerlo, entenderlo y llevarlo a un proyecto.</p>
-      <div class="meta">${pg("11–231")}<span class="pg"><b>${nF}</b> fichas</span><span class="pg"><b>${nC}</b> conceptos</span><span class="pg"><b>${nS}</b> fuentes</span><span class="pg"><b>${nV}</b> voces</span></div>
-      <div class="hero-cta"><a class="cta big" href="#empezar">¿Nuevo en esto? Empieza aquí<small>resumen en 5 minutos</small></a><a class="cta big ghost" href="#recorrido">Ver el recorrido<small>los 5 pasos · p. 42</small></a></div>
+      <div class="hero-cta"><a class="cta" href="#empezar">¿Nuevo en esto? Empieza aquí</a><a class="tlink" href="#recorrido">Ver los 5 pasos →</a></div>
     </div>
     <figure class="ill-box" style="${cv("f1")}">${pix("var(--red)",6,"a")}${pix("var(--purple)",5,"b")}<img class="ill" src="img/p41.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini: un ojo dentro de una cabeza, atravesado por un haz de luz que viene de una nube sonriente."><figcaption>Stefano Cardini · p. 41</figcaption></figure>
   </section>
-  <p class="route-h">Una ruta sugerida para recorrer esta guía</p>${routeHtml("")}
-  <section class="sec"><h2>El recorrido ${pg("42")}</h2>${procHtml()}</section>
-  <section class="sec"><h2>El libro, en sus propias palabras</h2>
-    <div class="igs">${igHtml("textos")}${igHtml("mente")}</div>
+  <section class="sec"><h2>Por dónde recorrer esta guía</h2><p class="intro">Cuatro momentos, en el mismo orden del menú. Puedes entrar por cualquiera.</p>${routeHtml("")}</section>
+  <section class="sec"><h2>El recorrido de un proyecto, en cinco pasos</h2><p class="intro">Los autores lo llaman Futuring by Design ${pg(42)}.</p>${procHtml(true)}</section>
+  <div class="band"><article class="sheet" aria-labelledby="h-libro">
+    <h2 id="h-libro">El libro, en sus propias palabras</h2>
+    <p>No es un manual: no tiene capítulos ni métodos paso a paso. Cada página es un texto breve que se puede leer en cualquier orden.</p>
+    <h3>Tres tipos de texto</h3>
+    <dl>
+      <div class="row"><dt>De los autores</dt><dd>La columna vertebral: Caruso y Cioni definen cada momento.</dd>${pg(21)}</div>
+      <div class="row"><dt>De colaboradores</dt><dd>Más de treinta voces, sin indicaciones de los autores, ubicadas para conversar.</dd>${pg(21)}</div>
+      <div class="row"><dt>Citas</dt><dd>Fragmentos de la literatura que sostienen la conversación.</dd>${pg(21)}</div>
+    </dl>
+    <h3>Una mentalidad y una práctica</h3>
+    <dl>
+      <div class="row"><dt translate="no">Futures Thinking</dt><dd>Una mentalidad: una manera flexible de relacionarse con la incertidumbre y el cambio.</dd>${pg(40)}</div>
+      <div class="row"><dt translate="no">Design Futures</dt><dd>Una práctica: une diseño y futuros con narrativas, prototipos y artefactos.</dd>${pg(31)}</div>
+    </dl>
+    <p class="q">«Deja que el pensamiento de futuros dé forma a tu mirada y que Design Futures guíe tu práctica.»</p>
+  </article></div>
+  <section class="sec"><h2>Abre el libro en cualquier página</h2>
+    <div class="random">
+      <div><p>El libro se puede leer en cualquier orden ${pg(21)}. Si no sabes por dónde empezar, deja que el azar elija un texto de los autores o de un colaborador.</p><button class="cta" type="button" data-azar="1">Abrir otra página</button></div>
+      ${f?`<article class="azar" style="${cv(f.ph)}"><div class="az-top"><span translate="no">${esc(PH[f.ph].t)}</span>${pg(f.p)}</div><h3>${esc(f.t)}</h3><div class="who">${esc(f.a)}</div><p>${esc(f.x.split(/\n\n/)[0])}</p><a href="#${SLUG_OF[f.ph]||"libro"}" data-jumpto="f-${f.p}">Leer la ficha completa</a></article>`:""}
+    </div>
   </section>
   <section class="sec"><h2>Cómo leer este sitio</h2>
     <p class="howto">Todo lo que ves aquí sale del libro y lleva su página. Puedes seguir el recorrido de un proyecto, leer cada texto resumido, repasar conceptos, ver infografías, marcar tu avance en la práctica y consultar todas las fuentes que el libro cita.</p>
-    <div class="rules">
+    <div class="rules plain">
       <div class="rule"><h3>Todo tiene página</h3><p>Cada ficha, concepto o paso lleva la página impresa del libro para que puedas ir al original.</p></div>
       <div class="rule"><h3>Resumen, no reemplazo</h3><p>Los textos en español son paráfrasis breves. Las citas de otros autores también: para citar, ve al original.</p></div>
       <div class="rule"><h3>Nada inventado</h3><p>Las infografías solo ordenan lo que el libro dice. Si el libro no da un dato (por ejemplo, valores para la disonancia), el sitio lo aclara.</p></div>
@@ -1284,7 +1569,7 @@ function viewEmpezar(){
    <p style="margin-top:10px"><a href="#conceptos">Ver los ${CONCEPTS.length} conceptos →</a></p></section>
 
   ${act("3","Cómo se hace","a3")}
-  <section class="sec"><h2>El camino de un proyecto ${pg(42)}</h2>${procHtml()}</section>
+  <section class="sec"><h2>El camino de un proyecto ${pg(42)}</h2>${procHtml(false)}</section>
 
   ${act("4","Antes de abrir el libro","a4")}
   <section class="sec"><h2>Metáforas y guiños del libro</h2>
@@ -1326,7 +1611,7 @@ function viewRecorrido(){
   return `<div class="view-h"><span class="eyebrow">Paso a paso</span><h1>El recorrido de un proyecto</h1><p>El libro ordena sus páginas siguiendo, más o menos, el camino de un proyecto de Design Futures. Entra a cada momento para ver su definición, sus ideas clave, las voces que lo discuten y las infografías.</p></div>
   ${routeHtml("recorrido")}
   ${act("1","El mapa: cinco pasos","r1")}
-  <div style="margin-top:18px">${procHtml()}</div>
+  <div style="margin-top:18px">${procHtml(true)}</div>
   ${act("2","Las secciones del libro, en orden","r2")}
   <section class="sec"><h2>Todas las secciones</h2>
    <div class="gloss">${["df","fr","sc","sm","vi","di","as","ta","viva"].map(k=>{const n=FICHAS.filter(f=>f.ph===k).length; const def=FICHAS.find(f=>f.ph===k&&f.ty==="a"); return `<a class="term" href="#${SLUG_OF[k]}" style="${cv(k)};text-decoration:none;color:inherit"><span class="pg">p. ${PH[k].pp} · ${n} fichas</span><h3>${esc(phName(k))}</h3><p style="color:var(--muted)">${esc((def?.x||"").split(". ")[0])}.</p></a>`;}).join("")}</div></section>
@@ -1346,23 +1631,25 @@ function viewFase(k){
   const shown = list.filter(f=>state.phTy==="todos"||f.ty===state.phTy);
   const igs = (IG_BY_PHASE[k]||[]);
   const prac = step ? PRAC[step.n] : null;
+  const stepper = step ? `<nav class="stepper" aria-label="Los 5 pasos">${STEPS.map(x=>`<a href="#${SLUG_OF[x.phases[0]]}" class="${x===step?"on":""}" ${x===step?'aria-current="step"':""} style="--c:var(--${x.c});--cs:var(--${x.c}s)">${x.n} · <span>${esc(x.es)}</span></a>`).join("")}</nav>` : "";
+  const first = def ? def.x.split(/\n\n/)[0] : "";
   return `<div style="${cv(k)}">
+  ${stepper}
   <div class="ph-head">
     <div>
-      <div class="ph-kick"><span class="ph-dot"></span><span class="eyebrow">${step?`Paso ${step.n} de 5 · ${esc(step.es)}`:"Marco"} · p. ${ph.pp}</span></div>
-      ${step&&step.phases.length>1?`<div class="substeps">${step.phases.map(x=>`<a href="#${SLUG_OF[x]}" ${x===k?'aria-current="page"':""}>${esc(PH[x].t)}</a>`).join("")}</div>`:""}
-      <h1 style="margin-top:12px">${esc(ph.t)}</h1>
-      ${ph.es?`<p class="eyebrow" style="margin-top:6px">${esc(ph.es)}</p>`:""}
-      ${def?`<div class="ph-def">${paras(def.x)}</div><p class="ph-def-src">${pg(def.p)} <span class="pg">· texto de los autores</span></p>`:""}
-      ${keys.length?`<h2 style="font-size:18px;margin-top:26px">Ideas clave de los autores</h2><ul class="keys">${keys.map(f=>`<li><span><b style="font-weight:500">${esc(f.t)}.</b> ${esc(f.x.split(/\n|\. /)[0].replace(/\.$/,""))}.</span>${pg(f.p)}</li>`).join("")}</ul>`:""}
+      ${step&&step.phases.length>1?`<div class="substeps">${step.phases.map(x=>`<a href="#${SLUG_OF[x]}" ${x===k?'aria-current="page"':""} translate="no">${esc(PH[x].t)}</a>`).join("")}</div>`:""}
+      <h1 translate="no">${esc(ph.t)}</h1>
+      <p class="ph-sub">${ph.es?`${esc(ph.es)} · `:""}${step?`paso ${step.n} de 5 · `:""}${ppg(ph.pp)}</p>
+      ${def?`<div class="ph-def"><p>${esc(first)}</p></div><p class="ph-def-src">Texto de los autores, ${pg(def.p)}${def.x.includes("\n\n")?` · <button type="button" class="tbtn" data-jump="f-${def.p}">seguir leyendo ↓</button>`:""}</p>`:""}
+      ${keys.map(f=>`<div class="key"><b>${esc(f.t)}</b><p>${esc(f.x.split(/\n|\. /)[0].replace(/\.$/,""))}.</p>${pg(f.p)}</div>`).join("")}
     </div>
-    ${ph.img?`<figure class="ill-box"><img class="ill" src="img/p${ph.img}.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini que abre la sección ${esc(ph.t)} (p. ${ph.img})."><figcaption>Stefano Cardini · p. ${ph.img}</figcaption></figure>`:""}
+    ${ph.img?`<figure class="ill-box"><img class="ill" src="img/p${ph.img}.png" width="550" height="880" fetchpriority="high" alt="Ilustración de Stefano Cardini que abre la sección ${esc(ph.t)} (p. ${ph.img})."><figcaption>Stefano Cardini · ${pg(ph.img)}</figcaption></figure>`:""}
   </div>
-  ${igs.length?`<section class="sec"><h2>Infografías</h2><div class="igs">${igs.map(igHtml).join("")}</div></section>`:""}
-  ${prac?`<section class="sec"><h2>En la práctica <a class="pg" href="#practica">ver lista completa →</a></h2>${pstepHtml(step, k)}</section>`:""}
-  <section class="sec"><h2>Todas las páginas de esta sección <span class="pg">${list.length} fichas</span></h2>
-    <div class="filters" role="toolbar" aria-label="Filtrar fichas">${[["todos","Todas"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-phty="${t}" aria-pressed="${state.phTy===t}">${l} <span class="n">${counts[t]}</span></button>`).join("")}</div>
-    <div class="fichas">${shown.map(f=>fichaHtml(f)).join("")}</div>
+  ${igs.length?`<div class="band tinted"><section class="sec"><h2>Infografías</h2><div class="igs one">${igs.map(igHtml).join("")}</div></section></div>`:""}
+  ${prac?`<section class="sec"><h2>En la práctica</h2><p class="intro">Lo que el libro propone hacer en este paso. <a href="#practica">Ver la lista completa →</a></p>${pstepHtml(step, k)}</section>`:""}
+  <section class="sec"><h2>Los textos de esta sección</h2>
+    <div class="filters" role="toolbar" aria-label="Filtrar fichas">${[["todos","Todos"],["a","Autores"],["c","Colaboradores"],["q","Citas"]].map(([t,l])=>`<button class="chip" type="button" data-phty="${t}" aria-pressed="${state.phTy===t}">${l} · ${counts[t]}</button>`).join("")}</div>
+    <div class="reading">${shown.map(f=>fichaHtml(f)).join("")}</div>
   </section>
   <nav class="phnav">${prev?`<a href="#${SLUG_OF[prev]}"><span>← Anterior</span>${esc(PH[prev].t)}</a>`:"<span></span>"}${next?`<a href="#${SLUG_OF[next]}"><span>Siguiente →</span>${esc(PH[next].t)}</a>`:""}</nav>
   </div>`;
@@ -1392,7 +1679,7 @@ function viewLibro(){
     ${vf?`<button class="chip" type="button" data-clearvoz="1" aria-pressed="true">${esc(vf)} <span aria-hidden="true">✕</span></button>`:""}
     <span class="count">${list.length} de ${FICHAS.length}</span>
    </div>
-   <div class="fichas">${list.map(f=>fichaHtml(f,{showPhase:true})).join("")||`<p class="empty">No hay fichas con estos filtros.</p>`}</div>`;
+   <div class="reading">${list.map(f=>fichaHtml(f,{showPhase:true})).join("")||`<p class="empty">No hay fichas con estos filtros.</p>`}</div>`;
 }
 
 function viewConceptos(){
@@ -1488,7 +1775,7 @@ function viewBuscar(){
   const ss = Object.entries(SRC).filter(([id,s])=>norm(s.r).includes(n));
   return `<div class="view-h"><span class="eyebrow">Búsqueda</span><h1>«${esc(q)}»</h1><p>${fs.length} fichas · ${cs.length} conceptos · ${ss.length} fuentes</p></div>
    ${cs.length?`<div class="res-g"><h2>Conceptos</h2><div class="gloss">${cs.map(c=>`<article class="term" style="${cv(c.ph)}"><span class="en" translate="no">${esc(c.en)}</span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p><span class="pg">p. ${c.p.join(", ")}</span></article>`).join("")}</div></div>`:""}
-   ${fs.length?`<div class="res-g"><h2>Fichas</h2><div class="fichas">${fs.map(f=>fichaHtml(f,{showPhase:true})).join("")}</div></div>`:""}
+   ${fs.length?`<div class="res-g"><h2>Fichas</h2><div class="reading">${fs.map(f=>fichaHtml(f,{showPhase:true})).join("")}</div></div>`:""}
    ${ss.length?`<div class="res-g"><h2>Fuentes</h2><div class="srclist">${ss.map(([id,s])=>`<div class="src-i"><div class="src-ref">${esc(s.r)}</div><div class="src-links"><button class="chip" type="button" data-src="${id}">Ver en Fuentes</button></div></div>`).join("")}</div></div>`:""}
    ${!fs.length&&!cs.length&&!ss.length?`<p class="empty">No hay resultados. Prueba con otra palabra, en español o en inglés (por ejemplo «signal», «escenario», «artefacto»).</p>`:""}`;
 }
@@ -1498,6 +1785,7 @@ function viewSobre(){
   const nF=FICHAS.length, nS=Object.keys(SRC).length, nC=CONCEPTS.length, nI=Object.keys(IG).length;
   const kb=Math.round(document.documentElement.outerHTML.length/1024);
   return `<div class="view-h"><span class="eyebrow">Para curiosos técnicos</span><h1>Sobre este sitio</h1></div>
+  <div class="facts">${[[FICHAS.length,"fichas, una por texto del libro"],[CONCEPTS.length,"conceptos con su página"],[Object.keys(IG).length,"infografías"],[Object.keys(SRC).length,"fuentes que cita el libro"],[new Set(FICHAS.filter(f=>f.ty==="c").map(f=>f.a.split(" · ")[0])).size,"voces de colaboradores"]].map(([n,t])=>`<div><b>${n}</b><span>${t}</span></div>`).join("")}</div>
   <div class="tech">
    <p>Esta guía es una sola página HTML, sin frameworks ni base de datos. Todo el contenido vive dentro del archivo como datos de JavaScript y se dibuja en el navegador. Pesa unos ${kb} KB, más diez ilustraciones.</p>
 
@@ -1595,8 +1883,10 @@ function go(r, opts={}){
 // ================= EVENTOS =================
 window.addEventListener("hashchange", ()=>{ const h=readHash(); if(h && h!==route) { state.phTy="todos"; go(h); } });
 document.addEventListener("click", e=>{
-  const a = e.target.closest('a[href^="#"]:not([data-skip])');
+  const a = e.target.closest('a[href^="#"]:not([data-skip]):not([data-jumpto])');
   if (a && !a.dataset.letter && !a.dataset.goto){ e.preventDefault(); const r=a.getAttribute("href").slice(1); state.phTy="todos"; go(r); return; }
+  const az = e.target.closest("[data-azar]"); if (az){ const n=AZAR().length; let r; do { r=Math.floor(Math.random()*n); } while(n>1 && r===state.azar); state.azar=r; const y=window.scrollY; render(); window.scrollTo(0,y); return; }
+  const jt = e.target.closest("[data-jumpto]"); if (jt){ e.preventDefault(); const r=jt.getAttribute("href").slice(1); go(r,{scrollTo:jt.dataset.jumpto}); return; }
   const sk = e.target.closest("[data-skip]"); if (sk){ e.preventDefault(); const v=$("#view"); v.focus({preventScroll:true}); v.scrollIntoView({block:"start"}); return; }
   const jp = e.target.closest("[data-jump]"); if (jp){ const el=document.getElementById(jp.dataset.jump); if(el) el.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); return; }
   const ckli = e.target.closest(".checks li:not(.grp)"); if (ckli && !e.target.closest("input,label,a,button")){ const cb=ckli.querySelector("input[type=checkbox]"); if(cb) cb.click(); return; }
