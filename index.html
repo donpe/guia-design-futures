@@ -781,6 +781,10 @@ span.pg b::before{content:none!important}
 .keys2{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:16px}
 .keys2 .key{max-width:none;margin:0;border:0;font:inherit;color:inherit;text-align:left;cursor:pointer;align-content:start;transition:background .15s}
 .keys2 .key:hover{background:var(--cs)}
+
+/* infografías en fases: dos columnas; los dibujos no crecen sin límite */
+.igs.one{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.ig > svg{display:block;width:100%;max-width:560px;margin-inline:auto}
 </style>
 
 <a class="skip" href="#view" data-skip>Saltar al contenido</a>
